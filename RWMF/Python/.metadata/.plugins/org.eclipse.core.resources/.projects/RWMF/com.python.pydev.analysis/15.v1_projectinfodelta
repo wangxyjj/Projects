@@ -1,0 +1,19 @@
+INSTUPtest_RWLSTM_basic_v1
+C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLSTM_basic_v1.py
+INFOS:&&3|1|2|0&&3|3|2|0&&3|4|2|0&&3|5|2|0&&3|4|2|0&&3|5|2|0&&3|6|2|0&&3|7|2|0&&3|8|2|0&&3|9|2|0&&3|10|2|0&&3|11|2|0&&3|12|2|0&&3|13|2|0&&3|14|2|0&&3|15|2|0&&3|16|2|0
+test_data_IO=1
+input_fea_size=10
+batch_size=8
+hidden_size=12
+num_timesteps=9
+epoch_size=11
+dataset_name=5
+projected_data_train=7
+n_classes=13
+input_train=15
+fin_mat=4
+n_epochs=14
+RWLR_parameters=6
+test_mode=3
+test_RWLSTM_basic_v1=2
+LSTM_model=16

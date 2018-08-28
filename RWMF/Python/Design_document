@@ -1,0 +1,128 @@
+Design Map
+
+#************* 1. IO part
+
+# instance for reading and outputing
+<1.1> instance_IO <-- IO_Data(output_path and output_name)
+
+# Generate the 2d matrix data and its labels,
+# splitted into training and testing.
+#
+# DataForm: a point is represented by a row;
+#          label is a ndarray or a row vector
+<1.2> train_M, train_label, test_M, test_label <-- instance_IO.use_dataset(dataset_name, fin_path_name, test_portion)
+
+
+#************* 2. Process training data into chunk-sequence
+
+# Generate training and testing dataset
+# set training and testing data set as the specifed tensor size
+
+<2.1> input_training <-- Preprocessed_Input(chunk_size,chunk_size, batch_size, train_M, train_label)
+
+<2.2> input_testing <-- Preprocessed_Input(chunk_size,chunk_size, batch_size, test_M, test_label)
+
+
+#************* 3. RWLSTM
+# set the necessary parameters
+<3.1> model_parameters <-- Hyperparameters()
+
+<3.2> instanceRWLM = RWLSTM(input_data and model_parameters, is_training)
+<3.2.1> {Set up parameters: data and model}
+<3.2.2> {Set up placeholders: input_M,output_h,output_s}
+#(1)output(h and s):Hidden layer, numb_points x output_feas
+#   matrix, i.e., batch_size x hidden_size.
+#   Weight is input_fea_size x hidden_size.
+#
+#(2)input: A input data sequence containing num_timesteps 2D tensor, each is batch_size x data_fea.
+#   !!!! input_fea_size and hidden_size should be considered
+#   of the projection!!!
+<3.2.2> bulid_Model()
+<3.2.2.1>   Define weights and bias for output_layer
+<3.2.2.2>   Set up the init_state tuple for LSTMcell
+
+
+# training section
+<3.3> for each epoch_i:
+        for each chunk_t:
+          M_chunk_t <-- chunk_t from input_data.train_M
+          #************* 3.3.1 RWLR
+          Pu_t, M_W_t <-- RWLR(M_chunk_t,Pu_t)
+          instanceRWLM.train_LSTM(M_chunk_t,M_W_t)
+
+        output Weight, Pu_t, final_points_weight, Residue
+
+*********************************************************
+Reweight_accessories.py
+
+  <1> method residue:
+    inputs: M with size dxn, X size dxk, YT size kxn, W size 1xn or ndarray type. d is dimension and n is the number of points.
+
+    return ||(M-XYT)W||_F and projected data matrix Mk
+
+  <2> method weight:
+    inputs: data matrix M with size dxn, basis X size dxk.
+
+    output:the truth vector weights of all points (square rooted) in ndarray type.
+
+
+*********************************************************
+RWLR_support.py
+
+method residue_w:
+    Inputs: 1-dim ndarray or row vector g (squared weights) and d (squared distance with size 1xn)
+
+    Calculate sqrt(\sum g_i*d_i)
+
+class ProjectM:
+    All inputs are first transfered into matrix type.
+
+    Take inputs: data matrix M with size dxn and subspace basis U with size dxk. Calculate projection Pu and the projection distance (power 2) for each point.
+
+class Weights:
+
+    For different kernels, return the weights (squared) based on the input distances.
+
+class RWLR_Model_Betta
+
+  <1> Construction:
+
+      Inputs description are as below.
+
+      1.1 data: The 2-D data points matrix with size dxn, where n is the number of points and d is the dimension.
+
+      1.2 X0: The initial basis with size dxk, where k is the low rank(the dimension of projected subspace).
+
+      1.3 idxes0: The idexes of pionts generating the X0. This is used for random sampling. It will record which points are used in intialization. Possibly, we need to consider the relation of the corresponding weights and total weights.
+
+      1.4 Y0T: M0 = X0*Y0T. Not required defaultly, since we can use X0.T*M.
+
+      1.5 control_para_obj: The flags as switches of special processings.
+      Most important one is momentum_on, which controls whether applying the momentum decent method. momentum_para contains the two parameters used in momentum method.
+
+  <2> _initialize_FGD:
+
+      Use the U0 to construct initial distance obj (ProjecM), inital weight obj (Weights) and obtain the corresponding weights.
+
+      Calculate the initial residue \sum g_i*d_i.
+
+      Construct err_list to record all residues.
+
+      Calculate the step_size: Lipschiz constant of weighted M (use method get_weighted_stepsize).
+
+  <3> _update_U_innerloop:
+
+      Fixing g, and updating U using 1st GD or Momentum in a predefined iteration loop.
+
+  <4> apply_RW_Basic_FGD:
+
+      Take the full size data as the input. Perform the 1st or momentum GD.
+
+      Return subspace basis Ut, the final squared weights g in np.array type and the record of all errors and weights during the iterations.
+
+
+
+
+
+
+

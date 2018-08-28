@@ -1,0 +1,18 @@
+warning: Debugger speedups using cython not found. Run '"/Users/XiangyuW/anaconda3/bin/python3.6" "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/setup_cython.py" build_ext --inplace' to build.
+pydev debugger: starting (pid: 995)
+/Users/XiangyuW/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Traceback (most recent call last):
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1621, in <module>
+    main()
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1615, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1022, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/_pydev_imps/_pydev_execfile.py", line 25, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/test_RWLR_rank_effect.py", line 11, in <module>
+    from Tensorflow.NN_handwritten import dir_path
+  File "/Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/Tensorflow/NN_handwritten.py", line 11, in <module>
+    from hw_funs import creat_hw_pickle,byebye
+ModuleNotFoundError: No module named 'hw_funs'

@@ -1,0 +1,1846 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+
+<channel>
+	<title>Planet Eclipse</title>
+	<link>http://planeteclipse.org/planet/</link>
+	<language>en</language>
+	<description>Planet Eclipse - http://planeteclipse.org/planet/</description>
+
+<item>
+	<title>Scott Lewis: ECF Photon supports OSGi Async Intent</title>
+	<guid isPermaLink="false">tag:blogger.com,1999:blog-20358640.post-5680104965640748238</guid>
+	<link>http://eclipseecf.blogspot.com/2018/05/ecf-photon-supports-osgi-async-intent.html</link>
+	<description>In a &lt;a href=&quot;http://eclipseecf.blogspot.com/2018/04/ecf-photon-supports-osgi-r7.html&quot;&gt;previous post&lt;/a&gt;, I indicated that ECF Photon will support OSGi R7.   What does this mean for  remote service developers?&lt;br /&gt;&lt;br /&gt;Support &lt;b&gt;osgi.async&lt;/b&gt; Remote Service Intent&lt;br /&gt;&lt;br /&gt;The &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html&quot;&gt;OSGi R7 Remote Services specification&lt;/a&gt; has been enhanced with new remote service &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html#i1693415&quot;&gt;intents&lt;/a&gt;.  Remote Service Intents allow remote service authors to specify requirements on the underlying distribution system.   The &lt;b&gt;osgi.async&lt;/b&gt; intent allows the service interface to use return types like Java8's &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html&quot;&gt;CompletableFuture&lt;/a&gt; or OSGi's &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/util.promise.html&quot;&gt;Promise&lt;/a&gt;.   When a distribution provider supports this intent, the remote service proxy will automatically implement the asynchronous/non-blocking behavior for the service consumer.&lt;br /&gt;&lt;br /&gt;For example, consider a service interface:&lt;br /&gt;&lt;pre class=&quot;brush:java&quot;&gt;public interface Hello {&lt;br /&gt;    CompletableFuture hello(String greetingMessage);&lt;br /&gt;}&lt;/pre&gt;When an implementation of this service is registered and exported as a remote service:&lt;br /&gt;&lt;pre class=&quot;brush:java&quot;&gt;@Component(property = { &quot;service.exported.interfaces=*&quot;, &quot;service.intents=osgi.async&quot; })&lt;br /&gt;public class HelloImpl implements Hello {&lt;br /&gt;    public CompletableFuture hello(String greetingMessage) {&lt;br /&gt;          CompletableFuture future = new CompletableFuture();&lt;br /&gt;          future.complete(&quot;Hi.  This a response to the greeting: &quot;+greetingMessage);&lt;br /&gt;          return future;&lt;br /&gt;    }&lt;br /&gt;}&lt;/pre&gt;Then when a Hello servicee consumer discovers, imports and the remote service is injected by DS:&lt;br /&gt;&lt;pre class=&quot;brush:java&quot;&gt;@Component(immediate=true)&lt;br /&gt;public class HelloConsumer {&lt;br /&gt;&lt;br /&gt;    @Reference&lt;br /&gt;    private Hello helloService;&lt;br /&gt;&lt;br /&gt;    @Activate&lt;br /&gt;    void activate() throws Exception {&lt;br /&gt;        // Call helloService.hello remote service without blocking&lt;br /&gt;        helloService.hello(&quot;hi there&quot;).whenComplete((result,exception) -&amp;gt; {&lt;br /&gt;            if (exception != null)&lt;br /&gt;                exception.printStackTrace(exception);&lt;br /&gt;            else&lt;br /&gt;                System.out.println(&quot;hello service responds: &quot;+helloService.hello(&quot;hi there&quot;));&lt;br /&gt;        });&lt;br /&gt;    }&lt;br /&gt;}&lt;/pre&gt;The injected &lt;b&gt;helloService &lt;/b&gt;instance will automatically implement the asynchronous/non-blocking remote call via the &lt;a href=&quot;https://wiki.eclipse.org/Distribution_Providers&quot;&gt;distribution provider&lt;/a&gt;.   No need for the consumer to implement anything other than calling the 'hello' method and handling the response via implementing &lt;b&gt;whenComplete&lt;/b&gt;.   The Java8 CompletionStage, Future, and OSGi's Promise are also supported return types.&lt;br /&gt;&lt;br /&gt;This makes it very easy to define, implement, and efficiently use loosely-coupled asynchronous remote services.   It also makes remote service contracts transport independent, allowing the swapping of &lt;a href=&quot;https://wiki.eclipse.org/Distribution_Providers&quot;&gt;distribution providers&lt;/a&gt; or custom providers without changes to the service interface contract.</description>
+	<pubDate>Tue, 01 May 2018 18:05:13 +0000</pubDate>
+	<author>noreply@blogger.com (Scott Lewis)</author>
+</item>
+<item>
+	<title>Scott Lewis: ECF Photon supports osgi.async intent</title>
+	<guid isPermaLink="false">tag:blogger.com,1999:blog-20358640.post-7326966142920811809</guid>
+	<link>http://eclipseecf.blogspot.com/2018/05/ecf-photon-supports-osgiasync-intent.html</link>
+	<description>In a previous post, I indicated that &lt;a href=&quot;http://eclipseecf.blogspot.com/2018/04/ecf-photon-supports-osgi-r7.html&quot;&gt;ECF Photon  will support OSGi R7&lt;/a&gt;.   What does this mean for  developers?&lt;br /&gt;&lt;br /&gt;&lt;b&gt;osgi.async&lt;/b&gt; Remote Service Intent&lt;br /&gt;&lt;br /&gt;The &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html&quot;&gt;OSGi R7 Remote Services specification&lt;/a&gt; has been enhanced with new &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html#i1693415&quot;&gt;Remote Service intents&lt;/a&gt;.  Remote Service Intents allow remote service authors to specify requirements on the underlying distribution system.   The &lt;b&gt;osgi.async&lt;/b&gt; intent allows the service interface to use return types like Java8's &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html&quot;&gt;CompletableFuture&lt;/a&gt; or OSGi's &lt;a href=&quot;https://osgi.org/specification/osgi.cmpn/7.0.0/util.promise.html&quot;&gt;Promise&lt;/a&gt;.   When a distribution provider supports this intent, the remote service proxy will automatically implement the asynchronous/non-blocking behavior.&lt;br /&gt;&lt;br /&gt;For example, consider a service interface:&lt;br /&gt;&lt;br /&gt; &lt;br /&gt;When an implementation of this service is registered and exported as a remote service:&lt;br /&gt;&lt;br /&gt; Then when a consumer discovers, imports and the remote service is injected by DS:&lt;br /&gt;&lt;br /&gt; The injected helloService instance will automatically implement the asynchronous/non-blocking remote call via the distribution provider.   No need for the consumer to implement anything other than calling the 'hello' method and handling the response via implementing whenComplete.   The Java8 CompletionStage, Future, and OSGi's Promise are also supported return types.&lt;br /&gt;&lt;br /&gt;This makes it very easy to define, implement, and efficiently use loosely-coupled asynchronous remote services.   It also makes remote service contracts transport independent, allowing the swapping of &lt;a href=&quot;https://wiki.eclipse.org/Distribution_Providers&quot;&gt;distribution providers&lt;/a&gt; or custom providers without changes to the service interface contract.</description>
+	<pubDate>Tue, 01 May 2018 17:23:13 +0000</pubDate>
+	<author>noreply@blogger.com (Scott Lewis)</author>
+</item>
+<item>
+	<title>Nikhil Nanivadekar: Eclipse Collections: A Community Story</title>
+	<guid isPermaLink="false">https://medium.com/p/dc63d0226fc2</guid>
+	<link>https://medium.com/@nikhilnanivadekar/eclipse-collections-a-community-story-dc63d0226fc2?source=rss-4285d8a2ca86------2</link>
+	<description>&lt;figure&gt;&lt;img alt=&quot;&quot; src=&quot;https://cdn-images-1.medium.com/proxy/1*FwXYmKTjYM1og40DIi5EBw.png&quot; /&gt;&lt;/figure&gt;&lt;p&gt;Eclipse Collections has optimized List, Set and Map implementations and adds more specialized data structures like Bag, Multimap, BiMap. Since, most of the Eclipse Collections implementations extend the respective JDK collections interfaces, we ensure users can have inter-op with the JDK. The library also provides a rich suite of primitive Lists, Sets, Bags, Stacks and Maps for all 8 primitives. Eclipse Collections provides lazy and eager execution patterns, it provides Mutable, Unmodifiable and Immutable collection types. Eclipse Collections has 80+ iteration patterns/API on the collections itself. With so many rich features and ability to co-exist with the JDK, Eclipse Collections enhances the Java developers’ experience.&lt;/p&gt;&lt;p&gt;Eclipse Collections is a part of the &lt;a href=&quot;https://wiki.openjdk.java.net/display/quality/Quality+Outreach&quot;&gt;Quality Outreach&lt;/a&gt; program and we run regression builds for Java 8, 9, 10 and 11-EA. The library helps identify bugs and regression breaks in the JDK and IDEs like IntelliJ Idea and Eclipse.&lt;/p&gt;&lt;p&gt;Recently, we discovered that the community is helping us by adding &lt;a href=&quot;https://github.com/FasterXML/jackson-datatypes-collections/issues/29&quot;&gt;Jackson serialization support&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Last year, we made the decision to participate in the Eclipse Release train. Thanks to the extensive support from the developer community, the library is integrated in the Eclipse Photon release!&lt;/p&gt;&lt;p&gt;As of writing of this blog, we have &lt;a href=&quot;https://github.com/eclipse/eclipse-collections/pulls&quot;&gt;12 open Pull Requests&lt;/a&gt; and &lt;a href=&quot;https://github.com/eclipse/eclipse-collections/issues&quot;&gt;65 open issues&lt;/a&gt;. The &lt;a href=&quot;http://eclipse.org/collections&quot;&gt;Eclipse Collections website&lt;/a&gt; is available in 6 languages. These issues help us understand the requirements and the features which developers and users of the library care about. So far we have 37 contributors to the project. We have a &lt;a href=&quot;https://projects.eclipse.org/projects/technology.collections/who&quot;&gt;project team&lt;/a&gt; comprised of 5 committers. In order to help first time contributors choose a contribution, we add a “&lt;a href=&quot;https://github.com/eclipse/eclipse-collections/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22&quot;&gt;good first issue&lt;/a&gt;” label.&lt;/p&gt;&lt;p&gt;I was voted as a project lead of Eclipse Collections in April ’17. In the past year, the framework has grown by leaps and bounds. I did a &lt;a href=&quot;https://medium.com/@nikhilnanivadekar/november-java-user-group-tour-2017-dbb103b80532&quot;&gt;UK, Ireland Java User Group tour&lt;/a&gt; in November ’17. I am writing this blog from the Bengaluru airport on my way to the fourth stop of my &lt;a href=&quot;https://medium.com/@nikhilnanivadekar/india-java-user-group-tour-2018-ecdd10e2543d&quot;&gt;India Java User Group tour&lt;/a&gt;. These JUG tours are a part of the project’s outreach initiative. I can’t help but be amazed at the maturity of the Eclipse Collections framework. But there is still a lot of work to be done, we would like to add more symmetry between the primitive and object side, make the framework modularized (similar to the JDK). The future is bright for the framework and you can help me keep it vibrant by adopting, contributing and evangelizing Eclipse Collections.&lt;/p&gt;&lt;p&gt;If you like it, show your support, put a star on our &lt;a href=&quot;https://github.com/eclipse/eclipse-collections&quot;&gt;GitHub Repo&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Resources:&lt;/strong&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md&quot;&gt;Eclipse Collections Reference Guide&lt;/a&gt;.&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/eclipse/eclipse-collections-kata&quot;&gt;Eclipse Collections Kata&lt;/a&gt; to learn the basic concepts of the framework.&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md&quot;&gt;Contribution guidelines&lt;/a&gt; to help get started contributing to the framework. If you have any questions, feel free to ask, we will be happy to help.&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://medium.com/@donraab&quot;&gt;Eclipse Collections by example blog series&lt;/a&gt;.&lt;/li&gt;&lt;li&gt;Refactoring Collections: Making Your Java Streams Leaner, Meaner, and Cleaner: &lt;a href=&quot;https://github.com/vmzakharov/refactor-to-ec/blob/master/docs/RefactorToEcIntro.pdf&quot;&gt;Presentation&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/Uje4vA3tRBI&quot;&gt;Video&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Java Evolution of Eclipse Collections: &lt;a href=&quot;https://www.infoq.com/articles/eclipse-collections&quot;&gt;Article&lt;/a&gt;, &lt;a href=&quot;https://www.infoq.com/presentations/java-eclipse-collections&quot;&gt;Video&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;img height=&quot;1&quot; src=&quot;https://medium.com/_/stat?event=post.clientViewed&amp;amp;referrerSource=full_rss&amp;amp;postId=dc63d0226fc2&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Sat, 28 Apr 2018 15:08:10 +0000</pubDate>
+</item>
+<item>
+	<title>Niko Stotz: High-Performance Interpreters for JetBrains MPS</title>
+	<guid isPermaLink="false">https://www.nikostotz.de/blog/?p=342</guid>
+	<link>https://www.nikostotz.de/blog/high-performance-interpreters-for-jetbrains-mps/</link>
+	<description>&lt;p&gt;&lt;b&gt;tl;dr&lt;/b&gt; An interpreter framework prototype based on &lt;a href=&quot;https://www.graalvm.org/&quot;&gt;GraalVM / Truffle&lt;/a&gt; shows two orders of magnitude better performance than the &lt;a href=&quot;http://mbeddr.com/interpreter/Interpreter.html&quot;&gt;previous implementation&lt;/a&gt;. Vote for &lt;a href=&quot;https://youtrack.jetbrains.com/issue/MPS-27653&quot;&gt;Java Annotation Processor support in MPS&lt;/a&gt; to help this effort.&lt;/p&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;At the great &lt;a href=&quot;https://confluence.jetbrains.com/display/MPS/JetBrains+MPS+Community+Meetup%3A+Agenda&quot;&gt;MPS Meetup&lt;/a&gt; last week in Munich I had a chance to give a talk on the &lt;a href=&quot;http://mbeddr.com/interpreter/Interpreter.html&quot;&gt;MPS Interpreter Framework&lt;/a&gt; I worked on at itemis. The &lt;a href=&quot;https://nikostotz.de/mps/Interpreter-MPS.pdf&quot;&gt;slides are available&lt;/a&gt;, and the talk was recorded (I’ll add a link once the video is published).&lt;br /&gt;
+We had an enthusiastic audience with lots of questions. This skewed my timing a bit, thus I could only spend a few minutes on my latest experiments in this field: A new take on the interpreter framework, based on &lt;a href=&quot;https://www.graalvm.org/&quot;&gt;GraalVM / Truffle&lt;/a&gt;. &lt;a href=&quot;https://medium.com/@dslmeinte/the-munich-mps-meetup-2018-my-impression-91fa280e82e2&quot;&gt;Meinte Boersma&lt;/a&gt; inspired this blog post to add more details — thanks a lot for the motivation, Meinte!&lt;/p&gt;
+&lt;p&gt;To shortly recap the first part of my talk: Interpreters are easy to implement, especially if an MPS language avoids the usual boilerplate and integration in the typesystem gets rid of &lt;tt&gt;instanceof&lt;/tt&gt; and casting orgies. This is pretty much the the state of the existing Interpreter Framework, which is used in a lot of real-world projects (e.g. &lt;a href=&quot;http://voelter.de/data/pub/kernelf-reference.pdf&quot;&gt;KernelF&lt;/a&gt; or at the Dutch tax office).&lt;/p&gt;
+&lt;p&gt;This leaves us with one big drawback of interpreters: Usually, their performance is pretty bad. Enter GraalVM!&lt;br /&gt;
+&lt;b&gt;GraalVM&lt;/b&gt; is a highly optimized just-in-time-compiler for Java. It also provides an API to the code running on the JVM, and thus can be leveraged by Truffle.&lt;br /&gt;
+&lt;b&gt;Truffle&lt;/b&gt; is a library to implement high-performance interpreters, it uses all the tricks in the book: AST rewriting, partial evaluation, polymorphic inline caches, …, you name it. This leads to &lt;a href=&quot;https://www.graalvm.org/docs/examples/java-performance-examples/&quot;&gt;pretty impressive performance&lt;/a&gt;, like 90 % of the hand-optimized V8 JavaScript engine. Truffle makes use of GraalVM, but also runs on a regular JVM.&lt;br /&gt;
+Another part of GraalVM ecosystem is called &lt;b&gt;Polyglot&lt;/b&gt;. It allows interaction and optimization across languages, e.g. starting a JavaScript program, calling an R routine, which calls Ruby, which uses JavaScript, and all of this without data serialization or performance drawback.&lt;br /&gt;
+Incidentally, Oracle &lt;a href=&quot;https://blogs.oracle.com/developers/announcing-graalvm&quot;&gt;released GraalVM 1.0&lt;/a&gt; this week. We might see a lot more traction in this field.&lt;/p&gt;
+&lt;p&gt;Based on the first non-representative, non-exhaustive tests, GraalVM delivers big time:&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;aligncenter size-large wp-image-345&quot; height=&quot;424&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/interpreterPerformance-1024x678.png&quot; width=&quot;640&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;i&gt;Truffle&lt;/i&gt; runs within MPS, but on a regular JVM (i.e. without GraalVM JIT).&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Legacy&lt;/i&gt; is the existing interpreter framework within MPS.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Graal skewed&lt;/i&gt; runs Truffle within MPS on a GraalVM JIT. I must have messed up something there, as the performance should be better than pure Truffle. Also, MPS itself felt quite sluggish with this configuration.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Graal extrapolated&lt;/i&gt; uses the stand-alone version (outside MPS) as a comparison what should be achievable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note that the test program was quite basic, probably leading to overly optimistic results. However, I used a pretty old version of GraalVM (shipped with JDK9 on Windows) and Truffle (0.30), and reportedly newer versions perform a lot better. So in total, I think we can expect two orders of magnitude better performance.&lt;/p&gt;
+&lt;h2&gt;Technical Details&lt;/h2&gt;
+&lt;h3&gt;GraalVM&lt;/h3&gt;
+&lt;p&gt;GraalVM is available in a special build of &lt;a href=&quot;https://www.graalvm.org/downloads/&quot;&gt;Java8 on Linux and Mac&lt;/a&gt;. Java9 on Windows and Mac and Java10 on Linux also contain a (probably outdated) version of GraalVM.&lt;/p&gt;
+&lt;p&gt;As my current development environment is on Windows, I first tried to build the source version of GraalVM on Windows. I finally got it built, but the resulting &lt;tt&gt;java.exe&lt;/tt&gt; segfaulted even on &lt;tt&gt;java.exe -version&lt;/tt&gt;.&lt;br /&gt;
+The next best way was to get MPS running on Java9. If we’re using Java8 for compilation and Java9 only as a runtime environment, we only need &lt;a href=&quot;https://youtrack.jetbrains.com/issue/MPS-27133&quot;&gt;a few adjustments&lt;/a&gt; to the MPS sources. I put my &lt;a href=&quot;https://github.com/enikao/MPS/tree/java9-annotationProcessor-truffle&quot;&gt;hack on github&lt;/a&gt;. Be warned: it contains a few hard-coded local paths!&lt;/p&gt;
+&lt;h3&gt;Truffle&lt;/h3&gt;
+&lt;p&gt;Truffle relies on &lt;a href=&quot;https://docs.oracle.com/javase/9/docs/api/javax/annotation/processing/Processor.html&quot;&gt;Java Annotation Processors&lt;/a&gt;, a standardized way to extend the Java compiler.&lt;br /&gt;
+MPS internally uses the Eclipse java compiler, which fully supports annotation processors. The Eclipse java compiler also supports both the IntelliJ compiler infrastructure and the &lt;a href=&quot;https://docs.oracle.com/javase/9/docs/api/javax/tools/JavaCompiler.html&quot;&gt;Java standard for calling compilers&lt;/a&gt;, but MPS uses a hand-knitted interface to the compiler without annotation processor support. I opened a &lt;a href=&quot;https://youtrack.jetbrains.com/issue/MPS-27653&quot;&gt;Feature request for MPS to support Annotation Processors&lt;/a&gt;, so please upvote if you’re interested in high-performance interpreters.&lt;br /&gt;
+My aforementioned hack also contains changes to enable the required annotation processors within MPS.&lt;/p&gt;
+&lt;h3&gt;TruffleInterpreter Language&lt;/h3&gt;
+&lt;p&gt;I started the language from scratch for several reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The existing Interpreter language was the first thing I implemented in MPS, and I learned a lot since then.&lt;/li&gt;
+&lt;li&gt;The interpreter should become its own language aspect, thus requiring considerable changes anyway.&lt;/li&gt;
+&lt;li&gt;Understanding Truffle and generating the correct code for it is hard enough, I didn’t want to add the burden of non-fitting abstractions.&lt;/li&gt;
+&lt;li&gt;We need quite some additional information for the new backend.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Obviously, I kept the nice parts regarding concise syntax and typesystem integration.&lt;/p&gt;
+&lt;p&gt;I did not spend much time yet on beautifying the language, but I think the general idea is already recognizable.&lt;/p&gt;
+&lt;p&gt;As a &lt;a href=&quot;https://github.com/enikao/mps-interpreter-graalvm-truffle&quot;&gt;playground&lt;/a&gt;, I implemented &lt;a href=&quot;https://github.com/graalvm/simplelanguage&quot;&gt;SimpleLanguage&lt;/a&gt; as shipped with Truffle in both MPS interpreter frameworks. (Please find &lt;a href=&quot;https://www.nikostotz.de/blog/feed/#completeInterpreters&quot;&gt;screenshots of the complete interpreters&lt;/a&gt; at the end of this post.)&lt;/p&gt;
+&lt;p&gt;Let’s look at a few examples from both interpreters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;b&gt;Invoke Expression&lt;/b&gt;&lt;br /&gt;
+Invoke maps quite directly.&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Legacy&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-354&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/legacyInvoke.png&quot; /&gt;&lt;br /&gt;
+Truffle&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-353&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/invoke.png&quot; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Plus Expression&lt;/b&gt;&lt;br /&gt;
+Plus is also similar, but we can spot some differences:&lt;p&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mixtures of types are handled automatically by Truffle&lt;/li&gt;
+&lt;li&gt;Truffle adds programmatic type guards for the String overload&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Legacy&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-355&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/legacyPlus.png&quot; /&gt;&lt;br /&gt;
+Truffle&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-352&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/add.png&quot; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Typemapping&lt;/b&gt;&lt;br /&gt;
+The actual typemapping is very similar. However, Truffle needs to know about the run-time (aka interpretation-time) typesystem including type checks, type casts, and implicit casts.&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Legacy&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-356&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/legacyTypeMapping.png&quot; /&gt;&lt;br /&gt;
+Truffle&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-357&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/typeMapping.png&quot; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Truffle variant contains a few more hints only accessible via inspector.&lt;/p&gt;
+&lt;p&gt;I guess a converter from legacy to Truffle interpreters should be feasible, but the result might not run out-of-the-box.&lt;/p&gt;
+&lt;h3&gt;Implementation&lt;/h3&gt;
+&lt;p&gt;The implementation faced three main issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;b&gt;Generating the correct code for Truffle&lt;/b&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Truffle is very picky about what code it accepts, e.g. some fields &lt;i&gt;must&lt;/i&gt; be &lt;tt&gt;final&lt;/tt&gt;, but others &lt;i&gt;must not&lt;/i&gt;. There seems no way for annotation processors to emit messages during compilation. Thus, we generate some code, and it either works or not, without any hints (in some cases we pass the compilation steps and get hints during execution).
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Providing the generated truffle interpreter to the Truffle runtime&lt;/b&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Truffle expects all its languages to be available in its &lt;tt&gt;classpath&lt;/tt&gt; at startup.&lt;br /&gt;
+So currently, we cannot change the interpreters after the first invocation of any (!) interpreter.&lt;br /&gt;
+There might be a way to add languages at runtime, but my hunch is this would get us into never-ending classloading issues. See &lt;a href=&quot;https://www.nikostotz.de/blog/feed/#oneForAll&quot;&gt;below&lt;/a&gt; for thoughts on a better approach.
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;b&gt;Running annotation processors the same time as the regular compilation&lt;/b&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;The code generated by MPS contains calls to classes only generated by Truffle’s annotation processors, so we have to execute both in the same step.&lt;br /&gt;
+Re-implementing Truffle’s generators in MPS is also not an option, both from their size and complexity.&lt;/p&gt;
+&lt;p&gt;This picture compares the input MPS Concepts mentioned in the interpreter, Java source files generated by MPS, and produced Java classes&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;aligncenter size-full wp-image-358&quot; height=&quot;839&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/concepts-sources-classes.png&quot; width=&quot;528&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;A small snippet of the Truffle-generated code. Who wants to tell me where I took it from?&lt;/p&gt;
+&lt;div class=&quot;codecolorer-container java default&quot; style=&quot;overflow: auto; white-space: nowrap; width: 435px;&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;div&gt;1&lt;br /&gt;2&lt;br /&gt;3&lt;br /&gt;4&lt;br /&gt;5&lt;br /&gt;6&lt;br /&gt;7&lt;br /&gt;8&lt;br /&gt;9&lt;br /&gt;10&lt;br /&gt;11&lt;br /&gt;12&lt;br /&gt;13&lt;br /&gt;14&lt;br /&gt;15&lt;br /&gt;16&lt;br /&gt;17&lt;br /&gt;18&lt;br /&gt;19&lt;br /&gt;20&lt;br /&gt;21&lt;br /&gt;22&lt;br /&gt;23&lt;br /&gt;24&lt;br /&gt;25&lt;br /&gt;26&lt;br /&gt;27&lt;br /&gt;28&lt;br /&gt;29&lt;br /&gt;30&lt;br /&gt;31&lt;br /&gt;32&lt;br /&gt;33&lt;br /&gt;34&lt;br /&gt;35&lt;br /&gt;36&lt;br /&gt;37&lt;br /&gt;38&lt;br /&gt;39&lt;br /&gt;40&lt;br /&gt;41&lt;br /&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&lt;div class=&quot;java codecolorer&quot;&gt;&lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color: #003399;&quot;&gt;Object&lt;/span&gt; executeGeneric_generic1&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;VirtualFrame frameValue, &lt;span style=&quot;color: #000066; font-weight: bold;&quot;&gt;int&lt;/span&gt; state&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #003399;&quot;&gt;Object&lt;/span&gt; leftValue_ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;left_&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;executeGeneric&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;frameValue&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #003399;&quot;&gt;Object&lt;/span&gt; rightValue_ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;right_&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;executeGeneric&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;frameValue&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;!=&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;0&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; leftValue_ &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;instanceof&lt;/span&gt; &lt;span style=&quot;color: #003399;&quot;&gt;Long&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #000066; font-weight: bold;&quot;&gt;long&lt;/span&gt; leftValue__ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #003399;&quot;&gt;Long&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;leftValue_&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;rightValue_ &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;instanceof&lt;/span&gt; &lt;span style=&quot;color: #003399;&quot;&gt;Long&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+      &lt;span style=&quot;color: #000066; font-weight: bold;&quot;&gt;long&lt;/span&gt; rightValue__ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #003399;&quot;&gt;Long&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;rightValue_&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+      &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+        &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;specialization&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;leftValue__, rightValue__&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+      &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;catch&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #003399;&quot;&gt;ArithmeticException&lt;/span&gt; var14&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+        Lock lock &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;getLock&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+        lock.&lt;span style=&quot;color: #006633;&quot;&gt;lock&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+        &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+          &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;exclude_&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;|=&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+          &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;state_&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;=&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;color: #cc66cc;&quot;&gt;3&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+        &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;finally&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+          lock.&lt;span style=&quot;color: #006633;&quot;&gt;unlock&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+        &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+        &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;executeAndSpecialize&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;leftValue__, rightValue__&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+      &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+  &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;!=&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;0&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; SLxTypesGen.&lt;span style=&quot;color: #006633;&quot;&gt;isImplicitBigInteger&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;48&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;4&lt;/span&gt;, leftValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #003399;&quot;&gt;BigInteger&lt;/span&gt; leftValue__ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; SLxTypesGen.&lt;span style=&quot;color: #006633;&quot;&gt;asImplicitBigInteger&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;48&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;4&lt;/span&gt;, leftValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;SLxTypesGen.&lt;span style=&quot;color: #006633;&quot;&gt;isImplicitBigInteger&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;192&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;6&lt;/span&gt;, rightValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+      &lt;span style=&quot;color: #003399;&quot;&gt;BigInteger&lt;/span&gt; rightValue__ &lt;span style=&quot;color: #339933;&quot;&gt;=&lt;/span&gt; SLxTypesGen.&lt;span style=&quot;color: #006633;&quot;&gt;asImplicitBigInteger&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;192&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;6&lt;/span&gt;, rightValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+      &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;specialization&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;leftValue__, rightValue__&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+  &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;state &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;8&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;!=&lt;/span&gt; &lt;span style=&quot;color: #cc66cc;&quot;&gt;0&lt;/span&gt; &lt;span style=&quot;color: #339933;&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;guardSpecialization&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;rightValue_, leftValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;specialization&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;leftValue_, rightValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;else&lt;/span&gt; &lt;span style=&quot;color: #009900;&quot;&gt;{&lt;/span&gt;&lt;br /&gt;
+    CompilerDirectives.&lt;span style=&quot;color: #006633;&quot;&gt;transferToInterpreterAndInvalidate&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+    &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #000000; font-weight: bold;&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: #006633;&quot;&gt;executeAndSpecialize&lt;/span&gt;&lt;span style=&quot;color: #009900;&quot;&gt;(&lt;/span&gt;leftValue_, rightValue_&lt;span style=&quot;color: #009900;&quot;&gt;)&lt;/span&gt;&lt;span style=&quot;color: #339933;&quot;&gt;;&lt;/span&gt;&lt;br /&gt;
+  &lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color: #009900;&quot;&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Lifecycle&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; class=&quot;aligncenter size-full wp-image-359&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/TruffleMps.png&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We start by defining our Language &lt;tt&gt;SimpleLanguage&lt;/tt&gt; as usual. As an example, we define a concept &lt;tt&gt;SlPlus&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;We create a TruffleInterpreter for &lt;tt&gt;SimpleLanguage&lt;/tt&gt;. In the interpreter, we create the evaluator for &lt;tt&gt;SlPlus&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;The generator of TruffleInterpreter turns the evaluator for &lt;tt&gt;SlPlus&lt;/tt&gt; into a Java class named &lt;tt&gt;SlPlusNode&lt;/tt&gt; that inherits from &lt;tt&gt;TruffleNode&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;Once we want to evaluate our instance model of &lt;tt&gt;SimpleLanguage&lt;/tt&gt;, the TruffleInterpreter framework converts all instances of &lt;tt&gt;SlPlus&lt;/tt&gt; (i.e. MPS nodes of concept SlPlus) into instances of &lt;tt&gt;SlPlusNode&lt;/tt&gt; (i.e. Java objects of class SlPlusNode).&lt;/li&gt;
+&lt;li&gt;The TruffleInterpreter framework invokes the &lt;tt&gt;TruffleRuntime&lt;/tt&gt; on the recently created &lt;tt&gt;SlPlusNode&lt;/tt&gt; object.&lt;/li&gt;
+&lt;li&gt;We can retrieve the result of our interpretation, e.g. a &lt;tt&gt;java.lang.Long&lt;/tt&gt; object, from &lt;tt&gt;TruffleRuntime&lt;/tt&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Truffle requires all evaluated nodes to be TruffleNodes to do its magic.&lt;br /&gt;
+This implies some overhead to convert MpsNodes into TruffleNodes, but allows us to execute the interpreter without model access afterwards. We can even run the interpreter in a different thread and update our editor once the calculation is done.&lt;/p&gt;
+&lt;h2&gt;Language Interoperability&lt;/h2&gt;
+&lt;p&gt;The Polyglot part of GraalVM allows arbitrary mixture of languages. The prototype contains an example to call JavaScript:&lt;br /&gt;
+&lt;img alt=&quot;&quot; class=&quot;alignnone size-full wp-image-360&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/batman.png&quot; /&gt;&lt;br /&gt;
+(You &lt;a href=&quot;https://www.destroyallsoftware.com/talks/wat&quot;&gt;have to know this joke!&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Polyglot supports language interoperability with complex types, but I didn’t implement this yet in this prototype.&lt;/p&gt;
+&lt;h2&gt;Future Work&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Turn Prototype into Production Code&lt;/b&gt;&lt;br /&gt;
+This blog post is about a prototype, meant to explore the possibilities, pitfalls and benefits. It breaks quickly if you try something different. It does not implement all features of Truffle. The generator does not need to be rewritten from scratch, but needs a serious overhaul. The language is too close to Truffle specifics, and thus hard to use if you don’t know about Truffle.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Interpreter Language Aspect&lt;/b&gt;&lt;br /&gt;
+Interpreters should be a separate language aspect, the same way as typesystem or constraints. At the MPS Meetup we agreed that executing your models is highly valuable in lots of domains; a language aspect emphasizes this importance.&lt;br /&gt;
+Also, having a language aspect should improve integration with the rest of the MPS ecosystem and ease classloading for interpreters.&lt;/p&gt;
+&lt;p&gt;&lt;b id=&quot;oneForAll&quot;&gt;One Interpreter for all Languages&lt;/b&gt;&lt;br /&gt;
+The current implementation registers every interpreter as its own Truffle language; the idea was to leverage Polyglot for language interaction. However, this leads to classloading issues.&lt;/p&gt;
+&lt;p&gt;An alternative would be to look at interpreters similar to editors: In MPS, we have a standard editor for all concepts. If we need to, we can provide other editors triggered by editor hints. Similarly, we could have one standard language (from a Truffle point of view), and all interpreters contribute to this standard Truffle language. We might register a few secondary Truffle languages by default, so we don’t have to restart MPS as soon as anybody wants to use an “interpreter hint”.&lt;/p&gt;
+&lt;p&gt;This should maintain MPS language extensibility, as any MPS language can contribute standard interpreters for any concept, or might register secondary interpreters with an “interpreter hint”.&lt;/p&gt;
+&lt;p&gt;I’m not sure yet what to do about nodes without any known interpreter. We might want to ignore them, or traverse their subnodes to find something we can interpret.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Fine-tuning MpsNode → TruffleNode Conversion&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;The current implementation converts an arbitrary selection of MpsNodes into TruffleNodes prior to invoking the interpreter. We could think of other approaches:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Convert the starting node and all contained and related nodes up to a specific depth; At the end of each branch, we’d insert a “ReloadNode” to convert more nodes once it’s needed.&lt;/li&gt;
+&lt;li&gt;We could keep the converted TruffleNodes in memory and update them on any changes to the underlying MpsNodes (aka “Shadow model”).&lt;/li&gt;
+&lt;li&gt;It should be feasible to make our TruffleNodes &lt;a id=&quot;serializable&quot;&gt;&lt;/a&gt;serializable. Thus, we could save and reload them on MPS restart, or even execute them outside MPS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;Typesystem Integration&lt;/b&gt;&lt;br /&gt;
+As mentioned above, the Truffle interpreter needs to know a lot about runtime types. At least for some of the information, we might be able to infer it from the MPS typesystem aspect.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Scoping Integration&lt;/b&gt;&lt;br /&gt;
+If our interpreted language had nested scopes, maybe even including shadowing, the interpreter needs to know this. We might be able to infer this knowledge from the MPS constraints aspect.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;DSL for Objects&lt;/b&gt;&lt;br /&gt;
+Polyglot supports direct interaction between different languages on complex types. I only scratched this topic yet, but so far this seems to be very exiting both to interact with non-MPS Truffle languages (GraalVM ships with implementations of JavaScript, R, and Ruby) and to enable language composition at runtime.&lt;/p&gt;
+&lt;p&gt;Truffle bases the interaction on a concept called Shapes; I’m pretty sure there could be a DSL to ease their usage.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Debugger Integration&lt;/b&gt;&lt;br /&gt;
+For smaller interpreted programs, something similar to the Trace Explorer available for the legacy Interpreter could be very useful.&lt;/p&gt;
+&lt;p&gt;GraalVM supports exposing the interpreted program via the standard JVM debugging APIs, including breakpoints and introspection. Contrary to popular belief, a Java program &lt;i&gt;can&lt;/i&gt; debug itself, as long as the debugger and the target (i.e. interpreter) run in different threads. So we might be able to use the debugging UI included in MPS (as inherited from IntelliJ) to debug our interpreted program. A long time ago, I wrote a proof-of-concept of this idea for the legacy Interpreter, so we know we can get to the appropriate APIs.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Ahead-of-Time Compilation Support&lt;/b&gt;&lt;br /&gt;
+A yet unmentioned part of GraalVM is called Sulong: An ahead-of-time-compiler for Truffle languages. I have no experience with Sulong, so I can only guess about its possibilities.&lt;br /&gt;
+Especially in combination with &lt;a href=&quot;https://www.nikostotz.de/blog/feed/#serializable&quot;&gt;serializable&lt;/a&gt; TruffleNodes this might lead to production-ready performance outside of MPS, thus rendering a separate implementation of the same logic in a generator obsolete.&lt;br /&gt;
+&lt;i&gt;Edit: &lt;a href=&quot;https://www.nikostotz.de/blog/feed/#comment-2429&quot;&gt;I mixed up Sulong and SubstrateVM&lt;/a&gt;, as Oleg points out in the comments.&lt;/i&gt;&lt;/p&gt;
+&lt;h2 id=&quot;completeInterpreters&quot;&gt;Appendix: Complete Interpreters&lt;/h2&gt;
+&lt;p&gt;Legacy&lt;br /&gt;
+&lt;a href=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/slLegacy.png&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-350&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/slLegacy-467x1024.png&quot; width=&quot;467&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Truffle&lt;br /&gt;
+&lt;a href=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/sl.png&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;size-large wp-image-351&quot; src=&quot;https://www.nikostotz.de/blog/wp-content/uploads/2018/04/sl.png&quot; width=&quot;467&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</description>
+	<pubDate>Fri, 27 Apr 2018 16:57:18 +0000</pubDate>
+        <enclosure url="https://www.nikostotz.de/blog/wp-content/uploads/2018/04/interpreterPerformance-1024x678.png" length="2854" type="image/png"/>
+</item>
+<item>
+	<title>Mikael Barbero: Scaling up the Continuous Integration infrastructure for Eclipse Foundation’s projects</title>
+	<guid isPermaLink="false">https://medium.com/p/6fd60d4dc41d</guid>
+	<link>https://medium.com/@mikael.barbero/scaling-up-the-continuous-integration-infrastructure-for-eclipse-foundations-projects-6fd60d4dc41d?source=rss-4a3bd8487ad8------2</link>
+	<description>&lt;blockquote&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;&lt;/blockquote&gt;&lt;blockquote&gt;Projects hosted by the Eclipse Foundation will soon benefit from a brand new enterprise-grade continuous integration (CI) infrastructure. Expected improvements are: resiliency, scalability and nimbleness. We are doing this move with tremendous support from our friends at &lt;a href=&quot;https://www.cloudbees.com&quot;&gt;CloudBees&lt;/a&gt; and &lt;a href=&quot;http://redhat.com&quot;&gt;RedHat&lt;/a&gt; with their respective products &lt;strong&gt;Jenkins Enterprise&lt;/strong&gt; and &lt;strong&gt;OpenShift Container Platform&lt;/strong&gt;.&lt;/blockquote&gt;&lt;figure&gt;&lt;img alt=&quot;&quot; src=&quot;https://cdn-images-1.medium.com/max/640/1*w3pg3MQ5UpYM2FUmzADUgA.jpeg&quot; /&gt;&lt;a href=&quot;https://www.flickr.com/photos/efandorin/&quot;&gt;https://www.flickr.com/photos/efandorin/&lt;/a&gt; CC BY-NC-ND 2.0&lt;/figure&gt;&lt;p&gt;A decade ago or so, the Eclipse Foundation started the continuous integration (CI) As A Service adventure by providing a &lt;strong&gt;single, shared, Hudson instance&lt;/strong&gt; to its projects. It has been an immediate success. It helped projects to get more frequent integration builds and more stable releases. Despite its success, the solution had a lot of drawbacks. First, we had to find a set of plugins that were fitting everybody and that were working well together. It ended with installing only the common denominator, which was frustrating for projects which wanted to use additional plugins. Second drawback was about finding a time window for maintenance operations: it had become harder and harder. With so many projects, the utilization was close to 24/7. Updating or installing new projects was requiring a lot of coordination overhead. Third, victim of its own success, the shared instance was sometimes unstable and any downtime was affecting all projects. Finally, while this model scaled pretty well in term of computing resources (we could add more agents easily), resources were shared and it was easy for a project to (unintentionally) starve others.&lt;/p&gt;&lt;p&gt;In late 2011, the &lt;a href=&quot;https://www.eclipse.org/community/eclipse_newsletter/2015/may/article2.php&quot;&gt;Common Build Infrastructure (CBI) initiative ramped up&lt;/a&gt;. It had 3 goals:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Make it really easy to copy and modify the source&lt;/li&gt;&lt;li&gt;Make it really easy to build and test the modifications&lt;/li&gt;&lt;li&gt;Make it really easy to contribute a change&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;With these goals set up, it soon became clear that the single Hudson instance was not a good fit. To reach these goals, a project needs to build and test each and every gerrit review / pull request it gets from the community. As such, build jobs will be running more often, automatically and not necessarily under the control of the project team (build can be trigger by a new contribution from someone external to the team). Finding a time window for maintenance would become impossible. Projects also wished for deploying their build results automatically. It was not possible on the shared Hudson instance as it would mean sharing projects specific credentials with all other projects: highly undesirable. Hence, the Eclipse Foundation started to deliver one &lt;strong&gt;Hudson Instance Per Project (HIPP)&lt;/strong&gt;. It started slow, with a couple of projects migrated away from the crowded shared instance. But this again became a big success. By the end of 2016, about 150 instance were running. It was more stable, gave projects the freedom to install plugins they want and to run isolated (from a credential point of view) from other projects. In the same year, the Hudson development was stale and it was not wise to continue to use it. Thus, we initiated a huge effort to migrate all of our Hudson instances to &lt;strong&gt;Jenkins — JIPP&lt;/strong&gt;. Kudos to &lt;a href=&quot;https://twitter.com/fr3dg&quot;&gt;Frederic Gurr&lt;/a&gt; who lead this effort which ended in March 2018. Despite this migration, there was still something fishy about the solution: all instances are running colocated on a dozen of beefy bare metal servers. It was not an issue at the beginning, but the more JIPP we added to the farm, the more the builds of one project were affected by others on the same machine. For instance, build could last up to 5 times longer depending on the global load. Moreover, we now have about 200 JIPP. Maintaining all of this requires a lot of time. With the creation of &lt;a href=&quot;https://jakarta.ee&quot;&gt;Jakarta EE&lt;/a&gt; and the move of all Java EE reference implementations, this number will skyrocket…&lt;/p&gt;&lt;p&gt;&lt;strong&gt;It’s now time to scale up this setup and make it more efficient&lt;/strong&gt;. We need to better use our hardware and be able to add interim cloud resources when needed. We need something where each project resource consumption is isolated from each other. We need to be able to update Jenkins masters and to install/update Jenkins plugins in batch. We need to provide more flexibility to projects to let them build their code in containers so that they control the build environment. We need a solution where resilience is built-in.&lt;/p&gt;&lt;p&gt;We’ve studied a couple of options that would offer all of this. The first conclusion of this study was that &lt;strong&gt;we need to run our system on top of a Kubernetes cluster.&lt;/strong&gt; There are a couple of cluster orchestration systems out there, some more mature than Kubernetes. But we can’t ignore the momentum Kubernetes has these days and we bet that it’s a future proof solution to build on. Kubernetes offers everything we need for scalability and resiliency. The downside is that we need to run it on-premise and it can be quite overwhelming. That’s why we decided to run this cluster with the Red Hat’s distribution of Kubernetes: &lt;strong&gt;Red Hat OpenShift Container Platform&lt;/strong&gt;. Among other things, it provides a rock-solid opinionated setup of Kubernetes which is very reassuring when you just start with these technologies.&lt;/p&gt;&lt;p&gt;The second conclusion of our study was that we needed an orchestrator for all our Jenkins masters. We currently manage our 200 JIPP with a lot of heterogeneous script / tools. We need a more integrated solution. &lt;strong&gt;CloudBees Jenkins Enterprise&lt;/strong&gt; (CJE) provides exactly that in the form of the so called CloudBees Jenkins Operation Center. After some testing and demoing from CloudBees guys, and the fact that the new version 2.0 of CJE runs on top of Kubernetes, it was a no brainer: we needed this tool.&lt;/p&gt;&lt;figure&gt;&lt;img alt=&quot;&quot; src=&quot;https://cdn-images-1.medium.com/max/1024/0*2JD7PDgMxYFd6tf8.&quot; /&gt;by &lt;a href=&quot;https://unsplash.com/@samuelzeller?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Samuel Zeller&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com?utm_source=medium&amp;amp;utm_medium=referral&quot;&gt;Unsplash&lt;/a&gt;&lt;/figure&gt;&lt;p&gt;Good news is that setting up this whole new environment has already started. OpenShift is already running on our hardware and we plan to have CJE running by the end of May. &lt;strong&gt;We don’t expect much disruption, and most of projects won’t need to change anything to their build settings&lt;/strong&gt;.&lt;br /&gt;Starting in a couple of weeks, all new projects will get a CJE JIPP instead of a regular JIPP. Soon after, we will start migrating existing JIPPs by calling for volunteer guinea pig projects. Once this is done and we get confident in the process, we will gradually ramp up the migration and move all remaining projects over to CJE. There is no set timeline, but &lt;strong&gt;we aim to move most projects to CJE before the end of the year&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;We are starting a &lt;a href=&quot;https://wiki.eclipse.org/CBI/CJE_Migration_FAQ&quot;&gt;FAQ about the migration process&lt;/a&gt; and it will be shared very soon on the Eclipse Foundation &lt;a href=&quot;https://accounts.eclipse.org/mailing-list/cross-project-issues-dev&quot;&gt;cross-projects mailing list&lt;/a&gt; as well as on the &lt;a href=&quot;https://accounts.eclipse.org/mailing-list/cbi-dev&quot;&gt;CBI mailing list&lt;/a&gt;. We will also announce progress and milestones on these lists. Stay tuned!&lt;/p&gt;&lt;img height=&quot;1&quot; src=&quot;https://medium.com/_/stat?event=post.clientViewed&amp;amp;referrerSource=full_rss&amp;amp;postId=6fd60d4dc41d&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Fri, 27 Apr 2018 15:26:37 +0000</pubDate>
+</item>
+<item>
+	<title>JBoss Tools Team: JBoss Tools 4.5.2.AM2 for Eclipse Oxygen.2</title>
+	<guid isPermaLink="true">https://tools.jboss.org/blog/4.5.2.am2-for-oxygen.2.html</guid>
+	<link>https://tools.jboss.org/blog/4.5.2.am2-for-oxygen.2.html</link>
+	<description>&lt;div&gt;&lt;div id=&quot;preamble&quot;&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Happy to announce 4.5.2.AM2 (Developer Milestone 2) build for Eclipse Oxygen.2 (built with RC2).&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Downloads available at &lt;a href=&quot;https://tools.jboss.org/downloads/jbosstools/oxygen/4.5.2.AM2.html&quot;&gt;JBoss Tools 4.5.2 AM2&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;what-is-new&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#what-is-new&quot;&gt;&lt;/a&gt;What is New?&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Full info is at &lt;a href=&quot;https://tools.jboss.org/documentation/whatsnew/jbosstools/4.5.2.AM2.html&quot;&gt;this page&lt;/a&gt;. Some highlights are below.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;fuse-tooling&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-tooling&quot;&gt;&lt;/a&gt;Fuse Tooling&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;fuse-7-karaf-based-runtime-server-adapter&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-7-karaf-based-runtime-server-adapter&quot;&gt;&lt;/a&gt;Fuse 7 Karaf-based runtime Server adapter&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Fuse 7 is cooking and preliminary versions are already available on &lt;a href=&quot;http://repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/jboss-fuse-karaf&quot;&gt;early-access repository&lt;/a&gt;. Fuse Tooling is ready to leverage them so that you can try the upcoming major Fuse version.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse 7 Server Adapter&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/Fuse7-ServerAdapter.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Classical functionalities with server adapters are available: automatic redeploy, Java debug, Graphical Camel debug through created JMX connection.
+      Please note:
+      - you can’t retrieve the Fuse 7 Runtime yet directly from Fuse tooling, it is required to download it on your machine and point to it when creating the Server adapter.
+      - the provided templates requires some modifications to have them working with Fuse 7, mainly adapting the bom. Please see work related to it in this &lt;a href=&quot;https://issues.jboss.org/browse/FUSETOOLS-2578&quot;&gt;JIRA task&lt;/a&gt; and its children.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;display-routes-defined-inside-routecontext-in-camel-graphical-editor-design-tab&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#display-routes-defined-inside-routecontext-in-camel-graphical-editor-design-tab&quot;&gt;&lt;/a&gt;Display routes defined inside &quot;routeContext&quot; in Camel Graphical Editor (Design tab)&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&quot;routeContext&quot; tag is a special tag used in Camel to provide the ability to reuse routes and to split them across different files. This is very useful on large projects. See Camel &lt;a href=&quot;http://camel.apache.org/how-do-i-import-routes-from-other-xml-files.html&quot;&gt;documentation&lt;/a&gt; for more information.
+      Since this version, the Design of the routes defined in &quot;routeContext&quot; tags are now displayed.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;usability-improvement-progress-bar-when-changing-the-camel-version&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#usability-improvement-progress-bar-when-changing-the-camel-version&quot;&gt;&lt;/a&gt;Usability improvement: Progress bar when &quot;Changing the Camel version&quot;&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Since Fuse Tooling 10.1.0, it is possible to change the Camel version. In case the Camel version was not cached locally yet and for slow internet connections, this operation can take a while. There is now a progress bar to see the progress.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Switch Camel Version with Progress Bar&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/switchCamelVersionWithProgressBar.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Enjoy!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Jeff Maury&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;&lt;/div&gt;</description>
+	<pubDate>Thu, 26 Apr 2018 14:06:56 +0000</pubDate>
+</item>
+<item>
+	<title>JBoss Tools Team: JBoss Tools and Red Hat Developer Studio for Eclipse Oxygen.2</title>
+	<guid isPermaLink="true">https://tools.jboss.org/blog/11.2.0.ga-for-oxygen.2.html</guid>
+	<link>https://tools.jboss.org/blog/11.2.0.ga-for-oxygen.2.html</link>
+	<description>&lt;div&gt;&lt;div id=&quot;preamble&quot;&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://tools.jboss.org/downloads/jbosstools/oxygen/4.5.2.Final.html&quot;&gt;JBoss Tools 4.5.2&lt;/a&gt; and &lt;a href=&quot;https://tools.jboss.org/downloads/devstudio/oxygen/11.2.0.GA.html&quot;&gt;Red Hat JBoss Developer Studio 11.2&lt;/a&gt; for Eclipse Oxygen.2 are here waiting for you. Check it out!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;devstudio11&quot; src=&quot;https://tools.jboss.org/blog/images/devstudio11.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;installation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#installation&quot;&gt;&lt;/a&gt;Installation&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;JBoss Developer Studio comes with everything pre-bundled in its installer. Simply download it from our &lt;a href=&quot;https://www.jboss.org/products/devstudio.html&quot;&gt;JBoss Products page&lt;/a&gt; and run it like this:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;literalblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre&gt;java -jar jboss-devstudio-&amp;lt;installername&amp;gt;.jar&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;JBoss Tools or Bring-Your-Own-Eclipse (BYOE) JBoss Developer Studio require a bit more:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;This release requires at least Eclipse 4.7 (Oxygen) but we recommend
+      using the latest &lt;a href=&quot;http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen2&quot;&gt;Eclipse 4.7.2 Oxygen JEE Bundle&lt;/a&gt; since then you get most of the dependencies preinstalled.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Once you have installed Eclipse, you can either find us on the Eclipse Marketplace under &quot;JBoss Tools&quot; or &quot;Red Hat JBoss Developer Studio&quot;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;For JBoss Tools, you can also use our update site directly.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;literalblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre&gt;http://download.jboss.org/jbosstools/oxygen/stable/updates/&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;what-is-new&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#what-is-new&quot;&gt;&lt;/a&gt;What is new?&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Our main focus for this release was on adoption of Java9, improvements for container based development and bug fixing.
+      Eclipse Oxygen itself has &lt;a href=&quot;https://www.youtube.com/playlist?list=PLy7t4z5SYNaTM66CahSlkMh5YkndYXMUq&quot;&gt;a lot of new cool stuff&lt;/a&gt; but let me highlight just a few updates in both Eclipse Oxygen and JBoss Tools plugins that I think are worth mentioning.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;openshift-3&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#openshift-3&quot;&gt;&lt;/a&gt;OpenShift 3&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;spring-boot-applications-support-in-openshift-server-adapter&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#spring-boot-applications-support-in-openshift-server-adapter&quot;&gt;&lt;/a&gt;Spring Boot applications support in OpenShift server adapter&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The OpenShift server adapter allowed hotdeploy and debugging for JEE and NodeJS based applications.
+      It now supports Spring Boot applications with some limitations: the Spring Boot devtools module must be added to your application as it monitors code changes and as the application must be launched in exploded mode, you must use the upstream image (docker.io/fabric8/s2i-java) rather than the downstream image builder fis-java-openshift.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;As an example, we’ve provided an OpenShift template that will create an OpenShift application based on the upstream application and a Git repository that added the Spring Boot devtools to the Fabric8 Spring Boot quickstart.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;listingblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;{
+        &quot;apiVersion&quot;: &quot;v1&quot;,
+        &quot;kind&quot;: &quot;Template&quot;,
+        &quot;metadata&quot;: {
+          &quot;annotations&quot;: {
+            &quot;description&quot;: &quot;Spring-Boot and CXF JAXRS QuickStart. This example demonstrates how you can use Apache CXF JAXRS with Spring Boot on Openshift. The quickstart uses Spring Boot to configure a little application that includes a CXF JAXRS endpoint with Swagger enabled.&quot;,
+            &quot;tags&quot;: &quot;quickstart,java,springboot,fis&quot;,
+            &quot;iconClass&quot;: &quot;icon-jboss&quot;,
+            &quot;version&quot;: &quot;2.0&quot;
+          },
+          &quot;name&quot;: &quot;s2i-spring-boot-cxf-jaxrs&quot;
+        },
+        &quot;labels&quot;: {
+          &quot;template&quot;: &quot;s2i-spring-boot-cxf-jaxrs&quot;
+        },
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;APP_NAME&quot;,
+            &quot;displayName&quot;: &quot;Application Name&quot;,
+            &quot;required&quot;: true,
+            &quot;value&quot;: &quot;s2i-spring-boot-cxf-jaxrs&quot;,
+            &quot;description&quot;: &quot;The name assigned to the application.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;GIT_REPO&quot;,
+            &quot;displayName&quot;: &quot;Git Repository URL&quot;,
+            &quot;required&quot;: true,
+            &quot;value&quot;: &quot;https://github.com/jeffmaury/spring-boot-cxf-jaxrs.git&quot;,
+            &quot;description&quot;: &quot;The URL of the repository with your application source code.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;GIT_REF&quot;,
+            &quot;displayName&quot;: &quot;Git Reference&quot;,
+            &quot;value&quot;: &quot;hotdeploy&quot;,
+            &quot;description&quot;: &quot;Set this to a branch name, tag or other ref of your repository if you are not using the default branch.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;SERVICE_NAME&quot;,
+            &quot;displayName&quot;: &quot;Service Name&quot;,
+            &quot;value&quot;: &quot;cxf-jaxrs&quot;,
+            &quot;description&quot;: &quot;Exposed service name.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;BUILDER_VERSION&quot;,
+            &quot;displayName&quot;: &quot;Builder version&quot;,
+            &quot;value&quot;: &quot;2.0&quot;,
+            &quot;description&quot;: &quot;The version of the FIS S2I builder image to use.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;APP_VERSION&quot;,
+            &quot;displayName&quot;: &quot;Application Version&quot;,
+            &quot;value&quot;: &quot;1.0.0.redhat-000014&quot;,
+            &quot;description&quot;: &quot;The application version.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;MAVEN_ARGS&quot;,
+            &quot;displayName&quot;: &quot;Maven Arguments&quot;,
+            &quot;value&quot;: &quot;package -DskipTests -Dfabric8.skip -e -B&quot;,
+            &quot;description&quot;: &quot;Arguments passed to mvn in the build.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;MAVEN_ARGS_APPEND&quot;,
+            &quot;displayName&quot;: &quot;Extra Maven Arguments&quot;,
+            &quot;description&quot;: &quot;Extra arguments passed to mvn, e.g. for multi-module builds.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;ARTIFACT_DIR&quot;,
+            &quot;displayName&quot;: &quot;Maven build directory&quot;,
+            &quot;description&quot;: &quot;Directory of the artifact to be built, e.g. for multi-module builds.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;IMAGE_STREAM_NAMESPACE&quot;,
+            &quot;displayName&quot;: &quot;Image Stream Namespace&quot;,
+            &quot;value&quot;: &quot;openshift&quot;,
+            &quot;required&quot;: true,
+            &quot;description&quot;: &quot;Namespace in which the Fuse ImageStreams are installed. These ImageStreams are normally installed in the openshift namespace. You should only need to modify this if you&amp;amp;aposve installed the ImageStreams in a different namespace/project.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;BUILD_SECRET&quot;,
+            &quot;displayName&quot;: &quot;Git Build Secret&quot;,
+            &quot;generate&quot;: &quot;expression&quot;,
+            &quot;description&quot;: &quot;The secret needed to trigger a build.&quot;,
+            &quot;from&quot;: &quot;[a-zA-Z0-9]{40}&quot;
+          },
+          {
+            &quot;name&quot;: &quot;CPU_REQUEST&quot;,
+            &quot;displayName&quot;: &quot;CPU request&quot;,
+            &quot;value&quot;: &quot;0.2&quot;,
+            &quot;required&quot;: true,
+            &quot;description&quot;: &quot;The amount of CPU to requests.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;CPU_LIMIT&quot;,
+            &quot;displayName&quot;: &quot;CPU limit&quot;,
+            &quot;value&quot;: &quot;1.0&quot;,
+            &quot;required&quot;: true,
+            &quot;description&quot;: &quot;The amount of CPU the container is limited to use.&quot;
+          }
+        ],
+        &quot;objects&quot;: [
+          {
+            &quot;apiVersion&quot;: &quot;v1&quot;,
+            &quot;kind&quot;: &quot;Route&quot;,
+            &quot;metadata&quot;: {
+              &quot;labels&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;
+              },
+              &quot;name&quot;: &quot;${SERVICE_NAME}-route&quot;
+            },
+            &quot;spec&quot;: {
+              &quot;to&quot;: {
+                &quot;kind&quot;: &quot;Service&quot;,
+                &quot;name&quot;: &quot;${SERVICE_NAME}&quot;
+              }
+            }
+          },
+          {
+            &quot;apiVersion&quot;: &quot;v1&quot;,
+            &quot;kind&quot;: &quot;Service&quot;,
+            &quot;metadata&quot;: {
+              &quot;annotations&quot;: {
+              },
+              &quot;labels&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;
+              },
+              &quot;name&quot;: &quot;${SERVICE_NAME}&quot;
+            },
+            &quot;spec&quot;: {
+              &quot;clusterIP&quot;: &quot;None&quot;,
+              &quot;deprecatedPublicIPs&quot;: [],
+              &quot;ports&quot;: [
+                {
+                  &quot;port&quot;: 9413,
+                  &quot;protocol&quot;: &quot;TCP&quot;,
+                  &quot;targetPort&quot;: 8080
+                }
+              ],
+              &quot;selector&quot;: {
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;
+              }
+            }
+          },
+          {
+            &quot;kind&quot;: &quot;ImageStream&quot;,
+            &quot;apiVersion&quot;: &quot;v1&quot;,
+            &quot;metadata&quot;: {
+              &quot;name&quot;: &quot;${APP_NAME}&quot;,
+              &quot;creationTimestamp&quot;: null,
+              &quot;labels&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;
+              }
+            },
+            &quot;spec&quot;: {},
+            &quot;status&quot;: {
+              &quot;dockerImageRepository&quot;: &quot;&quot;
+            }
+          },
+          {
+            &quot;kind&quot;: &quot;BuildConfig&quot;,
+            &quot;apiVersion&quot;: &quot;v1&quot;,
+            &quot;metadata&quot;: {
+              &quot;name&quot;: &quot;${APP_NAME}&quot;,
+              &quot;creationTimestamp&quot;: null,
+              &quot;labels&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;
+              }
+            },
+            &quot;spec&quot;: {
+              &quot;triggers&quot;: [
+                {
+                  &quot;type&quot;: &quot;GitHub&quot;,
+                  &quot;github&quot;: {
+                    &quot;secret&quot;: &quot;${BUILD_SECRET}&quot;
+                  }
+                },
+                {
+                  &quot;type&quot;: &quot;Generic&quot;,
+                  &quot;generic&quot;: {
+                    &quot;secret&quot;: &quot;${BUILD_SECRET}&quot;
+                  }
+                },
+                {
+                  &quot;type&quot;: &quot;ConfigChange&quot;
+                },
+                {
+                  &quot;type&quot;: &quot;ImageChange&quot;,
+                  &quot;imageChange&quot;: {}
+                }
+              ],
+              &quot;source&quot;: {
+                &quot;type&quot;: &quot;Git&quot;,
+                &quot;git&quot;: {
+                  &quot;uri&quot;: &quot;${GIT_REPO}&quot;,
+                  &quot;ref&quot;: &quot;${GIT_REF}&quot;
+                }
+              },
+              &quot;strategy&quot;: {
+                &quot;type&quot;: &quot;Source&quot;,
+                &quot;sourceStrategy&quot;: {
+                  &quot;from&quot;: {
+                    &quot;kind&quot;: &quot;DockerImage&quot;,
+                    &quot;name&quot;: &quot;fabric8/s2i-java:${BUILDER_VERSION}&quot;
+                  },
+                  &quot;forcePull&quot;: true,
+                  &quot;incremental&quot;: true,
+                  &quot;env&quot;: [
+                    {
+                      &quot;name&quot;: &quot;BUILD_LOGLEVEL&quot;,
+                      &quot;value&quot;: &quot;5&quot;
+                    },
+                    {
+                      &quot;name&quot;: &quot;ARTIFACT_DIR&quot;,
+                      &quot;value&quot;: &quot;${ARTIFACT_DIR}&quot;
+                    },
+                    {
+                      &quot;name&quot;: &quot;MAVEN_ARGS&quot;,
+                      &quot;value&quot;: &quot;${MAVEN_ARGS}&quot;
+                    },
+                    {
+                      &quot;name&quot;: &quot;MAVEN_ARGS_APPEND&quot;,
+                      &quot;value&quot;: &quot;${MAVEN_ARGS_APPEND}&quot;
+                    }
+                  ]
+                }
+              },
+              &quot;output&quot;: {
+                &quot;to&quot;: {
+                  &quot;kind&quot;: &quot;ImageStreamTag&quot;,
+                  &quot;name&quot;: &quot;${APP_NAME}:latest&quot;
+                }
+              },
+              &quot;resources&quot;: {}
+            },
+            &quot;status&quot;: {
+              &quot;lastVersion&quot;: 0
+            }
+          },
+          {
+            &quot;kind&quot;: &quot;DeploymentConfig&quot;,
+            &quot;apiVersion&quot;: &quot;v1&quot;,
+            &quot;metadata&quot;: {
+              &quot;name&quot;: &quot;${APP_NAME}&quot;,
+              &quot;creationTimestamp&quot;: null,
+              &quot;labels&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;
+              }
+            },
+            &quot;spec&quot;: {
+              &quot;strategy&quot;: {
+                &quot;resources&quot;: {}
+              },
+              &quot;triggers&quot;: [
+                {
+                  &quot;type&quot;: &quot;ConfigChange&quot;
+                },
+                {
+                  &quot;type&quot;: &quot;ImageChange&quot;,
+                  &quot;imageChangeParams&quot;: {
+                    &quot;automatic&quot;: true,
+                    &quot;containerNames&quot;: [
+                      &quot;${APP_NAME}&quot;
+                    ],
+                    &quot;from&quot;: {
+                      &quot;kind&quot;: &quot;ImageStreamTag&quot;,
+                      &quot;name&quot;: &quot;${APP_NAME}:latest&quot;
+                    }
+                  }
+                }
+              ],
+              &quot;replicas&quot;: 1,
+              &quot;selector&quot;: {
+                &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                &quot;deploymentconfig&quot;: &quot;${APP_NAME}&quot;,
+                &quot;group&quot;: &quot;quickstarts&quot;,
+                &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                &quot;provider&quot;: &quot;s2i&quot;,
+                &quot;version&quot;: &quot;${APP_VERSION}&quot;
+              },
+              &quot;template&quot;: {
+                &quot;metadata&quot;: {
+                  &quot;creationTimestamp&quot;: null,
+                  &quot;labels&quot;: {
+                    &quot;component&quot;: &quot;${APP_NAME}&quot;,
+                    &quot;deploymentconfig&quot;: &quot;${APP_NAME}&quot;,
+                    &quot;group&quot;: &quot;quickstarts&quot;,
+                    &quot;project&quot;: &quot;${APP_NAME}&quot;,
+                    &quot;provider&quot;: &quot;s2i&quot;,
+                    &quot;version&quot;: &quot;${APP_VERSION}&quot;
+                  }
+                },
+                &quot;spec&quot;: {
+                  &quot;containers&quot;: [
+                    {
+                      &quot;name&quot;: &quot;${APP_NAME}&quot;,
+                      &quot;image&quot;: &quot;library/${APP_NAME}:latest&quot;,
+                      &quot;readinessProbe&quot; : {
+                        &quot;httpGet&quot; : {
+                          &quot;path&quot; : &quot;/health&quot;,
+                          &quot;port&quot; : 8081
+                        },
+                        &quot;initialDelaySeconds&quot; : 10
+                      },
+                      &quot;livenessProbe&quot; : {
+                        &quot;httpGet&quot; : {
+                          &quot;path&quot; : &quot;/health&quot;,
+                          &quot;port&quot; : 8081
+                        },
+                        &quot;initialDelaySeconds&quot; : 180
+                      },
+                      &quot;ports&quot;: [
+                        {
+                          &quot;containerPort&quot;: 8778,
+                          &quot;name&quot;: &quot;jolokia&quot;
+                        }
+                      ],
+                      &quot;env&quot; : [ {
+                        &quot;name&quot; : &quot;KUBERNETES_NAMESPACE&quot;,
+                        &quot;valueFrom&quot; : {
+                          &quot;fieldRef&quot; : {
+                            &quot;fieldPath&quot; : &quot;metadata.namespace&quot;
+                          }
+                        }
+                      } ],
+                      &quot;resources&quot;: {
+                        &quot;requests&quot;: {
+                          &quot;cpu&quot;: &quot;${CPU_REQUEST}&quot;
+                        },
+                        &quot;limits&quot;: {
+                          &quot;cpu&quot;: &quot;${CPU_LIMIT}&quot;
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            &quot;status&quot;: {}
+          }
+        ]
+      }&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;You can see a demo of the OpenShift server adapter for Spring Boot application here:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;videoblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;support-for-route-timeouts-and-liveness-probe-for-openshift-server-adapter-debugging-configurations&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#support-for-route-timeouts-and-liveness-probe-for-openshift-server-adapter-debugging-configurations&quot;&gt;&lt;/a&gt;Support for route timeouts and liveness probe for OpenShift Server Adapter debugging configurations&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;While debugging your OpenShift deployment, you may face two different issues:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;ulist&quot;&gt;
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;if you launch your test through a Web browser, then it’s likely that you will access your OpenShift deployment through an OpenShift
+      route. The problem is that, by default, OpenShift routes have a 30 seconds timeout for each request. So if you’re stepping through one
+      of your breakpoints, you will get a timeout error message in the browser window even if you can still debug your OpenShift deployment.
+      And you’re now stuck will the navigation of your OpenShift application.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+      &lt;p&gt;if your OpenShift deployment has a liveness probe configured, depending on your virtual machine capabilities or how your debugger is
+      configured, if your stepping into one of your breakpoints, the liveness probe may fail thus OpenShift so OpenShift will restart your
+      container and your debugging session will be destroyed.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;So, from now, when the OpenShift server adapter is started in &lt;code&gt;debug&lt;/code&gt; mode, the following action are being performed:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;ulist&quot;&gt;
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;if an OpenShift route is found that is linked to the OpenShift deployment you want to debug, the route timeout will be
+      set or increased to 1 hour. The original or default value will be restored when the OpenShift server adapter will be restarted
+      in &lt;code&gt;run&lt;/code&gt; mode.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+      &lt;p&gt;if your OpenShift deployment has a liveness probe configured, the &lt;code&gt;initialDelay&lt;/code&gt; field will be increased to 1 hour if the defined
+      value for this field is lower than 1 hour. If the value of this field is defined to a value greater than 1 hour, it is left intact.
+      The original value will be restored when the OpenShift server adapter will be restarted
+      in &lt;code&gt;run&lt;/code&gt; mode&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;enhanced-command-to-delete-resource-s&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#enhanced-command-to-delete-resource-s&quot;&gt;&lt;/a&gt;Enhanced command to delete resource(s)&lt;/h3&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When it comes to delete OpenShift resources, you had two different choices:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;ulist&quot;&gt;
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;individually delete each resource but as some resources are hidden by the OpenShift explorer, it may become troublesome&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+      &lt;p&gt;delete the containing OpenShift project but you are then deleting more resources than required&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;There is now a new enhanced command to delete resources. It is available at the OpenShift project level and it will first
+      list all the available OpenShift resources for the selected OpenShift project. You can now select the ones you want to delete
+      and you can also filter the list using a filter that will be applied to the labels for each retrieved OpenShift resource.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;So if you have two different deployments in a single OpenShift project (if you using OpenShift Online Starter for example) or if
+      you have different kind of resources in a single deployment, you can now distinct them.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Let’s see this in action:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;In this example, I have deployed an EAP6.4 based application and an EAP7.0 based one. Here is what you  can see from the OpenShift explorer:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;new delete resources explorer&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/new-delete-resources-explorer.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Now, let’s invoke the new delete command on the &lt;em&gt;eap&lt;/em&gt; OpenShift project: right click the OpenShift project and select &lt;strong&gt;Delete Resources…​&lt;/strong&gt;:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;new delete resources dialog&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/new-delete-resources-dialog.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Let suppose that we want to delete the EAP6.4 deployement. Enter &lt;em&gt;eap=6.4&lt;/em&gt; in the filter field:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;new delete resources dialog1&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/new-delete-resources-dialog1.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Push the &lt;strong&gt;Select All&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;new delete resources dialog2&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/new-delete-resources-dialog2.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Close this dialog by pushing the &lt;strong&gt;OK&lt;/strong&gt; button. The resources will be deleted and the OpenShift explorer will be updated accordingly:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;new delete resources explorer1&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/new-delete-resources-explorer1.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;server-tools&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#server-tools&quot;&gt;&lt;/a&gt;Server tools&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;eap-7-1-server-adapter&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#eap-7-1-server-adapter&quot;&gt;&lt;/a&gt;EAP 7.1 Server Adapter&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;A server adapter has been added to work with EAP 7.1 and Wildfly 11. It’s based on WildFly 11. This new server adapter includes support for incremental management
+      deployment like it’s upstream WildFly 11 counterpart.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;fuse-tooling&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-tooling&quot;&gt;&lt;/a&gt;Fuse Tooling&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;fuse-7-karaf-based-runtime-server-adapter&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-7-karaf-based-runtime-server-adapter&quot;&gt;&lt;/a&gt;Fuse 7 Karaf-based runtime Server adapter&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Fuse 7 is cooking and preliminary versions are already available on &lt;a href=&quot;http://repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/jboss-fuse-karaf&quot;&gt;early-access repository&lt;/a&gt;. Fuse Tooling is ready to leverage them so that you can try the upcoming major Fuse version.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse 7 Server Adapter&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/Fuse7-ServerAdapter.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Classical functionalities with server adapters are available: automatic redeploy, Java debug, Graphical Camel debug through created JMX connection.
+      Please note:
+      - you can’t retrieve the Fuse 7 Runtime yet directly from Fuse tooling, it is required to download it on your machine and point to it when creating the Server adapter.
+      - the provided templates requires some modifications to have them working with Fuse 7, mainly adapting the bom. Please see work related to it in this &lt;a href=&quot;https://issues.jboss.org/browse/FUSETOOLS-2578&quot;&gt;JIRA task&lt;/a&gt; and its children.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;display-routes-defined-inside-routecontext-in-camel-graphical-editor-design-tab&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#display-routes-defined-inside-routecontext-in-camel-graphical-editor-design-tab&quot;&gt;&lt;/a&gt;Display routes defined inside &quot;routeContext&quot; in Camel Graphical Editor (Design tab)&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&quot;routeContext&quot; tag is a special tag used in Camel to provide the ability to reuse routes and to split them across different files. This is very useful on large projects. See Camel &lt;a href=&quot;http://camel.apache.org/how-do-i-import-routes-from-other-xml-files.html&quot;&gt;documentation&lt;/a&gt; for more information.
+      Since this version, the Design of the routes defined in &quot;routeContext&quot; tags are now displayed.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;usability-improvement-progress-bar-when-changing-the-camel-version&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#usability-improvement-progress-bar-when-changing-the-camel-version&quot;&gt;&lt;/a&gt;Usability improvement: Progress bar when &quot;Changing the Camel version&quot;&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Since Fuse Tooling 10.1.0, it is possible to change the Camel version. In case the Camel version was not cached locally yet and for slow internet connections, this operation can take a while. There is now a progress bar to see the progress.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Switch Camel Version with Progress Bar&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/switchCamelVersionWithProgressBar.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;support-for-creating-fuse-ignite-technical-extensions&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#support-for-creating-fuse-ignite-technical-extensions&quot;&gt;&lt;/a&gt;Support for creating Fuse Ignite Technical Extensions&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;We are happy to announce the addition of support for creating Technical Extension projects for &lt;strong&gt;Fuse Ignite&lt;/strong&gt;*. That includes the creation of the project using the &lt;em&gt;&quot;New Fuse Ignite Extension Project&quot;&lt;/em&gt; wizard as well as support for building the deployable artifact directly from inside the Eclipse environment.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;em&gt;*&lt;strong&gt;Fuse Ignite&lt;/strong&gt; is a JBoss Fuse feature that provides a web interface for integrating applications. Without writing code, a business expert can use Ignite to connect to applications and optionally operate on data between connections to different applications. In Ignite, a data operation is referred to as a step in an integration.
+      Ignite provides steps for operations such as filtering and mapping data. To operate on data in ways that are not provided by Ignite built-in steps, you can develop an Ignite extension to define one or more custom steps.
+      Fuse Ignite comes as part of &lt;a href=&quot;https://developers.redhat.com/products/fuse/overview/&quot;&gt;Fuse&lt;/a&gt; and &lt;a href=&quot;https://www.redhat.com/en/explore/fuse-online&quot;&gt;Fuse Online&lt;/a&gt;. Please refer to the &lt;a href=&quot;https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.3/html-single/tooling_user_guide/#IgniteExtension&quot;&gt;online documentation&lt;/a&gt; for more information on how to create and configure technical extensions for Fuse Ignite.&lt;/em&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse Ignite Technical Extension Wizard&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/igniteExtensionWizard.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The provided project template allows you to define an &lt;a href=&quot;http://camel.apache.org&quot;&gt;Apache Camel&lt;/a&gt; route as the base flow of your new technical extension.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse Ignite Technical Extension Route&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/igniteExtensionRoute.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;To configure your new technical extension you can use the JSON file created with the new project.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse Ignite Technical Extension Configuration&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/igniteExtensionConfig.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;forge-tools&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#forge-tools&quot;&gt;&lt;/a&gt;Forge Tools&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;forge-runtime-updated-to-3-8-1-final&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#forge-runtime-updated-to-3-8-1-final&quot;&gt;&lt;/a&gt;Forge Runtime updated to 3.8.1.Final&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The included Forge runtime is now 3.8.1.Final. Read the official announcement &lt;a href=&quot;http://forge.jboss.org/news/jboss-forge-3.8.1.final-is-here&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;and-more&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#and-more&quot;&gt;&lt;/a&gt;And more…​&lt;/h3&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;You can find more noteworthy updates in on &lt;a href=&quot;https://tools.jboss.org/documentation/whatsnew/jbosstools/4.5.2.Final.html&quot;&gt;this page&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;what-is-next&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#what-is-next&quot;&gt;&lt;/a&gt;What is next?&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Having JBoss Tools 4.5.2 and Developer Studio 11.2 out we are already working on the next maintenance release for Eclipse Oxygen.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Enjoy!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Jeff Maury&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;&lt;/div&gt;</description>
+	<pubDate>Thu, 26 Apr 2018 14:06:56 +0000</pubDate>
+</item>
+<item>
+	<title>itemis: Announcement: Xtext 2.14 RC1 is now available</title>
+	<guid isPermaLink="true">https://blogs.itemis.com/en/announcement-xtext-2-14-rc1-is-now-available</guid>
+	<link>https://blogs.itemis.com/en/announcement-xtext-2-14-rc1-is-now-available</link>
+	<description>&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;The Xtext team &lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;proudly announces&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; the availability of the first release candidate for the upcoming 2.14 release. &lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;img alt=&quot;Update-Tastatur&quot; height=&quot;439&quot; src=&quot;https://blogs.itemis.com/hs-fs/hubfs/Update-Tastatur.jpg?t=1524751962199&amp;amp;width=922&amp;amp;height=439&amp;amp;name=Update-Tastatur.jpg&quot; style=&quot;width: 922px;&quot; width=&quot;922&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;The new release comes with an impressive list of new features! We will now document them in the &lt;/span&gt;&lt;a href=&quot;https://github.com/eclipse/xtext/blob/website-master/xtext-website/_posts/releasenotes/2018-05-23-version-2-14-0.md&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;release notes for Xtext&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; and &lt;/span&gt;&lt;a href=&quot;https://github.com/eclipse/xtext/blob/website-master/xtend-website/_posts/releasenotes/2018-05-23-version-2-14-0.md&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Xtend&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;, and in the &lt;/span&gt;&lt;a href=&quot;https://github.com/eclipse/xtext/tree/website-master/xtext-website/documentation&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Xtext user manual&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;. Make sure to visit these once in a while when you try the new features. We are going to update the docs regularly.&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Xtext 2.14 has been made ready for Java 9 and &lt;/span&gt;&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Java 10&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;! Especially &lt;/span&gt;&lt;a href=&quot;https://www.oracle.com/corporate/features/understanding-java-9-modules.html&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Java 9 Modules&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; caused major headaches, like for other projects that we rely on as JDT, Gradle and Tycho, too. This is also a great opportunity to check out Java 10 yourself. &lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Also Xtext 2.14 is fully compatible with your existing languages. To best employ the new features after the upgrade, we recommend to use the Xtext Project Wizard to create new projects with an up-to-date configuration and compare the setup with your existing language. For example, for Java 10 support we had to upgrade the ASM library to version 6.1.1 and so do you. In the next weeks we will work on a more thorough migration guide as part of the final release notes.&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Xtext 2.14 supports the brand &lt;/span&gt;&lt;a href=&quot;https://www.eclipse.org/eclipse/news/4.8/M5/#Platform-Dev&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;new Code Mining API from Eclipse Photon&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;. To give it a try, you’ll need Eclipse Photon. You should use the &lt;/span&gt;&lt;a href=&quot;http://download.eclipse.org/eclipse/downloads/&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;latest Eclipse 4.8 Integration Build&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;. The Domainmodel Example DSL contains a sample implementation for Code Minings and serves as a blueprint if you plan to implement your own. As the Code Mining implementation in Eclipse is still under development, its inventor &lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Angelo Zerr&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; is happy to get your feedback, too. Fame and fortune is to come if you r&lt;/span&gt;&lt;a href=&quot;https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Platform&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;eport bugs&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; to the Platform Text component in time so they can be fixed for the Photon release.&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;The 2.14 release contains an updated testing infrastructure. The JUnit support has been extended so you can execute tests written with &lt;/span&gt;&lt;a href=&quot;https://junit.org/junit5/&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;JUnit 5&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;. The Xtext Project Wizard allows you now to select JUnit 5 for testing support and will produce a sample parser test and add the required dependencies.&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;We encourage you to check out Xtext 2.14.0.RC1 now. Also &lt;a href=&quot;https://github.com/eclipse/xtext/issues&quot;&gt;report issues&lt;/a&gt; and&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;take a look at the &lt;/span&gt;&lt;a href=&quot;https://github.com/eclipse/xtext/blob/website-master/xtext-website/_posts/releasenotes/2018-05-23-version-2-14-0.md#fixed-issues&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;bugfix lists&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt; for changes that have not been highlighted here. We have spent endless hours to bring you the best Xtext release and love to hear from you what you think about it! &lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Get Xtext 2.14.0.RC1 from the &lt;a href=&quot;http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/&quot;&gt;Xtext Milestone Update Site&lt;/a&gt;, &lt;a href=&quot;http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.eclipse.xtext%22%20OR%20g%3A%22org.eclipse.xtend%22&quot;&gt;Maven Central&lt;/a&gt; or &lt;a href=&quot;https://www.eclipse.org/modeling/tmf/downloads/index.php?project=xtext&amp;amp;showAll=0&amp;amp;showMax=5&amp;amp;sortBy=&quot;&gt;Download Area&lt;/a&gt; (Stable Build S201804242303). The final release is planned for May 23th 2018. &lt;/span&gt;&lt;/p&gt;  
+&lt;img alt=&quot;&quot; height=&quot;1&quot; src=&quot;https://track.hubspot.com/__ptq.gif?a=761475&amp;amp;k=14&amp;amp;r=https%3A%2F%2Fblogs.itemis.com%2Fen%2Fannouncement-xtext-2-14-rc1-is-now-available&amp;amp;bu=https%253A%252F%252Fblogs.itemis.com&amp;amp;bvt=rss&quot; style=&quot;width: 1px!important;&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Thu, 26 Apr 2018 13:48:38 +0000</pubDate>
+	<author>xtext@itemis.com (Xtext-Team)</author>
+</item>
+<item>
+	<title>Tom Schindl: Fluent-Log API landed in e(fx)clipse</title>
+	<guid isPermaLink="false">http://tomsondev.bestsolution.at/?p=5101</guid>
+	<link>https://tomsondev.bestsolution.at/2018/04/25/fluent-log-api-landed-in-efxclipse/</link>
+	<description>&lt;p&gt;Last week I came a cross &lt;a href=&quot;https://github.com/google/flogger&quot;&gt;Googles FLogger-API&lt;/a&gt; and I really liked it. &lt;/p&gt;
+&lt;p&gt;Back in &lt;a href=&quot;http://efxclipse.org/&quot;&gt;e(fx)clipse&lt;/a&gt; land I started to miss it but because introducing a dependency to other log-frameworks is not possible – I implemented our own fluent log API inspired by &lt;a href=&quot;https://github.com/google/flogger&quot;&gt;Flogger&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So how do you use it:&lt;/p&gt;
+&lt;pre class=&quot;brush: java; title: ; notranslate&quot;&gt;// if you have a logger
+Logger logger = LoggerCreator.createLogger( Sample.class );
+FluentLogger flogger = FluentLogger.of( logger );
+
+// if you use @Log
+@Inject
+@Log
+FluentLogger flogger;
+
+// Log something
+FluentLogContext debug = flogger.atDebug();
+debug.log( &quot;Hello World&quot; );
+debug.log( &quot;Hello World with format %s&quot;, 10 );
+debug.log( () -&amp;gt; &quot;Lazy Hello World&quot; );
+debug.log( t -&amp;gt; &quot;Lazy Hello World with Context&quot; + t, o );
+
+// Log with exception
+try {
+   // ...
+} catch( Throwable l ) {
+  flogger.atInfo().withException( t ).log( &quot;Hello World&quot; );
+}
+
+// Throttle: Only log every 100 log statement
+flogger.atInfo().throttleByCount(100)
+  .log( &quot;Log every 100 time&quot; );
+
+// Throttle: Only log every minute
+flogger.atInfo().throttleByTime(1, TimeUnit.MINUTES)
+  .log( &quot;Log every minute&quot; );
+
+// Build your own condition fluent addition
+logger.atInfo().with( Throttle::new ).every( 100 )
+  .log( &quot;Log every 100 time&quot; )
+&lt;/pre&gt;</description>
+	<pubDate>Wed, 25 Apr 2018 21:21:04 +0000</pubDate>
+</item>
+<item>
+	<title>EclipseCon France 2018: Interview: Cloud scale IoT messaging</title>
+	<guid isPermaLink="false">https://www.eclipsecon.org/france2018/news/3894 at https://www.eclipsecon.org/france2018</guid>
+	<link>https://www.eclipsecon.org/france2018/news/interview-cloud-scale-iot-messaging</link>
+	<description>&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;&lt;em&gt;Eclipse Hono is a cloud-based IoT connectivity platform. In this interview Jens Reimann and Dejan Bosanac's give us insights into the project. You can learn more at their talk, &lt;a href=&quot;https://www.eclipsecon.org/france2018/session/cloud-scale-iot-messaging&quot;&gt;Cloud scale IoT messaging&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&quot;..IoT connectivity is one of the main challenges in building IoT cloud platforms, as having a single broker is not enough anymore. Hono solves scalable messaging problem with adding more specifics to IoT use cases. This means it’s interesting to other companies that want to build their own IoT cloud platforms...&quot;&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-news-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;https://www.eclipsecon.org/france2018/news/interview-cloud-scale-iot-messaging&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;img-responsive block-center&quot; height=&quot;250&quot; src=&quot;https://www.eclipsecon.org/france2018/sites/default/files/styles/solstice_news_-_default_-_thumbnail/public/news/HonoLogosq.png?itok=cLjSdK-n&quot; width=&quot;250&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+	<pubDate>Wed, 25 Apr 2018 16:26:11 +0000</pubDate>
+</item>
+<item>
+	<title>Eclipse Announcements: EclipseCon France 2018: Register Early!</title>
+	<guid isPermaLink="true">http://feedproxy.google.com/~r/eclipse/fnews/~3/JlZYcHvzL3E/registration</guid>
+	<link>http://feedproxy.google.com/~r/eclipse/fnews/~3/JlZYcHvzL3E/registration</link>
+	<description>Prices go up after April 30, so register now.&lt;img alt=&quot;&quot; height=&quot;1&quot; src=&quot;http://feeds.feedburner.com/~r/eclipse/fnews/~4/JlZYcHvzL3E&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Wed, 25 Apr 2018 13:30:00 +0000</pubDate>
+</item>
+<item>
+	<title>itemis: Xtend 2.14 – Unnecessary modifiers validation</title>
+	<guid isPermaLink="true">https://blogs.itemis.com/en/xtend-2-14-unnecessary-modifiers-validation</guid>
+	<link>https://blogs.itemis.com/en/xtend-2-14-unnecessary-modifiers-validation</link>
+	<description>&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;In the &lt;a href=&quot;https://www.eclipse.org/xtend/&quot;&gt;Xtend&lt;/a&gt; programming language, visibility modifiers are unnecessary when they match the defaults.&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;The &lt;code&gt;public&lt;/code&gt; modifier is default on:&lt;/span&gt;&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Classes&lt;/span&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Interfaces&lt;/span&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Enums&lt;/span&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Annotatitons&lt;/span&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Constructors&lt;/span&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Methods&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;/span&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;The &lt;code&gt;private&lt;/code&gt; modifier is default on:&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Fields&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;/span&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Additionally the &lt;code&gt;final&lt;/code&gt; modifier is redundant in combination with the &lt;code&gt;val&lt;/code&gt; keyword on field declarations, and the &lt;code&gt;def&lt;/code&gt; keyword in combination with the &lt;code&gt;override&lt;/code&gt; keyword on method declarations.&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Xtend 2.14 adds validation rules to detect the unnecessary modifiers and issues corresponding warnings.&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;br /&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;img alt=&quot;1_Unnecessary_Modifier_Warnings&quot; height=&quot;636&quot; src=&quot;https://blogs.itemis.com/hs-fs/hubfs/Blog/Xtext/1_Unnecessary_Modifier_Warnings.png?t=1524751962199&amp;amp;width=964&amp;amp;height=636&amp;amp;name=1_Unnecessary_Modifier_Warnings.png&quot; style=&quot;width: 964px;&quot; width=&quot;964&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;The Xtend IDE also provides Quick Fixes to assist the user on fixing such issues: Select all &lt;em&gt;Unnecessary modifier&lt;/em&gt; warnings on the Problems view and invoke the Quick Fix dialog either via the context menu or the keyboard shortcut &lt;code&gt;Ctrl + 1&lt;/code&gt;.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;img alt=&quot;2_Quickfix_Dialog&quot; height=&quot;692&quot; src=&quot;https://blogs.itemis.com/hs-fs/hubfs/Blog/Xtext/2_Quickfix_Dialog.png?t=1524751962199&amp;amp;width=966&amp;amp;height=692&amp;amp;name=2_Quickfix_Dialog.png&quot; style=&quot;width: 966px;&quot; width=&quot;966&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;After clicking on the Finish button all &lt;em&gt;Unnecessary modifier&lt;/em&gt; warnings will be fixed at once with a single action. Comparing the Xtend code before and after the Quick Fix execution confirms that all unnecessary modifiers have been successfully removed.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;img alt=&quot;3_Compare_Dialog&quot; height=&quot;466&quot; src=&quot;https://blogs.itemis.com/hs-fs/hubfs/Blog/Xtext/3_Compare_Dialog.png?t=1524751962199&amp;amp;width=964&amp;amp;height=466&amp;amp;name=3_Compare_Dialog.png&quot; style=&quot;width: 964px;&quot; width=&quot;964&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;For ongoing Xtend projects, it could be noisy suddenly having tons of new warnings after updating to a new Xtend version. The &lt;em&gt;Unnecessary modifier&lt;/em&gt; serverity can be configured on the Xtend preference page and (wenn desired) can even be completely ignored.&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;img alt=&quot;4_Xtend_Preferences&quot; height=&quot;635&quot; src=&quot;https://blogs.itemis.com/hs-fs/hubfs/Blog/Xtext/4_Xtend_Preferences.png?t=1524751962199&amp;amp;width=710&amp;amp;height=635&amp;amp;name=4_Xtend_Preferences.png&quot; style=&quot;width: 710px; display: block; margin-left: auto; margin-right: auto;&quot; width=&quot;710&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;The latest Xtend version can be installed from its &lt;a href=&quot;http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/&quot;&gt;Update Site&lt;/a&gt;. Give it a try! The Xtext team is always happy about your early feedback!&lt;/span&gt;&lt;/p&gt;  
+&lt;img alt=&quot;&quot; height=&quot;1&quot; src=&quot;https://track.hubspot.com/__ptq.gif?a=761475&amp;amp;k=14&amp;amp;r=https%3A%2F%2Fblogs.itemis.com%2Fen%2Fxtend-2-14-unnecessary-modifiers-validation&amp;amp;bu=https%253A%252F%252Fblogs.itemis.com&amp;amp;bvt=rss&quot; style=&quot;width: 1px!important;&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Wed, 25 Apr 2018 12:24:39 +0000</pubDate>
+	<author>miklossy@itemis.de (Tamas Miklossy)</author>
+</item>
+<item>
+	<title>Eclipse Announcements: Survey of 1800+ developers now released on new Jakarta EE website</title>
+	<guid isPermaLink="true">http://feedproxy.google.com/~r/eclipse/fnews/~3/chHefpYH1Hk/</guid>
+	<link>http://feedproxy.google.com/~r/eclipse/fnews/~3/chHefpYH1Hk/</link>
+	<description>Survey of 1,800+ Java developers reveals &quot;cloud native&quot; top requirement in platform's evolution.&lt;img alt=&quot;&quot; height=&quot;1&quot; src=&quot;http://feeds.feedburner.com/~r/eclipse/fnews/~4/chHefpYH1Hk&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Tue, 24 Apr 2018 14:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>JBoss Tools Team: JBoss Tools and Red Hat Developer Studio for Eclipse Oxygen.3a</title>
+	<guid isPermaLink="true">https://tools.jboss.org/blog/11.3.0.ga-for-oxygen.3a.html</guid>
+	<link>https://tools.jboss.org/blog/11.3.0.ga-for-oxygen.3a.html</link>
+	<description>&lt;div&gt;&lt;div id=&quot;preamble&quot;&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://tools.jboss.org/downloads/jbosstools/oxygen/4.5.3.Final.html&quot;&gt;JBoss Tools 4.5.3&lt;/a&gt; and &lt;a href=&quot;https://tools.jboss.org/downloads/devstudio/oxygen/11.3.0.GA.html&quot;&gt;Red Hat JBoss Developer Studio 11.3&lt;/a&gt; for Eclipse Oxygen.3a are here waiting for you. Check it out!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;devstudio11&quot; src=&quot;https://tools.jboss.org/blog/images/devstudio11.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;installation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#installation&quot;&gt;&lt;/a&gt;Installation&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;JBoss Developer Studio comes with everything pre-bundled in its installer. Simply download it from our &lt;a href=&quot;https://www.jboss.org/products/devstudio.html&quot;&gt;JBoss Products page&lt;/a&gt; and run it like this:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;literalblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre&gt;java -jar jboss-devstudio-&amp;lt;installername&amp;gt;.jar&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;JBoss Tools or Bring-Your-Own-Eclipse (BYOE) JBoss Developer Studio require a bit more:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;This release requires at least Eclipse 4.7 (Oxygen) but we recommend
+      using the latest &lt;a href=&quot;http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a&quot;&gt;Eclipse 4.7.3a Oxygen JEE Bundle&lt;/a&gt; since then you get most of the dependencies preinstalled.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Once you have installed Eclipse, you can either find us on the Eclipse Marketplace under &quot;JBoss Tools&quot; or &quot;Red Hat JBoss Developer Studio&quot;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;For JBoss Tools, you can also use our update site directly.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;literalblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre&gt;http://download.jboss.org/jbosstools/oxygen/stable/updates/&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;what-is-new&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#what-is-new&quot;&gt;&lt;/a&gt;What is new?&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Our main focus for this release was on adoption of Java10, improvements for container based development and bug fixing.
+      Eclipse Oxygen itself has &lt;a href=&quot;https://www.youtube.com/playlist?list=PLy7t4z5SYNaTM66CahSlkMh5YkndYXMUq&quot;&gt;a lot of new cool stuff&lt;/a&gt; but let me highlight just a few updates in both Eclipse Oxygen and JBoss Tools plugins that I think are worth mentioning.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;openshift-3&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#openshift-3&quot;&gt;&lt;/a&gt;OpenShift 3&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;cdk-and-minishift-server-adapter-better-developer-experience&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#cdk-and-minishift-server-adapter-better-developer-experience&quot;&gt;&lt;/a&gt;CDK and Minishift Server Adapter better developer experience&lt;/h4&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;minishift_home-setting&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#minishift_home-setting&quot;&gt;&lt;/a&gt;MINISHIFT_HOME setting&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When working with both CDK and upstream Minishift, it is recommanded to distinguish environments through the MINISHIFT_HOME variable.
+      It was possible before to use this parameter but it requires a two steps process:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;ulist&quot;&gt;
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;first create the server adapter (through the wizard)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+      &lt;p&gt;then change the MINISHIFT_HOME in the server adapter editor&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;It is now possible to set this parameter from the server adapter wizard. So now, everything is correctly setup when you create the
+      server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Let’s see an example with the CDK server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;From the &lt;strong&gt;Servers&lt;/strong&gt; view, select the new Server menu item and enter cdk in the filter:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Select Red Hat Container Development Kit 3.2+&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard1&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard1.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard2&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard2.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The MINISHIFT_HOME parameter can be set here and is defaulted.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;cdk-and-minishift-server-adapter-runtime-download&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#cdk-and-minishift-server-adapter-runtime-download&quot;&gt;&lt;/a&gt;CDK and Minishift Server Adapter runtime download&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When working with both CDK and upstream Minishift, you needed to have previously downloaded the CDK
+      or Minishift binary. It is now possible to download the runtime to a specific folder when you create
+      the server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Let’s see an example with the CDK server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;From the &lt;strong&gt;Servers&lt;/strong&gt; view, select the new Server menu item and enter cdk in the filter:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Select Red Hat Container Development Kit 3.2+&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard1&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard1.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard3&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard3.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;In order to download the runtime, click the &lt;strong&gt;Download and install runtime…​&lt;/strong&gt; link:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard4&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard4.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Select the version of the runtime you want to download&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard5&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard5.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard6&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard6.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;You need an account to download the CDK. If you already had configured credentials, select the one you
+      want to use. If you didn’t, click the &lt;strong&gt;Add&lt;/strong&gt; button to add your credentials.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard7&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard7.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button. Your credentials will be validated, and upon success, you must accept
+      the license agreement:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard8&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard8.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Accept the license agreement and click the &lt;strong&gt;Next&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard9&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard9.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;You can choose the folder where you want the runtime to be installed. Once you’ve set it,
+      click the &lt;strong&gt;Finish&lt;/strong&gt; button:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The download of the runtime will be started and you should see the progression on the server adapter
+      wizard:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard10&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard10.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Once the download is completed, you will notice that the &lt;strong&gt;Minishift Binary&lt;/strong&gt; and &lt;strong&gt;Username&lt;/strong&gt; fields have been filled:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard11&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard11.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Click the &lt;strong&gt;Finish&lt;/strong&gt; button to create the server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Please note that if it’s the first time you install CDK, you must perform an initialization. In the &lt;strong&gt;Servers&lt;/strong&gt; view, right click
+      the server and select the &lt;strong&gt;Setup CDK&lt;/strong&gt; menu item:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard12&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard12.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;cdk server adapter wizard13&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/cdk-server-adapter-wizard13.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Please note that the &lt;strong&gt;setup-cdk&lt;/strong&gt; command will also be automatically run when you start the CDK server adapter if the
+      MINISHIFT_HOME environment is detected uninitialized after user approval.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;minishift-server-adapter&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#minishift-server-adapter&quot;&gt;&lt;/a&gt;Minishift Server Adapter&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;A new server adapter has been added to support upstream Minishift.
+      While the server adapter itself has limited functionality, it is able to start and stop the Minishift virtual machine via its minishift binary.
+      From the Servers view, click &lt;strong&gt;New&lt;/strong&gt; and then type minishift, that will bring up a command to setup and/or launch the Minishift server adapter.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;minishift server adapter&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/minishift-server-adapter.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;All you have to do is set the location of the minishift binary file, the type of virtualization hypervisor
+      and an optional Minishift profile name.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;minishift server adapter1&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/minishift-server-adapter1.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Once you’re finished, a new Minishift Server adapter will then be created and visible in the Servers view.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;minishift server adapter2&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/minishift-server-adapter2.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Once the server is started, Docker and OpenShift connections should appear in their respective views, allowing the user to quickly create a new Openshift application and begin developing their AwesomeApp in a highly-replicatable environment.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;minishift server adapter3&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/minishift-server-adapter3.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;minishift server adapter4&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/openshift/images/minishift-server-adapter4.png&quot; width=&quot;600&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The credentials framework still supports the JBoss.org credentials in case other services / components require or use this credentials domain.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;fuse-tooling&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-tooling&quot;&gt;&lt;/a&gt;Fuse Tooling&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;new-shortcuts-in-fuse-integration-perspective&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#new-shortcuts-in-fuse-integration-perspective&quot;&gt;&lt;/a&gt;New shortcuts in Fuse Integration perspective&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Shortcuts for the Java, Launch, and Debug perspectives and basic navigation operations are now provided within the Fuse Integration perspective.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The result is a set of buttons in the Toolbar:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;New Toolbar action&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/newToolbarAction.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;All of the associated keyboard shortcuts are also available, such as Ctrl+Shift+T to open a Java Type.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;performance-improvement-loading-advanced-tab-for-camel-endpoints&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#performance-improvement-loading-advanced-tab-for-camel-endpoints&quot;&gt;&lt;/a&gt;Performance improvement: Loading Advanced tab for Camel Endpoints&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The loading time of the &quot;Advanced&quot; tab in the Properties view for Camel Endpoints is greatly improved.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Advanced Tab in Properties view&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/advancedTab.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Previously, in the case of Camel Components that have a lot of parameters, it took several seconds to load the Advanced tab. For example, for the File component, it would take ~3.5s. It now takes ~350ms. The load time has been reduced by a factor of 10. (See this interesting &lt;a href=&quot;https://www.nngroup.com/articles/response-times-3-important-limits/&quot;&gt;article on response time&lt;/a&gt;)&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;If you notice other places showing slow performance, you can file a report by using the &lt;a href=&quot;https://issues.jboss.org/browse/FUSETOOLS&quot;&gt;Fuse Tooling issue tracker&lt;/a&gt;. The Fuse Tooling team really appreciates your help. Your feedback contributes to our development priorities and improves the Fuse Tooling user experience.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;display-fuse-version-corresponding-to-camel-version-proposed&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#display-fuse-version-corresponding-to-camel-version-proposed&quot;&gt;&lt;/a&gt;Display Fuse version corresponding to Camel version proposed&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When you create a new project, you select the Camel version from a list. Now, the list of Camel versions includes the Fuse version to help you choose the version that corresponds to your production version.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse Version also displayed in drop-down list close to Camel version&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/listOfFuseVersion.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;update-validation-for-similar-ids-between-a-component-and-its-definition&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#update-validation-for-similar-ids-between-a-component-and-its-definition&quot;&gt;&lt;/a&gt;Update validation for similar IDs between a component and its definition&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Starting with Camel 2.20, you can use similar IDs for the component name and its definition unless the specific property &quot;registerEndpointIdsFromRoute&quot; is provided.
+      The validation process checks the Camel version and the value of the &quot;registerEndpointIdsFromRoute&quot; property.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;For example:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;listingblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;from id=&quot;timer&quot; uri=&quot;timer:timerName&quot;/&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;improved-guidance-in-method-selection-for-factory-methods-on-global-bean&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#improved-guidance-in-method-selection-for-factory-methods-on-global-bean&quot;&gt;&lt;/a&gt;Improved guidance in method selection for factory methods on Global Bean&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When selecting factory method on a Global bean, a lot of possibilities were proposed in the user interface. The list of factory methods for a global bean is now limited to only those methods that match the constraints of the bean’s global definition type (bean or bean factory).&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;customize-eip-labels-in-the-diagram&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#customize-eip-labels-in-the-diagram&quot;&gt;&lt;/a&gt;Customize EIP labels in the diagram&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Fuse Tooling preferences page for the Editor view includes a new &quot;Preferred Labels&quot; option.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Fuse Tooling editor preference page&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/prefEIPLabels.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Use this option to define the label of EIP components (except endpoints) shown in the Editor’s Design view.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Dialog for defining the display text for an EIP&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/prefEIPLabelsResult.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;fuse-ignite-technical-extension-templates&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#fuse-ignite-technical-extension-templates&quot;&gt;&lt;/a&gt;Fuse Ignite Technical Extension templates&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The existing template for &quot;Custom step using a Camel Route&quot; has been updated to work with Fuse 7 Tech Preview 4.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Two new templates have been added:
+      - Custom step using Java Bean
+      - Custom connector&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;New Fuse Ignite wizard with 3 options&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/igniteExtensionWizard10.3.0.AM3.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;improvements-of-the-wizard-to-create-a-fuse-integration-project&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#improvements-of-the-wizard-to-create-a-fuse-integration-project&quot;&gt;&lt;/a&gt;Improvements of the wizard to create a Fuse Integration project&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The creation wizard provides better guidance for the targeted deployment environment:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;New Fuse Integration Project wizard page to select environment&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/newFuseIntegrationWizard-environment.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;More place is available to choose the templates and they are now filtered based on the targeted environment:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;New Fuse Integration Project wizard page to select templates&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/newFuseIntegrationWizard-templates.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;It also points out to other places to find different examples for advanced users (see the link at the bottom of the previous screenshot).&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;camel-rest-dsl-editor-technical-preview&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#camel-rest-dsl-editor-technical-preview&quot;&gt;&lt;/a&gt;Camel Rest DSL editor (Technical preview)&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Camel is providing a Rest DSL to help the integration through Rest endpoints. Fuse Tooling is now providing a new tab in read-only mode to visualize the Rest endpoints defined.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;Rest DSL editor tab in read-only mode&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/fusetools/images/restViewer.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;It is currently in Tech Preview and needs to be activated in Window → Preferences → Fuse Tooling → Editor → Enable Read Only Tech preview REST DSL tab.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Work is still ongoing and feedback is very welcome on this new feature, you can comment on &lt;a href=&quot;https://issues.jboss.org/browse/FUSETOOLS-1287&quot;&gt;this JIRA epic&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;dozer-upgrade-and-migration&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#dozer-upgrade-and-migration&quot;&gt;&lt;/a&gt;Dozer upgrade and migration&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;When upgrading from Camel &amp;lt; 2.20 to Camel &amp;gt; 2.20, the Dozer dependency has been upgraded to a version not backward-compatible
+      If you open a Data transformation based on Dozer in Fuse Tooling, it will propose to migrate the file used for the transformation (technically changing the namespace). It allow to continue to use the Data Transformation editor and have - in most cases - the Data Transformation working at runtime with Camel &amp;gt; 2.20.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;hibernate-tools&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#hibernate-tools&quot;&gt;&lt;/a&gt;Hibernate Tools&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;hibernate-runtime-provider-updates&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#hibernate-runtime-provider-updates&quot;&gt;&lt;/a&gt;Hibernate Runtime Provider Updates&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;A number of additions and updates have been performed on the available Hibernate runtime  providers.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;new-hibernate-5-3-runtime-provider&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#new-hibernate-5-3-runtime-provider&quot;&gt;&lt;/a&gt;New Hibernate 5.3 Runtime Provider&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;With beta releases available in the Hibernate 5.3 stream, the time was right to make available a corresponding Hibernate 5.3 runtime provider. This runtime provider incorporates Hibernate Core version 5.3.0.Beta2 and Hibernate Tools version 5.3.0.Beta1.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot; style=&quot;text-align: center;&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;hibernate 5 3&quot; src=&quot;https://tools.jboss.org/documentation/whatsnew/hibernate/images/4.5.3.AM3/hibernate_5_3.png&quot; width=&quot;381&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;title&quot;&gt;Figure 1. Hibernate 5.3 is available&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;other-runtime-provider-updates&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#other-runtime-provider-updates&quot;&gt;&lt;/a&gt;Other Runtime Provider Updates&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Hibernate 5.0 runtime provider now incorporates Hibernate Core version 5.0.12.Final and Hibernate Tools version 5.0.6.Final.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Hibernate 5.1 runtime provider now incorporates Hibernate Core version 5.1.12.Final and Hibernate Tools version 5.1.7.Final.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Hibernate 5.2 runtime provider now incorporates Hibernate Core version 5.2.15.Final and Hibernate Tools version 5.2.10.Final.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;java-developement-tools-jdt&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#java-developement-tools-jdt&quot;&gt;&lt;/a&gt;Java Developement Tools (JDT)&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;support-for-java-10&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#support-for-java-10&quot;&gt;&lt;/a&gt;Support for Java™ 10&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The biggest part is the support for local variable type inference.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;add-java-10-jre&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#add-java-10-jre&quot;&gt;&lt;/a&gt;Add Java 10 JRE&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Basic necessity of recognizing a Java 10 for launching&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;j10&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/j10.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;And the compiler compliance option of 10&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;j10.compliance&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/j10.compliance.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect4&quot;&gt;
+      &lt;h5 id=&quot;jep-286-var-compilation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#jep-286-var-compilation&quot;&gt;&lt;/a&gt;JEP 286 var - compilation&lt;/h5&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Support for compilation of var as shown below&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.compile&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.compile.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Flagging of the compiler errors as expected, shown below&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.nocompile&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.nocompile.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Completion at places var is allowed&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.complete&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.complete.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Completion not offered at places var is not allowed&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.nocomplete&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.nocomplete.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Hover to reveal the javadoc&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.hover&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.hover.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Convert from var to the appropriate type using quick assist&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.vartotype&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.vartotype.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Convert from type to var using quick assist&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;imageblock&quot;&gt;
+      &lt;div class=&quot;content&quot;&gt;
+      &lt;img alt=&quot;var.typetovar&quot; src=&quot;https://www.eclipse.org/eclipse/news/4.7.3a/images/var.typetovar.png&quot; /&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;general&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#general&quot;&gt;&lt;/a&gt;General&lt;/h3&gt;
+      
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;credentials-framework&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#credentials-framework&quot;&gt;&lt;/a&gt;Credentials Framework&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;sunsetting-jboss-org-credentials&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#sunsetting-jboss-org-credentials&quot;&gt;&lt;/a&gt;Sunsetting jboss.org credentials&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;code&gt;Download Runtimes&lt;/code&gt; and &lt;code&gt;CDK Server Adapter&lt;/code&gt; used the credentials framework to manage credentials. However, the JBoss.org credentials cannot be used any more
+      as the underlying service used by these components does not support these credentials.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;aerogear&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#aerogear&quot;&gt;&lt;/a&gt;Aerogear&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;aerogear-component-deprecation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#aerogear-component-deprecation&quot;&gt;&lt;/a&gt;Aerogear component deprecation&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Aerogear component has been marked deprecated as there is no more maintenance on the source code. It is still available in Red Hat Central
+      and may be removed in the future.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;arquillian&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#arquillian&quot;&gt;&lt;/a&gt;Arquillian&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;arquillian-component-removal&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#arquillian-component-removal&quot;&gt;&lt;/a&gt;Arquillian component removal&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Arquillian component has been removed from Red Hat Central as it has been deprecated since July 2017.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The last available update site release is here:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://download.jboss.org/jbosstools/oxygen/stable/updates/core/arquillian/&quot;&gt;Arquillian 1.2.601.v20171220-1317&lt;/a&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;browsersim&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#browsersim&quot;&gt;&lt;/a&gt;BrowserSim&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;browsersim-component-deprecation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#browsersim-component-deprecation&quot;&gt;&lt;/a&gt;BrowserSim component deprecation&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The BrowserSim component has been marked deprecated as there is no more maintenance on the source code. It is still available in Red Hat Central
+      and may be removed in the future.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;freemarker&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#freemarker&quot;&gt;&lt;/a&gt;Freemarker&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;freemarker-component-removal&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#freemarker-component-removal&quot;&gt;&lt;/a&gt;Freemarker component removal&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The Freemarker component has been removed from Red Hat Central as it has been deprecated since July 2017.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The last available update site release is here:&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://download.jboss.org/jbosstools/oxygen/stable/updates/core/freemarker/&quot;&gt;Freemarker 1.5.302.v20171212-1534&lt;/a&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;livereload&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#livereload&quot;&gt;&lt;/a&gt;LiveReload&lt;/h3&gt;
+      &lt;div class=&quot;sect3&quot;&gt;
+      &lt;h4 id=&quot;livereload-component-deprecation&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#livereload-component-deprecation&quot;&gt;&lt;/a&gt;LiveReload component deprecation&lt;/h4&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;The LiveReload component has been marked deprecated as there is no more maintenance on the source code. It is still available in Red Hat Central
+      and may be removed in the future.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect2&quot;&gt;
+      &lt;h3 id=&quot;and-more&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#and-more&quot;&gt;&lt;/a&gt;And more…​&lt;/h3&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;You can find more noteworthy updates in on &lt;a href=&quot;https://tools.jboss.org/documentation/whatsnew/jbosstools/4.5.3.Final.html&quot;&gt;this page&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;sect1&quot;&gt;
+      &lt;h2 id=&quot;what-is-next&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;http://tools.jboss.org/blog/news.atom#what-is-next&quot;&gt;&lt;/a&gt;What is next?&lt;/h2&gt;
+      &lt;div class=&quot;sectionbody&quot;&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Having JBoss Tools 4.5.3 and Developer Studio 11.3 out we are already working on the next release for Eclipse Photon.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Enjoy!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;paragraph&quot;&gt;
+      &lt;p&gt;Jeff Maury&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;&lt;/div&gt;</description>
+	<pubDate>Tue, 24 Apr 2018 12:56:09 +0000</pubDate>
+</item>
+<item>
+	<title>Scott Lewis: ECF Photon adds Gogo Commands</title>
+	<guid isPermaLink="false">tag:blogger.com,1999:blog-20358640.post-1866288943800996883</guid>
+	<link>http://eclipseecf.blogspot.com/2018/04/ecf-photon-adds-gogo-commands.html</link>
+	<description>A &lt;a href=&quot;http://eclipseecf.blogspot.com/2018/04/ecf-photon-supports-bndtools.html&quot;&gt;third&lt;/a&gt; major enhancement for &lt;a href=&quot;http://www.eclipse.org/ecf&quot;&gt;ECF&lt;/a&gt;'s implementation of &lt;a href=&quot;https://wiki.eclipse.org/Eclipse_Communication_Framework_Project#OSGi_Remote_Services&quot;&gt;OSGi Remote Services&lt;/a&gt; is the addition of Apache Gogo console commands for examining the existing state of remote services, and the ability to export a service and import an endpoint from the OSGi console.&lt;br /&gt;&lt;br /&gt;See this &lt;a href=&quot;https://wiki.eclipse.org/Gogo_Commands_for_Remote_Services_Development&quot;&gt;wiki page describing the new commands and their usage&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;</description>
+	<pubDate>Tue, 24 Apr 2018 01:34:59 +0000</pubDate>
+	<author>noreply@blogger.com (Scott Lewis)</author>
+</item>
+<item>
+	<title>EclipseCon France 2018: Interview: Making EMF Intelligent with AI</title>
+	<guid isPermaLink="false">https://www.eclipsecon.org/france2018/news/3881 at https://www.eclipsecon.org/france2018</guid>
+	<link>https://www.eclipsecon.org/france2018/news/interview-making-emf-intelligent-ai</link>
+	<description>&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;&lt;em&gt;Niranjan Babu's talk &lt;a href=&quot;https://www.eclipsecon.org/france2018/session/making-emf-intelligent-ai&quot;&gt;Making EMF Intelligent with AI&lt;/a&gt; was chosen as an early bird selection. Read this brief Q&amp;amp;A with Niranjan to find out more about the I-EMF project.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Q: How did you begin with the idea of combining AI with EMF?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A: &lt;/strong&gt;EMF is used extensively as a modeling framework in the automotive world and the entire world is moving towards model driven development. These modeling frameworks are thus critical in determining the efficiency of software development. I thought the best way to improve efficiency is to make these models intelligent. That is when machine learning came into picture and I decided to combine machine learning with EMF.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-news-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;https://www.eclipsecon.org/france2018/news/interview-making-emf-intelligent-ai&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;img-responsive block-center&quot; height=&quot;250&quot; src=&quot;https://www.eclipsecon.org/france2018/sites/default/files/styles/solstice_news_-_default_-_thumbnail/public/news/niranjan.jpg?itok=Fw7l_4Ve&quot; width=&quot;250&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+	<pubDate>Mon, 23 Apr 2018 08:55:31 +0000</pubDate>
+</item>
+<item>
+	<title>InfoQ Eclipse feed: Eclipse Photon Nears Release</title>
+	<guid isPermaLink="true">http://www.infoq.com/news/2018/04/eclipse-photon?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=Eclipse</guid>
+	<link>http://www.infoq.com/news/2018/04/eclipse-photon?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=Eclipse</link>
+	<description>&lt;img src=&quot;http://www.infoq.com/styles/i/logo_bigger.jpg&quot; /&gt;&lt;p&gt;Eclipse Photon, the seventeenth annual release of the Eclipse Project, will be released in June, but we’re keeping an eye on all the new and noteworthy features in each pre-release milestone. Milestone 6 (M6) offers noteworthy features for the Eclipse Platform, Java Development Tools (JDT), Plug-in Development Environment (PDE), Equinox sub-project, and for JDT and Eclipse Platform developers.&lt;/p&gt; &lt;i&gt;By Kesha Williams&lt;/i&gt;</description>
+	<pubDate>Mon, 23 Apr 2018 05:30:00 +0000</pubDate>
+</item>
+<item>
+	<title>Donald Raab: EC by Example: FlatCollect</title>
+	<guid isPermaLink="false">https://medium.com/p/3efe24e43da2</guid>
+	<link>https://medium.com/@donraab/ec-by-example-flatcollect-3efe24e43da2?source=rss-df39b86e9f04------2</link>
+	<description>&lt;p&gt;Learn how to flatten a collection of collections into a single collection using the &lt;em&gt;flatCollect&lt;/em&gt; method in &lt;a href=&quot;https://www.eclipse.org/collections/&quot;&gt;Eclipse Collections&lt;/a&gt;.&lt;/p&gt;&lt;figure&gt;&lt;img alt=&quot;&quot; src=&quot;https://cdn-images-1.medium.com/max/1024/1*D0U-Qv3YU3K3eg7uIQN-3g.png&quot; /&gt;Organize a collection of collections into a single collection&lt;/figure&gt;&lt;h3&gt;What is FlatCollect?&lt;/h3&gt;&lt;p&gt;The method &lt;em&gt;flatCollect&lt;/em&gt; is a special form of &lt;em&gt;collect&lt;/em&gt;, where the output of the &lt;em&gt;Function&lt;/em&gt; provided to the method must always be some &lt;em&gt;Iterable&lt;/em&gt; type. The purpose of flatCollect is to provide a transformation that flattens a collection of collections. This method is similar in function to &lt;em&gt;flatMap&lt;/em&gt; in Java Streams. The primary difference is that the &lt;em&gt;Function&lt;/em&gt; for &lt;em&gt;flatCollect&lt;/em&gt; must return an &lt;em&gt;Iterable&lt;/em&gt;, while the &lt;em&gt;Function&lt;/em&gt; for &lt;em&gt;flatMap&lt;/em&gt; must return a &lt;em&gt;Stream&lt;/em&gt;.&lt;/p&gt;&lt;figure&gt;&lt;img alt=&quot;&quot; src=&quot;https://cdn-images-1.medium.com/max/640/1*borarfXLzhw3z0qJdYYhaw.png&quot; /&gt;Creating Intervals from Integers and flattening them to a List&lt;/figure&gt;&lt;h3&gt;FlatCollecting a List (Java 8)&lt;/h3&gt;&lt;pre&gt;@Test&lt;br /&gt;public void flatCollectingAListJava8()&lt;br /&gt;{&lt;br /&gt;    MutableList&amp;lt;Integer&amp;gt; list = &lt;em&gt;mList&lt;/em&gt;(5, 4, 3, 2, 1);&lt;br /&gt;    MutableList&amp;lt;Integer&amp;gt; result = list.&lt;strong&gt;flatCollect&lt;/strong&gt;(Interval::&lt;em&gt;oneTo&lt;/em&gt;);&lt;br /&gt;&lt;br /&gt;    MutableList&amp;lt;Integer&amp;gt; expected = &lt;em&gt;mList&lt;/em&gt;(&lt;br /&gt;            1, 2, 3, 4, 5,&lt;br /&gt;            1, 2, 3, 4,&lt;br /&gt;            1, 2, 3,&lt;br /&gt;            1, 2,&lt;br /&gt;            1);&lt;br /&gt;    Assert.&lt;em&gt;assertEquals&lt;/em&gt;(expected, result);&lt;br /&gt;}&lt;/pre&gt;&lt;h3&gt;Collection Pipelines&lt;/h3&gt;&lt;p&gt;Martin Fowler describes the Collection Pipeline pattern &lt;a href=&quot;https://martinfowler.com/articles/collection-pipeline/&quot;&gt;here&lt;/a&gt;. Here is an example of &lt;em&gt;flatCollect&lt;/em&gt; used in a collection pipeline to find all of the methods that contain “flat” in their name for a List of classes. Here I used a overloaded form of &lt;em&gt;flatCollect&lt;/em&gt; which takes a target collection as an argument.&lt;/p&gt;&lt;pre&gt;@Test&lt;br /&gt;public void flatCollectingAListOfMethodsToASetJava8()&lt;br /&gt;{&lt;br /&gt;    MutableList&amp;lt;Class&amp;lt;?&amp;gt;&amp;gt; list = &lt;em&gt;mList&lt;/em&gt;(&lt;br /&gt;            ListIterable.class,&lt;br /&gt;            MutableList.class,&lt;br /&gt;            ImmutableList.class);&lt;br /&gt;    MutableSet&amp;lt;String&amp;gt; result = list&lt;br /&gt;            .collect(Class::getMethods)&lt;br /&gt;            .&lt;strong&gt;flatCollect&lt;/strong&gt;(Lists.&lt;strong&gt;&lt;em&gt;fixedSize&lt;/em&gt;&lt;/strong&gt;::with, &lt;em&gt;mSet&lt;/em&gt;())&lt;br /&gt;            .collect(Method::getName)&lt;br /&gt;            .select(each -&amp;gt; each.toLowerCase().contains(&lt;strong&gt;&quot;flat&quot;&lt;/strong&gt;));&lt;br /&gt;&lt;br /&gt;    MutableSet&amp;lt;String&amp;gt; expected = mSet(&lt;strong&gt;&quot;flatCollect&quot;&lt;/strong&gt;);&lt;br /&gt;    Assert.&lt;em&gt;assertEquals&lt;/em&gt;(expected, result);&lt;br /&gt;}&lt;/pre&gt;&lt;p&gt;The method &lt;em&gt;getMethods&lt;/em&gt; on class returns an array, so in the Function I pass to flatCollect, I convert the array to a &lt;em&gt;List&lt;/em&gt;. If &lt;em&gt;getMethods&lt;/em&gt; had returned a List or some other Iterable type, I could have simply used &lt;em&gt;flatCollect&lt;/em&gt; passing Class::&lt;em&gt;getMethods&lt;/em&gt;.&lt;/p&gt;&lt;p&gt;Here’s the same example using Java 10 with Local-variable Type Inference.&lt;/p&gt;&lt;pre&gt;@Test&lt;br /&gt;public void flatCollectingAListOfMethodsToASetJava10()&lt;br /&gt;{&lt;br /&gt;    var list = &lt;em&gt;mList&lt;/em&gt;(&lt;br /&gt;            ListIterable.class,&lt;br /&gt;            MutableList.class,&lt;br /&gt;            ImmutableList.class);&lt;br /&gt;    var resultSet = list&lt;br /&gt;            .collect(Class::getMethods)&lt;br /&gt;            .&lt;strong&gt;flatCollect&lt;/strong&gt;(Lists.&lt;strong&gt;&lt;em&gt;fixedSize&lt;/em&gt;&lt;/strong&gt;::with, &lt;em&gt;mSet&lt;/em&gt;())&lt;br /&gt;            .collect(Method::getName)&lt;br /&gt;            .select(each -&amp;gt; each.toLowerCase().contains(&lt;strong&gt;&quot;flat&quot;&lt;/strong&gt;));&lt;br /&gt;&lt;br /&gt;    var expected = mSet(&lt;strong&gt;&quot;flatCollect&quot;&lt;/strong&gt;);&lt;br /&gt;    Assert.&lt;em&gt;assertEquals&lt;/em&gt;(expected, resultSet);&lt;br /&gt;}&lt;/pre&gt;&lt;h3&gt;&lt;a href=&quot;https://medium.com/@donraab/symmetric-sympathy-2c59d4541d60&quot;&gt;Symmetric Sympathy&lt;/a&gt; Strikes Again&lt;/h3&gt;&lt;p&gt;While there exists a method named &lt;em&gt;collectWith&lt;/em&gt; which is a form of &lt;em&gt;collect&lt;/em&gt; that takes a &lt;em&gt;Function2&lt;/em&gt;, there currently is no method named &lt;em&gt;flatCollectWith&lt;/em&gt; which also takes a &lt;em&gt;Function2&lt;/em&gt;. I discovered the lack of flatCollectWith (again) this week. I have submitted an &lt;a href=&quot;https://github.com/eclipse/eclipse-collections/issues/504&quot;&gt;issue&lt;/a&gt; for this feature and began working on it over the weekend. I expect to have the &lt;em&gt;flatCollectWith&lt;/em&gt; implementation tested and completed over the next week or two.&lt;/p&gt;&lt;h3&gt;APIs covered in the examples&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;&lt;a href=&quot;https://www.eclipse.org/collections/javadoc/9.1.0/org/eclipse/collections/api/list/MutableList.html#flatCollect-org.eclipse.collections.api.block.function.Function-&quot;&gt;flatCollect&lt;/a&gt;— transforms elements of a source collection to a new collection by flattening collections in the source collection to a single collection&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.eclipse.org/collections/javadoc/9.1.0/org/eclipse/collections/impl/factory/Iterables.html#mList-T...-&quot;&gt;mList&lt;/a&gt; — creates a MutableList&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.eclipse.org/collections/javadoc/9.1.0/org/eclipse/collections/impl/factory/Iterables.html#mSet--&quot;&gt;mSet&lt;/a&gt; — creates a MutableSet&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.eclipse.org/collections/javadoc/9.1.0/org/eclipse/collections/impl/list/Interval.html#oneTo-int-&quot;&gt;Interval.oneTo(int)&lt;/a&gt; — creates an Interval starting from 1 to the specified value&lt;/li&gt;&lt;li&gt;var — Local variable Type Inference included in Java 10 (&lt;a href=&quot;http://openjdk.java.net/jeps/286&quot;&gt;JEP 286&lt;/a&gt;)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Refer to my previous blogs in the EC by Example series for examples of &lt;a href=&quot;https://medium.com/@donraab/ec-by-example-collect-262a46030c49&quot;&gt;collect&lt;/a&gt; and &lt;a href=&quot;https://medium.com/@donraab/ec-by-example-filtering-4f14b906f718&quot;&gt;select&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Check out this &lt;a href=&quot;http://eclipse.github.io/eclipse-collections-kata/api-design&quot;&gt;presentation&lt;/a&gt; to learn more about the origins, design and evolution of the Eclipse Collections API. There is also a &lt;a href=&quot;https://www.youtube.com/watch?v=Xrx_407Dt-I&quot;&gt;video&lt;/a&gt; covering the slides that was recorded at an Eclipse Community Virtual Meet-up.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/eclipse/eclipse-collections&quot;&gt;&lt;em&gt;Eclipse Collections&lt;/em&gt;&lt;/a&gt;&lt;em&gt; is open for &lt;/em&gt;&lt;a href=&quot;https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md&quot;&gt;&lt;em&gt;contributions&lt;/em&gt;&lt;/a&gt;&lt;em&gt;. If you like the library, you can let us know by starring it on GitHub.&lt;/em&gt;&lt;/p&gt;&lt;img height=&quot;1&quot; src=&quot;https://medium.com/_/stat?event=post.clientViewed&amp;amp;referrerSource=full_rss&amp;amp;postId=3efe24e43da2&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Mon, 23 Apr 2018 05:08:51 +0000</pubDate>
+</item>
+<item>
+	<title>vert.x project: Eclipse Vert.x RabbitMQ client gets a new consumer API!</title>
+	<guid isPermaLink="true">https://vertx.io/blog/eclipse-vert-x-rabbitmq-client-gets-a-new-consumer-api</guid>
+	<link>https://vertx.io/blog/eclipse-vert-x-rabbitmq-client-gets-a-new-consumer-api</link>
+	<description>&lt;article&gt;&lt;p&gt;In Eclipse Vert.x 3.6.0 the RabbitMQ client will get a new consumer API. In this post we are going to show
+the improvements since the previous API and how easy it is to use now.&lt;/p&gt;
+&lt;p&gt;Before digging into the new API let’s find out what were the limitations of the actual one:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The API uses the event bus in such limiting the control of the consumer over the RabbitMQ queue.&lt;/li&gt;
+&lt;li&gt;The message API is based on &lt;code&gt;JsonObject&lt;/code&gt; which does not provide a typed API&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;the-new-api-at-a-glance&quot;&gt;The new API at a glance&lt;/h2&gt;
+&lt;p&gt;Here is how simple queue consumption looks like with the new API:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;hljs java&quot;&gt;RabbitMQClient client = RabbitMQClient.create(vertx, &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; RabbitMQOptions());
+
+client.basicConsumer(&lt;span class=&quot;hljs-string&quot;&gt;&quot;my.queue&quot;&lt;/span&gt;, res -&amp;gt; {
+  &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (res.succeeded()) {
+    System.out.println(&lt;span class=&quot;hljs-string&quot;&gt;&quot;RabbitMQ consumer created !&quot;&lt;/span&gt;);
+    RabbitMQConsumer mqConsumer = res.result();
+    mqConsumer.handler((RabbitMQMessage message) -&amp;gt; {
+        System.out.println(&lt;span class=&quot;hljs-string&quot;&gt;&quot;Got message: &quot;&lt;/span&gt; + message.body().toString());
+    });
+  } &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; {
+    &lt;span class=&quot;hljs-comment&quot;&gt;// Oups something went wrong&lt;/span&gt;
+    res.cause().printStackTrace();
+  }
+});&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Now to create a queue you simply call the &lt;code&gt;basicConsumer&lt;/code&gt; method and you obtain asynchronously
+a &lt;code&gt;RabbitMQConsumer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then you need to provide a handler called for each message consumed via &lt;em&gt;RabbitMQConsumer#handler&lt;/em&gt; which
+is the idiomatic way to consumer stream in Vert.x&lt;/p&gt;
+&lt;p&gt;You may also note that when we a message arrives, it has the type of &lt;code&gt;RabbitMQMessage&lt;/code&gt;, this is a typed
+message representation.&lt;/p&gt;
+&lt;p&gt;Since &lt;code&gt;RabbitMQConsumer&lt;/code&gt; is a stream, you also allowed to &lt;code&gt;pause&lt;/code&gt; and &lt;code&gt;resume&lt;/code&gt; the stream, subscribe to the
+end event, get notified when an exception occurs.&lt;/p&gt;
+&lt;p&gt;In addition, you can cancel the subscription by calling &lt;code&gt;RabbitMQConsumer#cancel&lt;/code&gt; method.&lt;/p&gt;
+&lt;h2 id=&quot;backpressure&quot;&gt;Backpressure&lt;/h2&gt;
+&lt;p&gt;Sometimes you can have more incoming messages than you can handle.&lt;/p&gt;
+&lt;p&gt;The new consumer API allows you to control this and lets you store arrived messages in the internal queue
+before they are delivered to the application. Indeed, you can configure the queue size.&lt;/p&gt;
+&lt;p&gt;Here is how you can limit the internal queue size:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;hljs java&quot;&gt;&lt;span class=&quot;hljs-comment&quot;&gt;// Limit to max 300 messages&lt;/span&gt;
+QueueOptions options = &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; QueueOptions()
+  .setMaxInternalQueueSize(&lt;span class=&quot;hljs-number&quot;&gt;300&lt;/span&gt;);
+
+RabbitMQClient client = RabbitMQClient.create(vertx, &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; RabbitMQOptions());
+
+client.basicConsumer(&lt;span class=&quot;hljs-string&quot;&gt;&quot;my.queue&quot;&lt;/span&gt;, options, res -&amp;gt; {
+  &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (res.succeeded()) {
+    System.out.println(&lt;span class=&quot;hljs-string&quot;&gt;&quot;RabbitMQ consumer created !&quot;&lt;/span&gt;);
+    RabbitMQConsumer mqConsumer = res.result();
+    mqConsumer.handler((RabbitMQMessage message) -&amp;gt; {
+      System.out.println(&lt;span class=&quot;hljs-string&quot;&gt;&quot;Got message: &quot;&lt;/span&gt; + message.body().toString());
+    });
+  } &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; {
+    res.cause().printStackTrace();
+  }
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When the intenral queue queue capacity is exceeded, the new message will be simply dropped.&lt;/p&gt;
+&lt;p&gt;An alternative option is to drop the oldest message in the queue.&lt;/p&gt;
+&lt;p&gt;In order to achieve this, you should specify the behavior by calling &lt;code&gt;QueueOptions#setKeepMostRecent&lt;/code&gt; method.&lt;/p&gt;
+&lt;h2 id=&quot;finally&quot;&gt;Finally&lt;/h2&gt;
+&lt;p&gt;The new Vert.x RabbitMQ client consumer API is way more idiomatic and modern way to consume messages from a queue.&lt;/p&gt;
+&lt;p&gt;This API is going to provided in the 3.6.0 release, while the old will be deprecated.&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed reading this article. See you soon on our &lt;a href=&quot;https://gitter.im/eclipse-vertx/vertx-users&quot;&gt;Gitter channel&lt;/a&gt;!&lt;/p&gt;
+&lt;/article&gt;</description>
+	<pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Nikhil Nanivadekar: India Java User Group Tour 2018</title>
+	<guid isPermaLink="false">https://medium.com/p/ecdd10e2543d</guid>
+	<link>https://medium.com/@nikhilnanivadekar/india-java-user-group-tour-2018-ecdd10e2543d?source=rss-4285d8a2ca86------2</link>
+	<description>&lt;p&gt;After 27+ hours of travel I just reached Pune, my home town. I am excited for my India Java User Group Tour 2018. I will be presenting on Java 10, Java 9, Eclipse Collections, Spark and more!&lt;/p&gt;&lt;p&gt;It is a quick pit stop in Pune before I head over to Chennai for my first JUG meet-up in #INDJUG tour. Abstracts for all my talks are available at the end of this blog. Join me at one of these cities:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.meetup.com/MadrasJUG/events/248758532/&quot;&gt;&lt;strong&gt;Chennai JUG&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; Saturday, April 21&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.meetup.com/Delhi-NCR-JUG/events/249660682/&quot;&gt;&lt;strong&gt;Delhi-NCR JUG&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; Sunday, April 22&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.meetup.com/BangaloreOpenJUG/events/248526846/&quot;&gt;&lt;strong&gt;Bengaluru JUG&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; Wednesday, April 25&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://www.meetup.com/jughyderabad/events/247346390&quot;&gt;&lt;strong&gt;Hyderabad JUG&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; Sunday, April 29&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Kerala JUG (Thiruvananthapuram):&lt;/strong&gt; Saturday, May 5&lt;/p&gt;&lt;p&gt;Thank you to &lt;a href=&quot;https://twitter.com/MadrasJUG&quot;&gt;@MadrasJUG&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/DelhiJUG&quot;&gt;@DelhiJUG&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/bangalorejug&quot;&gt;@bangalorejug&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/JUGHYD&quot;&gt;@JUGHYD&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/KeralaJUG&quot;&gt;@KeralaJUG&lt;/a&gt; for hosting me in each city.&lt;/p&gt;&lt;p&gt;I’ll be tweeting using the #INDJUG so if you can’t make it, you can still follow my adventures through India.&lt;/p&gt;&lt;p&gt;Hope to see you at one of the stops!&lt;/p&gt;&lt;a href=&quot;https://medium.com/media/1965d4579fd3e295b79002ad7b50a1f5/href&quot;&gt;https://medium.com/media/1965d4579fd3e295b79002ad7b50a1f5/href&lt;/a&gt;&lt;p&gt;&lt;strong&gt;Abstracts&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;How to make your project Java-10 compatible:&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Java 10 was recently released and was the first release with the new Java release cadence. However, one can’t simply upgrade their projects from Java 8 to Java 10. It first should be upgraded to Java 9, due to the numerous changes that might potentially break existing applications. This session is a case study of making a third-party Java Collections library (Eclipse Collections) first Java 9 compatible and then with relative ease Java 10 compatible. The audience will see an overview of all the steps taken and the evolution of the final product which is Java 10 compatible. Attending this session will put you in the driver’s seat when you will be required to upgrade your application to use JDK 10.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Getting Started with Spark:&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Data analytics and machine learning have become mainstream in recent years. With the amount of data available, distributed computing has become a necessity. Apache Spark is one of the forerunners in distributed computing domain. In this hands-on session, the audience will learn about the background and basic concepts of Apache Spark. The speaker will build a reference implementation live and introduce new concepts along the way.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Collections.compare(JDK, Apache, Eclipse, Guava…):&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Collections are a staple in any programming language: the need to collect, sort, or iterate over values is needed by nearly all developers. The Java language introduced the Collections framework long ago. It has plenty to offer, but many find it lacking: the number of collection libraries as active open source projects demonstrates the need for something else. This session does a holistic comparison of the most-common collections (pun intended!) frameworks, what they have to offer, and what you should consider for your next project. It also shows common programmer use cases; how each library handles them; and the impact on memory, processing power, and ease of use/coding. Come and let us help you choose the right bag for your tricks!&lt;/p&gt;&lt;p&gt;&lt;strong&gt;API Deep Dive: Designing Eclipse Collections&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;When designing an API, its authors have to consider many aspects: style, naming, scope, and implementation details are among these aspects. They have a direct impact on the resulting code, and its implementation can go in many different directions. How do you choose the best route to go? How do you maintain symmetry? How do you guarantee consistency and performance across the framework? Last but not the least, what is the complexity associated with adding a new API? Come take a look behind the curtains of a widely used API that has many years of development and that you can contribute to.&lt;/p&gt;&lt;img height=&quot;1&quot; src=&quot;https://medium.com/_/stat?event=post.clientViewed&amp;amp;referrerSource=full_rss&amp;amp;postId=ecdd10e2543d&quot; width=&quot;1&quot; /&gt;</description>
+	<pubDate>Fri, 20 Apr 2018 00:13:55 +0000</pubDate>
+</item>
+
+</channel>
+</rss>

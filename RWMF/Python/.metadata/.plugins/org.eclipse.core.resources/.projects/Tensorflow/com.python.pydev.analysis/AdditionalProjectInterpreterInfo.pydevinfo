@@ -1,0 +1,28 @@
+-- VERSION_4
+-- START DISKCACHE_2
+C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\.metadata\.plugins\org.eclipse.core.resources\.projects\Tensorflow\com.python.pydev.analysis\v2_indexcache
+hw_funs|1513149703000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\Tensorflow\hw_funs.py
+NN_handwritten|1513216782000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\Tensorflow\NN_handwritten.py
+-- END DISKCACHE
+-- START DICTIONARY
+2
+2=hw_funs
+1=NN_handwritten
+-- END DICTIONARY
+-- START TREE 1
+11
+M|1|M!11@
+bye|1|byebye!18@
+cre|1|creat_hw_pickle!18@
+dat|1|data!11@
+dir|1|dir_path!11@
+fin|2|fin_mat!11@fin!11@
+fou|2|fout!11@fout_mat!11@
+img|2|img_w!11@img_h!11@
+lab|1|label!11@
+out|1|output!11@
+ver|1|version!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

@@ -1,0 +1,175 @@
+-- VERSION_4
+-- START DISKCACHE_2
+C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\.metadata\.plugins\org.eclipse.core.resources\.projects\RWMF\com.python.pydev.analysis\v2_indexcache
+RWLR_support|1519413650000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLR_support.py
+Reweight_accessories|1517593222000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\Reweight_accessories.py
+test_CompareGrad|1517002035000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_CompareGrad.py
+test_RWLR|1518426033000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLR.py
+RWLR_support2|1518608266000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLR_support2.py
+test_condi_numb|1514587190000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_condi_numb.py
+test_RWLSTM_v2|1517717726000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLSTM_v2.py
+test_RWLSTM_basic_v1|1517720576000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLSTM_basic_v1.py
+test_Reweight_v1|1517592841000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_Reweight_v1.py
+test_Reweight_v2|1517596573000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_Reweight_v2.py
+RWLSTM_lib|1517719693000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLSTM_lib.py
+residue|1510795741000000000|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\residue.py
+-- END DISKCACHE
+-- START DICTIONARY
+34
+6=Reweight_accessories
+9=RWLR_support
+5=test_RWLR
+27=Model_Controlling.__init__
+32=IO_Data.create_data_hw
+17=Model_Controlling
+20=Preprocessed_Input
+8=RWLSTM_lib
+25=Weights.update_dist
+34=IO_Data.update_fout
+19=IO_Data
+16=Weights
+23=Weights.__init__
+14=ProjectM.update_U
+24=Weights.update_damping
+2=test_Reweight_v1
+28=Preprocessed_Input.__init__
+3=test_Reweight_v2
+30=RWLR_Model.__init__
+13=ProjectM.__init__
+4=test_CompareGrad
+1=test_condi_numb
+15=ProjectM
+29=RWLR_Model_Betta.__init__
+26=ProjectM.update_Pu
+11=residue
+10=RWLR_support2
+12=RWLSTM_Model_basic.__init__
+18=RWLR_Model
+7=test_RWLSTM_basic_v1
+33=IO_Data.use_dataset
+21=RWLSTM_Model_basic
+22=RWLR_Model_Betta
+31=IO_Data.__init__
+-- END DICTIONARY
+-- START TREE 1
+71
+M|4|M!11@M!19@M!27@M!35@
+M1|1|M1!11@
+M2|1|M2!11@
+U0|1|U0!43@
+W0|3|W0!35@W0!27@W0!19@
+X0|4|X0!19@X0!11@X0!35@X0!27@
+alt|2|Alter_OMF!50@Alter_OMF2!50@
+bat|2|batch_size!59@batch_producer!66@
+bet|1|betta_parameters!43@
+bye|1|byebye!50@
+che|1|checkPSD!50@
+com|1|CompareGrad!50@
+dam|3|damping!35@damping!27@damping!19@
+dat|9|data_path!35@data!35@data_path!19@dataset_name!43@dataset_name!27@data!43@data!19@dataset_name!59@data!11@
+del|3|delta_err_min!11@delta_converged!19@delta_converged!27@
+dim|1|dim!11@
+dir|5|dir_path!27@dir_path!35@dir_path!43@dir_path!11@dir_path!19@
+dis|1|distance!50@
+dra|1|draw_graph3D_v1!50@
+epo|1|epoch_size!59@
+fil|5|file_input!35@file_name!35@file_output!35@file_input!19@file_output!19@
+fin|6|fin_mat!59@fin!11@fin_name!43@fin_mat!27@fin_mat!43@fin_name!27@
+fou|4|fout!19@fout!11@fout!35@fout_mat!11@
+gen|1|generate_unrealiable_labels!66@
+get|9|get_initU!74@get_weight!74@get_weight!82@get_weighted_stepsize!82@get_weighted_factored_grad!74@get_minibatch!82@get_weighted_stepsize!74@get_minibatch!74@get_weighted_factored_grad!82@
+hid|1|hidden_size!59@
+ide|2|idexes0!43@idexes0!27@
+ini|2|init_portion!27@init_portion!43@
+inp|2|input_fea_size!59@input_train!59@
+io_|1|IO_Data!65@
+ite|3|iter_max!27@iter_max!11@iter_max!19@
+k|5|k!19@k!27@k!35@k!11@k!43@
+kap|2|kappa1!11@kappa2!11@
+loa|2|load_mat!66@load_data_pickle_mat!66@
+lst|1|LSTM_model!59@
+m|2|m!19@m!35@
+max|1|max_iters!43@
+mod|2|Model_Controlling!73@Model_Controlling!81@
+mu|5|mu!19@mu!11@mu!35@mu!43@mu!27@
+mu1|1|mu1!11@
+mu2|1|mu2!11@
+n|2|n!19@n!35@
+n_c|1|n_classes!59@
+n_e|1|n_epochs!59@
+n_m|1|n_minibatch!43@
+nor|4|normal_col_l1!74@normal_col_l2!82@normal_col_l2!74@normal_col_l1!82@
+num|2|numb!11@num_timesteps!59@
+omf|1|OMF_Pu!50@
+out|5|output!27@output!35@output!19@output!43@output!11@
+par|1|par_kernel!43@
+pre|1|Preprocessed_Input!65@
+pro|3|ProjectM!73@projected_data_train!59@ProjectM!81@
+ran|2|random_pick!27@random_pick!43@
+raw|2|raw_data!27@raw_data!43@
+res|4|residue!90@residue!50@residue_w!82@residue_w!74@
+rew|3|ReweightMF_adjust2!50@ReweightMF!50@ReweightMF_adjust!50@
+rwl|5|RWLSTM_Model_basic!65@RWLR_Model!73@RWLR_parameters!59@RWLR_Model_Betta!73@RWLR_Model!81@
+sig|7|sigma!11@sigma1!11@sigma!19@sigma2!11@sigma!35@sigma!43@sigma!27@
+sum|1|sum_col_X!11@
+svd|2|svd_initial!43@svd_initial!27@
+tes|10|test!19@test_mode!59@test_model_betta!43@test!11@test_model!43@test_projection!74@test_data_IO!59@test_data_IO!43@test_data_IO!27@test!35@
+tra|1|train_Model_basic!66@
+upd|1|update_Pu_momentum!82@
+ver|6|version!19@ver_out!11@ver!27@ver!43@version!35@version!43@
+w1|1|w1!11@
+w2|1|w2!11@
+w_k|1|w_kernel!43@
+wei|3|Weights!73@weight!50@Weights!81@
+x01|1|X01!11@
+x02|1|X02!11@
+y0t|3|Y0T!35@Y0T!19@Y0T!27@
+-- END TREE
+-- START TREE 2
+45
+X|1|X!12&67@
+Y|1|Y!12&67@
+_U|4|_U!13&75@_U!14&75@_U!13&83@_U!14&83@
+__i|12|__init__!15&82@__init__!16&82@__init__!17&82@__init__!18&82@__init__!19&66@__init__!20&66@__init__!21&66@__init__!15&74@__init__!16&74@__init__!18&74@__init__!17&74@__init__!22&74@
+_da|4|_damping!23&75@_damping!24&75@_damping!23&83@_damping!24&83@
+_di|4|_dist!23&75@_dist!25&75@_dist!23&83@_dist!25&83@
+_in|1|_initialize_FGD!22&74@
+_pu|5|_Pu!13&75@_Pu!14&75@_Pu!26&75@_Pu!13&83@_Pu!14&83@
+_up|3|_update_U_innerloop!22&74@_update_U_1st_GD!22&74@_update_U_momentum!22&74@
+adj|1|adjust_on!27&83@
+app|8|apply_RW_Basic_FGD!18&74@apply_RW_SGD_FGD_FullW!18&74@apply_RW_Basic_FGD!22&74@apply_RW_SGD_FGD_ShortW!18&74@apply_RW_Basic_FGD!18&82@apply_RW_SGD_FGD!18&82@apply_RW_SGD_M_FGD!18&74@apply_RW_ALM_FGD!22&74@
+bat|2|batch_size!28&67@batch_size!12&67@
+bui|1|build_Model_basic!21&66@
+con|1|control_para_obj!29&75@
+cre|1|create_data_hw!19&66@
+dam|2|damping!30&83@damping!30&75@
+dat|2|data!30&83@data!30&75@
+del|2|delta_err_min!30&75@delta_err_min!30&83@
+dis|4|dist_UVT!15&82@dist_Pu!15&82@dist_UVT!15&74@dist_Pu!15&74@
+epo|2|epoch_size!28&67@epoch_size!12&67@
+fin|3|fin!31&67@fin!32&67@fin!33&67@
+fou|2|fout!31&67@fout!34&67@
+ful|2|full_weight_on!27&75@full_weight_on!27&83@
+get|8|get_kernel!16&82@get_kernel!16&74@get_Pu!15&82@get_U!15&74@get_Pu!15&74@get_U!15&82@get_cur_dist!16&82@get_cur_dist!16&74@
+hid|1|hidden_size!12&67@
+ini|5|init_U!30&75@init_portion!27&75@init_portion!27&83@init_idxes!30&75@init_U!30&83@
+inp|2|input_obj!12&67@input_fea_size!12&67@
+k|2|k!30&83@k!30&75@
+ker|2|kernel_tv!16&82@kernel_tv!16&74@
+mak|1|make_orthonormal!15&74@
+mom|4|momentum_para!27&75@momentum_para!27&83@momentum_on!27&83@momentum_on!27&75@
+n_c|1|n_classes!12&67@
+n_e|1|n_epochs!12&67@
+n_i|2|n_iters!30&75@n_iters!30&83@
+nex|1|next_batch!20&66@
+num|3|num_timesteps!28&67@num_timesteps!12&67@num_feas!28&67@
+par|2|partial_tv!16&74@partial_tv!16&82@
+pat|2|path!31&67@path!34&67@
+pro|2|prob_wj!16&82@prob_wj!16&74@
+rea|1|read_all_data!19&66@
+sav|1|save_data!19&66@
+thr|2|threshold_para!27&75@threshold_para!27&83@
+upd|8|update_damping!16&82@update_Pu!15&74@update_U!15&74@update_damping!16&74@update_dist!16&82@update_fout!19&66@update_U!15&82@update_dist!16&74@
+use|1|use_dataset!19&66@
+v|2|v!31&67@v!34&67@
+-- END TREE

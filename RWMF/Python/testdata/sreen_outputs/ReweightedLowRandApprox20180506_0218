@@ -1,0 +1,416 @@
+/Users/XiangyuW/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Successfully load data from pickle /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/YaleFace1.pickle!
+Data loaded successfully from /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/YaleFace1.pickle !
+
+The projected low rank is  100
+The initial randon shuffle is  [ 25 139 106   7  89 142 129  97 100  38  19  28 116  74 147  67  47  64
+ 107  88   4 110 133 135  54  85  68 117 143  91  75 115 113 104 108  45
+  62   1  37  81  63  66  31 121 137  99   6 114  27  41 146 120 132  46
+ 136  60  29   5 130  94  39  42  70  71  34 134  69  40  87 111  24  33
+  15 125  77  92  78  90  30  17 101 126  10  82  65 109   3   0  61 103
+  14  13  96 145  50  55  48 144  76  79  18  52  23  59  98 128  26 118
+  51  22 102  35  57 138  20  32  36 123 140   8  86   9  11  53  83  84
+  58 141 105  73  44   2 122  16  43 112 127 119  56 124  93  80  12  21
+  72 131  95  49]
+********
+Starting the AGD-type ALM FGD---Accelerate Basis********
+
+The initial err is  22685.02467462472
+
+The 1-th iteration of Accelerated ALM FGD
+----The ALM err is  19769.814803531917
+----The accelerated err is  22685.02467462472
+--Current err is 19769.815 and the improvement is 2915.210
+
+The 2-th iteration of Accelerated ALM FGD
+----The ALM err is  17622.344612409
+----The accelerated err is  17622.344612409
+--Current err is 17622.345 and the improvement is 2147.470
+
+The 3-th iteration of Accelerated ALM FGD
+----The ALM err is  17067.734251773018
+----The accelerated err is  17148.719037055504
+--Current err is 17067.734 and the improvement is 554.610
+
+The 4-th iteration of Accelerated ALM FGD
+----The ALM err is  16893.471057685267
+----The accelerated err is  17053.947804264913
+--Current err is 16893.471 and the improvement is 174.263
+
+The 5-th iteration of Accelerated ALM FGD
+----The ALM err is  16839.923003810414
+----The accelerated err is  17048.819490271122
+--Current err is 16839.923 and the improvement is 53.548
+
+The 6-th iteration of Accelerated ALM FGD
+----The ALM err is  16792.152144755833
+----The accelerated err is  16995.6010659695
+--Current err is 16792.152 and the improvement is 47.771
+
+The 7-th iteration of Accelerated ALM FGD
+----The ALM err is  16788.442548361407
+----The accelerated err is  17019.197811846887
+--Current err is 16788.443 and the improvement is 3.710
+
+The 8-th iteration of Accelerated ALM FGD
+----The ALM err is  16758.085693249894
+----The accelerated err is  16969.353854503337
+--Current err is 16758.086 and the improvement is 30.357
+
+The 9-th iteration of Accelerated ALM FGD
+----The ALM err is  16763.086036331548
+----The accelerated err is  16998.181330373667
+--Current err is 16763.086 and the improvement is 5.000
+
+The 10-th iteration of Accelerated ALM FGD
+----The ALM err is  16737.175699469317
+----The accelerated err is  16950.426327715264
+--Current err is 16737.176 and the improvement is 25.910
+
+The 11-th iteration of Accelerated ALM FGD
+----The ALM err is  16745.32234899504
+----The accelerated err is  16981.888408159008
+--Current err is 16745.322 and the improvement is 8.147
+
+The 12-th iteration of Accelerated ALM FGD
+----The ALM err is  16721.611830115777
+----The accelerated err is  16935.766075794272
+--Current err is 16721.612 and the improvement is 23.711
+
+The 13-th iteration of Accelerated ALM FGD
+----The ALM err is  16731.75749029913
+----The accelerated err is  16969.187393127675
+--Current err is 16731.757 and the improvement is 10.146
+
+The 14-th iteration of Accelerated ALM FGD
+----The ALM err is  16709.73082612192
+----The accelerated err is  16924.515977551408
+--Current err is 16709.731 and the improvement is 22.027
+
+The 15-th iteration of Accelerated ALM FGD
+----The ALM err is  16721.568088658485
+----The accelerated err is  16959.650818457212
+--Current err is 16721.568 and the improvement is 11.837
+
+The 16-th iteration of Accelerated ALM FGD
+----The ALM err is  16701.02659794444
+----The accelerated err is  16916.303617709276
+--Current err is 16701.027 and the improvement is 20.541
+
+The 17-th iteration of Accelerated ALM FGD
+----The ALM err is  16714.31355763532
+----The accelerated err is  16952.895869747397
+--Current err is 16714.314 and the improvement is 13.287
+
+The 18-th iteration of Accelerated ALM FGD
+----The ALM err is  16694.992822276712
+----The accelerated err is  16910.634229699892
+--Current err is 16694.993 and the improvement is 19.321
+
+The 19-th iteration of Accelerated ALM FGD
+----The ALM err is  16709.40281297839
+----The accelerated err is  16948.341666004155
+--Current err is 16709.403 and the improvement is 14.410
+
+The 20-th iteration of Accelerated ALM FGD
+----The ALM err is  16690.981016152266
+----The accelerated err is  16906.871954978935
+--Current err is 16690.981 and the improvement is 18.422
+
+The 21-th iteration of Accelerated ALM FGD
+----The ALM err is  16706.17818516499
+----The accelerated err is  16945.35362050509
+--Current err is 16706.178 and the improvement is 15.197
+
+The 22-th iteration of Accelerated ALM FGD
+----The ALM err is  16688.362713151226
+----The accelerated err is  16904.41411152422
+--Current err is 16688.363 and the improvement is 17.815
+
+The 23-th iteration of Accelerated ALM FGD
+----The ALM err is  16704.07333754417
+----The accelerated err is  16943.397717097338
+--Current err is 16704.073 and the improvement is 15.711
+
+The 24-th iteration of Accelerated ALM FGD
+----The ALM err is  16686.644852548998
+----The accelerated err is  16902.795775888753
+--Current err is 16686.645 and the improvement is 17.428
+
+The 25-th iteration of Accelerated ALM FGD
+----The ALM err is  16702.677468480953
+----The accelerated err is  16942.0932942898
+--Current err is 16702.677 and the improvement is 16.033
+
+The 26-th iteration of Accelerated ALM FGD
+----The ALM err is  16685.490591182366
+----The accelerated err is  16901.70283514264
+--Current err is 16685.491 and the improvement is 17.187
+
+The 27-th iteration of Accelerated ALM FGD
+----The ALM err is  16701.723453313327
+----The accelerated err is  16941.195552482142
+--Current err is 16701.723 and the improvement is 16.233
+
+The 28-th iteration of Accelerated ALM FGD
+----The ALM err is  16684.688504157468
+----The accelerated err is  16900.93928128677
+--Current err is 16684.689 and the improvement is 17.035
+
+The 29-th iteration of Accelerated ALM FGD
+----The ALM err is  16701.04804279353
+----The accelerated err is  16940.55563077854
+--Current err is 16701.048 and the improvement is 16.360
+
+The 30-th iteration of Accelerated ALM FGD
+----The ALM err is  16684.111450775672
+----The accelerated err is  16900.38738972661
+--Current err is 16684.111 and the improvement is 16.937
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/FACE_ARWLR_AGD_ALM_v1.mat.
+********
+Starting the AGD-type ALM FGD ----- Accelerate Weights and Basis ********
+
+The initial err is  22685.02467462472
+
+The 1-th iteration of Accelerated ALM FGD
+----The ALM err is  19769.814803531917
+----The accelerated err of accelerating basis is  22685.02467462472
+--Current err is 19769.815 and the improvement is 2915.210
+
+The 2-th iteration of Accelerated ALM FGD
+----The ALM err is  17622.344612409
+----The accelerated err of accelerating basis is  17622.344612409
+--Current err is 17622.345 and the improvement is 2147.470
+
+The 3-th iteration of Accelerated ALM FGD
+----The ALM err is  17067.734251773018
+----The accelerated-weight err is  16897.417935160596
+------Found a better point after accelerating weights! Improvment is  170.31631661242136
+----The accelerated err of accelerating basis is  16886.765761471215
+------Found a better point after accelerating basis! Improvment is  10.652173689381016
+--Current err is 16886.766 and the improvement is 735.579
+
+The 4-th iteration of Accelerated ALM FGD
+----The ALM err is  16843.915947707705
+----The accelerated-weight err is  16814.326779116454
+------Found a better point after accelerating weights! Improvment is  29.5891685912502
+----The accelerated err of accelerating basis is  16820.361894404858
+--Current err is 16814.327 and the improvement is 72.439
+
+The 5-th iteration of Accelerated ALM FGD
+----The ALM err is  16802.966970772857
+----The accelerated-weight err is  16784.113494656147
+------Found a better point after accelerating weights! Improvment is  18.853476116710226
+----The accelerated err of accelerating basis is  16779.766009361465
+------Found a better point after accelerating basis! Improvment is  4.347485294681974
+--Current err is 16779.766 and the improvement is 34.561
+
+The 6-th iteration of Accelerated ALM FGD
+----The ALM err is  16775.757551422994
+----The accelerated-weight err is  16761.877932508793
+------Found a better point after accelerating weights! Improvment is  13.879618914201274
+----The accelerated err of accelerating basis is  16759.173706884238
+------Found a better point after accelerating basis! Improvment is  2.704225624554965
+--Current err is 16759.174 and the improvement is 20.592
+
+The 7-th iteration of Accelerated ALM FGD
+----The ALM err is  16757.597352037374
+----The accelerated-weight err is  16746.830643307156
+------Found a better point after accelerating weights! Improvment is  10.766708730217943
+----The accelerated err of accelerating basis is  16745.36070896993
+------Found a better point after accelerating basis! Improvment is  1.4699343372267322
+--Current err is 16745.361 and the improvement is 13.813
+
+The 8-th iteration of Accelerated ALM FGD
+----The ALM err is  16745.22136929929
+----The accelerated-weight err is  16736.968485773996
+------Found a better point after accelerating weights! Improvment is  8.252883525292418
+----The accelerated err of accelerating basis is  16736.30217308186
+------Found a better point after accelerating basis! Improvment is  0.6663126921375806
+--Current err is 16736.302 and the improvement is 9.059
+
+The 9-th iteration of Accelerated ALM FGD
+----The ALM err is  16737.3024162343
+----The accelerated-weight err is  16731.049743144395
+------Found a better point after accelerating weights! Improvment is  6.25267308990442
+----The accelerated err of accelerating basis is  16730.87490926885
+------Found a better point after accelerating basis! Improvment is  0.17483387554602814
+--Current err is 16730.875 and the improvement is 5.427
+
+The 10-th iteration of Accelerated ALM FGD
+----The ALM err is  16732.692131154137
+----The accelerated-weight err is  16727.84538083537
+------Found a better point after accelerating weights! Improvment is  4.84675031876759
+----The accelerated err of accelerating basis is  16727.887426649246
+--Current err is 16727.845 and the improvement is 3.030
+
+The 11-th iteration of Accelerated ALM FGD
+----The ALM err is  16730.269452355653
+----The accelerated-weight err is  16725.82131364001
+------Found a better point after accelerating weights! Improvment is  4.448138715641107
+----The accelerated err of accelerating basis is  16725.534569221523
+------Found a better point after accelerating basis! Improvment is  0.2867444184885244
+--Current err is 16725.535 and the improvement is 2.311
+
+The 12-th iteration of Accelerated ALM FGD
+----The ALM err is  16728.382319715805
+----The accelerated-weight err is  16724.312114050874
+------Found a better point after accelerating weights! Improvment is  4.070205664931564
+----The accelerated err of accelerating basis is  16724.179042030293
+------Found a better point after accelerating basis! Improvment is  0.13307202058058465
+--Current err is 16724.179 and the improvement is 1.356
+
+The 13-th iteration of Accelerated ALM FGD
+----The ALM err is  16727.23624217205
+----The accelerated-weight err is  16723.433434535957
+------Found a better point after accelerating weights! Improvment is  3.8028076360933483
+----The accelerated err of accelerating basis is  16723.38034783388
+------Found a better point after accelerating basis! Improvment is  0.053086702075233916
+--Current err is 16723.380 and the improvement is 0.799
+
+The 14-th iteration of Accelerated ALM FGD
+----The ALM err is  16726.52811642559
+----The accelerated-weight err is  16722.899025203697
+------Found a better point after accelerating weights! Improvment is  3.629091221893759
+----The accelerated err of accelerating basis is  16722.86978750539
+------Found a better point after accelerating basis! Improvment is  0.029237698305223603
+--Current err is 16722.870 and the improvement is 0.511
+
+The 15-th iteration of Accelerated ALM FGD
+----The ALM err is  16726.058608708805
+----The accelerated-weight err is  16722.54296060918
+------Found a better point after accelerating weights! Improvment is  3.51564809962656
+----The accelerated err of accelerating basis is  16722.51998633537
+------Found a better point after accelerating basis! Improvment is  0.022974273808358703
+--Current err is 16722.520 and the improvement is 0.350
+
+The 16-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.730330436858
+----The accelerated-weight err is  16722.291717327855
+------Found a better point after accelerating weights! Improvment is  3.4386131090031995
+----The accelerated err of accelerating basis is  16722.271485144698
+------Found a better point after accelerating basis! Improvment is  0.02023218315662234
+--Current err is 16722.271 and the improvement is 0.249
+
+The 17-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.4949140128
+----The accelerated-weight err is  16722.110645287812
+------Found a better point after accelerating weights! Improvment is  3.3842687249889423
+----The accelerated err of accelerating basis is  16722.092617255275
+------Found a better point after accelerating basis! Improvment is  0.01802803253667662
+--Current err is 16722.093 and the improvement is 0.179
+
+The 18-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.32475137731
+----The accelerated-weight err is  16721.979761396044
+------Found a better point after accelerating weights! Improvment is  3.344989981265826
+----The accelerated err of accelerating basis is  16721.96361982756
+------Found a better point after accelerating basis! Improvment is  0.01614156848518178
+--Current err is 16721.964 and the improvement is 0.129
+
+The 19-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.20175210859
+----The accelerated-weight err is  16721.88547310616
+------Found a better point after accelerating weights! Improvment is  3.316279002432566
+----The accelerated err of accelerating basis is  16721.870804967653
+------Found a better point after accelerating basis! Improvment is  0.014668138504930539
+--Current err is 16721.871 and the improvement is 0.093
+
+The 20-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.113084882418
+----The accelerated-weight err is  16721.817859559807
+------Found a better point after accelerating weights! Improvment is  3.2952253226103494
+----The accelerated err of accelerating basis is  16721.804255129642
+------Found a better point after accelerating basis! Improvment is  0.01360443016528734
+--Current err is 16721.804 and the improvement is 0.067
+
+The 21-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.04937010574
+----The accelerated-weight err is  16721.769574235816
+------Found a better point after accelerating weights! Improvment is  3.279795869922964
+----The accelerated err of accelerating basis is  16721.75669859503
+------Found a better point after accelerating basis! Improvment is  0.01287564078666037
+--Current err is 16721.757 and the improvement is 0.048
+
+The 22-th iteration of Accelerated ALM FGD
+----The ALM err is  16725.003713868115
+----The accelerated-weight err is  16721.735205602694
+------Found a better point after accelerating weights! Improvment is  3.268508265420678
+----The accelerated err of accelerating basis is  16721.722812746782
+------Found a better point after accelerating basis! Improvment is  0.012392855911457445
+--Current err is 16721.723 and the improvement is 0.034
+
+The 23-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.971068837578
+----The accelerated-weight err is  16721.710804790026
+------Found a better point after accelerating weights! Improvment is  3.2602640475524822
+----The accelerated err of accelerating basis is  16721.69872454231
+------Found a better point after accelerating basis! Improvment is  0.012080247714038705
+--Current err is 16721.699 and the improvement is 0.024
+
+The 24-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.94776284634
+----The accelerated-weight err is  16721.69351492276
+------Found a better point after accelerating weights! Improvment is  3.2542479235780775
+----The accelerated err of accelerating basis is  16721.68163352275
+------Found a better point after accelerating basis! Improvment is  0.011881400012498489
+--Current err is 16721.682 and the improvement is 0.017
+
+The 25-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.931140419987
+----The accelerated-weight err is  16721.681282995374
+------Found a better point after accelerating weights! Improvment is  3.2498574246128555
+----The accelerated err of accelerating basis is  16721.669525893194
+------Found a better point after accelerating basis! Improvment is  0.011757102180126822
+--Current err is 16721.670 and the improvement is 0.012
+
+The 26-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.91929094771
+----The accelerated-weight err is  16721.672640964858
+------Found a better point after accelerating weights! Improvment is  3.2466499828515225
+----The accelerated err of accelerating basis is  16721.660959900357
+------Found a better point after accelerating basis! Improvment is  0.01168106450131745
+--Current err is 16721.661 and the improvement is 0.009
+
+The 27-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.910845072165
+----The accelerated-weight err is  16721.666542799383
+------Found a better point after accelerating weights! Improvment is  3.244302272782079
+----The accelerated err of accelerating basis is  16721.654906808224
+------Found a better point after accelerating basis! Improvment is  0.011635991158982506
+--Current err is 16721.655 and the improvement is 0.006
+
+The 28-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.904824144847
+----The accelerated-weight err is  16721.66224504047
+------Found a better point after accelerating weights! Improvment is  3.2425791043788195
+----The accelerated err of accelerating basis is  16721.65063442776
+------Found a better point after accelerating basis! Improvment is  0.011610612709773704
+--Current err is 16721.651 and the improvement is 0.004
+
+The 29-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.90053013692
+----The accelerated-weight err is  16721.659220224064
+------Found a better point after accelerating weights! Improvment is  3.241309912857105
+----The accelerated err of accelerating basis is  16721.64762260203
+------Found a better point after accelerating basis! Improvment is  0.011597622033150401
+--Current err is 16721.648 and the improvement is 0.003
+
+The 30-th iteration of Accelerated ALM FGD
+----The ALM err is  16724.897465825605
+----The accelerated-weight err is  16721.65709460697
+------Found a better point after accelerating weights! Improvment is  3.2403712186351186
+----The accelerated err of accelerating basis is  16721.645502311585
+------Found a better point after accelerating basis! Improvment is  0.011592295384616591
+--Current err is 16721.646 and the improvement is 0.002
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/FACE_ARWLR_AGD_ALM_Beta_v1.mat.
+
+ Plot Output Figs.
+The output fig is saved as /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/ConvergenceComparison_AGD_ALM_v1.png.
+
+Finished!

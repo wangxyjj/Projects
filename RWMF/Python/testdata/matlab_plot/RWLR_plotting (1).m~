@@ -1,0 +1,63 @@
+close all
+clear
+
+f_basic = 'MINIST_RWLR_v4.mat';
+f_classic = 'MINIST_RWLR_Classic_v4.mat';
+f_sgd = 'data_RWLR_SGD_v1.mat';
+f_cm = 'data_RWLR_SGD_ShortW_CM_v1.mat';
+f_nag = 'data_RWLR_SGD_NAG_v0.mat';
+f_sgd_classic = 'data_RWLR_SGD_Classic_v1.mat';
+f_sgd_shortw = 'data_RWLR_SGD_ShortW_CM_Classic_v1.mat';
+
+logflag = 1;
+
+[x_cl,y_cl] = load_coordinates(f_classic,logflag);
+[x_b,y_b] = load_coordinates(f_basic,logflag);
+[x_s,y_s] = load_coordinates(f_sgd,logflag);
+[x_cm,y_cm] = load_coordinates(f_cm,logflag);
+[x_nag,y_nag] = load_coordinates(f_nag,logflag);
+[x_s_c,y_s_c] = load_coordinates(f_sgd_classic,logflag);
+[x_ss,y_ss] = load_coordinates(f_sgd_shortw,logflag);
+
+figure()
+
+plot(x_cl(1:length(x_cl)),y_cl(1:length(x_cl)),'b.-','LineWidth',0.5);
+hold on
+plot(x_b(1:length(x_b)),y_b(1:length(x_b)),'r.-','LineWidth',0.5);
+hold off
+
+legend('Classic-ALM','Our method')
+
+xlabel('Iterations');
+if logflag == 1
+    ylabel('Log of Residues');
+else
+    ylabel('Residues');
+end
+
+
+figure()
+%plot(x_s,y_s,'r.-');
+%hold on
+plot(x_cm,y_cm,'r.-','LineWidth',0.5);
+%hold on
+%plot(x_nag,y_nag,'k.-');
+%hold on
+%plot(x_s_c,y_s_c,'b--','LineWidth',0.5);
+%hold on
+%plot(x_ss,y_ss,'g.-');
+
+%legend('MinibatchSGD-FGD', 'MinibatchSGD-Short-CM-FGD','MinibatchSGD-Classic-FGD','MinibatchSGD-Short-CM-Classic-FGD')
+
+%legend('MinibatchSGD-Short-CM-FGD','MinibatchSGD-Short-CM-Classic-FGD')
+
+legend('MinibatchSGD-ClassicALM', 'MinibatchSGD-Ours')
+
+xlabel('Iterations')
+if logflag == 1
+    ylabel('Log of Residues');
+else
+    ylabel('Residues');
+end
+
+

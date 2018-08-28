@@ -1,0 +1,2399 @@
+/Users/XiangyuW/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Err in loading pickle files and the infor is:  [Errno 2] No such file or directory: '/Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/data_RWLR_train_3000'
+
+
+We now try loding data from mat /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/data_RWLR_train_3000!
+
+
+Successfully load data from mat /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/data_RWLR_train_3000!
+Handwritten data loaded successfully from /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/data_RWLR_train_3000 !
+
+The projected low rank is  196
+The initial randon shuffle is  [ 212 2273 1134 ... 1140 2847 2799]
+********
+Starting the AGD-type ALM FGD---Accelerate Basis********
+
+The initial err is  59839.611907354614
+
+The 1-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.707781090771753
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.3186334679387706
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.2116296615070667
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.1524909032069925
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.1255067921018782
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.1071735755933574
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0972376511034492
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0898636629258815
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0855333853817595
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0821143985814405
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0799784070919671
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.078194942774757
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.077017249379828
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0759880671879802
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0752785670396912
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0746396276708268
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0741865478650021
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0737715164242672
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0734720765154766
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0731950384507036
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072992851394546
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072804401545676
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0726656246539217
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072535360826191
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072438655757029
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0723472071266813
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722787953589654
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0722135963601949
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721644621741273
+----The ALM err is  50387.365966299134
+--Current err is 50387.366 and the improvement is 9452.246
+
+The 2-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.073811408776217
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0731624730168345
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0729638926112381
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0728484479255054
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0727829647096676
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0727306285644544
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0726951858216753
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0726636034617965
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072640786585982
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0726194894353995
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0726036412019446
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0725884859840393
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072577020310595
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0725658909336475
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072557379134348
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0725490297503713
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0725425924341332
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072536226421518
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0725312860301208
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072526367382608
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0725225285396447
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0725186842586107
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0725156685327117
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072512632807974
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072510240038242
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0725078200266294
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0725059040059892
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0725039577935935
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0725024103240341
+----The ALM err is  50373.08364680136
+----The accelerated err is  50373.08364680136
+--Current err is 50373.084 and the improvement is 14.282
+
+The 3-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0725087491273657
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0725054240798613
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072503509268741
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.072501786547254
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0725004760386336
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724991782671156
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724981541739427
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724971172891342
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724962895318642
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072495443526203
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724947638109763
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072494065214896
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072493501280568
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724929193495223
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072492447738417
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724919595234461
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072491562487958
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724911503754968
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724908141798173
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072490464412493
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724901782615295
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072489879955757
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072489635265723
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072489379722318
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724891696013643
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724889498055363
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724887686734774
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724885789242289
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724884222287254
+----The ALM err is  50372.79703083186
+----The accelerated err is  50372.71759664909
+------Found a better point! Improvment is  0.07943418277136516
+--Current err is 50372.718 and the improvement is 0.366
+
+The 4-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0723323271983107
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0723322070568522
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0723321175174994
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0723320263918714
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072331950633662
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072331871393414
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0723318048091441
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0723317348139765
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072331675823271
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0723316136864407
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0723315612396989
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0723315059269642
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072331459189492
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0723314098494507
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0723313681198263
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0723313240278216
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0723312867042107
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072331247234886
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0723312137959504
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0723311784059335
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0723311483977271
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072331116613014
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0723310896390095
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0723310610450354
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0723310367580936
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0723310109915976
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.072330989087311
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0723309658295126
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.072330946040577
+----The ALM err is  50372.68562671326
+----The accelerated err is  50372.67122274848
+------Found a better point! Improvment is  0.014403964778466616
+--Current err is 50372.671 and the improvement is 0.046
+
+The 5-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0723044992156168
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0723044831297515
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0723044701013125
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0723044564187187
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0723044447270695
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.07230443226318
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0723044215605961
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0723044101136365
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0723044002682767
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0723043897216933
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0723043806407735
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0723043709023896
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072304362509363
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0723043535003498
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072304345729027
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0723043373803118
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072304330172459
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0723043224229152
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0723043157268928
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0723043085221604
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072304302291978
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0723042955835622
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0723042897781507
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0723042835226926
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0723042781052967
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0723042722639595
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0723042672016299
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0723042617395708
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0723042570027213
+----The ALM err is  50372.66255662883
+----The accelerated err is  50372.657913385105
+------Found a better point! Improvment is  0.004643243722966872
+--Current err is 50372.658 and the improvement is 0.013
+
+The 6-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0722961420456414
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.072296137227826
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0722961332606404
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0722961290283688
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072296125354803
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0722961213833588
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0722961179214359
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0722961141697502
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0722961108959845
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0722961073448927
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072296104244569
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0722961008797651
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072296097940985
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0722960947502111
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0722960919625488
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0722960889348376
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0722960862888908
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0722960834142563
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0722960809014357
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0722960781707156
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0722960757831264
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0722960731878786
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072296070918235
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072296068450649
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0722960662922054
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0722960639450472
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722960618915471
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0722960596580944
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0722960577037237
+----The ALM err is  50372.654111669865
+----The accelerated err is  50372.651942343684
+------Found a better point! Improvment is  0.0021693261805921793
+--Current err is 50372.652 and the improvement is 0.006
+
+The 7-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0722923408980038
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0722923386856458
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0722923368572033
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0722923348976034
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072292333189521
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0722923313347128
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0722923297112825
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0722923279448104
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0722923263973705
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0722923247126104
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0722923232362853
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0722923216285731
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0722923202195291
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0722923186848934
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0722923173397492
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0722923158745874
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0722923145902354
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0722923131912026
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0722923119647405
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072292310628699
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0722923094573948
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0722923081813835
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0722923070626553
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0722923058438727
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0722923047752746
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.072292303611065
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722923025902786
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0722923014781245
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0722923005029468
+----The ALM err is  50372.65002053655
+----The accelerated err is  50372.648902311776
+------Found a better point! Improvment is  0.001118224776291754
+--Current err is 50372.649 and the improvement is 0.003
+
+The 8-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.072290392160744
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0722903910306525
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0722903900966094
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0722903890947686
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072290388220901
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0722903872712148
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0722903864393898
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0722903855336445
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0722903847396403
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0722903838746523
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0722903831161612
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0722903822897227
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0722903815649416
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0722903807751802
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072290380082515
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072290379327725
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0722903786657028
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0722903779442918
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0722903773115267
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.07229037662199
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0722903760171705
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0722903753580826
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0722903747799621
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0722903741499648
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0722903735973546
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0722903729951538
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722903724669213
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.072290371891284
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0722903713863474
+----The ALM err is  50372.647905255486
+----The accelerated err is  50372.64732142361
+------Found a better point! Improvment is  0.0005838318757014349
+--Current err is 50372.647 and the improvement is 0.002
+
+The 9-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.072289375718162
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.072289375130728
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072289374645246
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0722893741244583
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0722893736701733
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0722893731764112
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0722893727438942
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0722893722728966
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0722893718599684
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072289371410092
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0722893710155674
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0722893705856769
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072289370208629
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.072289369797761
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072289369437371
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072289369044647
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0722893687001567
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0722893683247559
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0722893679954528
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0722893676366005
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072289367321809
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0722893669787705
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0722893666778472
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0722893663499202
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0722893660622506
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0722893657487673
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722893654737675
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.072289365174091
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0722893649112009
+----The ALM err is  50372.64680224385
+----The accelerated err is  50372.64649755138
+------Found a better point! Improvment is  0.00030469246848952025
+--Current err is 50372.646 and the improvement is 0.001
+
+Break the loop at 8-th iteration, since little improvement!
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/MINIST_ARWLR_AGD_ALM_v8.mat.
+********
+Starting the AGD-type ALM FGD---Accelerate Basis********
+
+The initial err is  59839.611907354614
+
+The 1-th iteration of Accelerated ALM FGD
+----The ALM err is  52437.17070790816
+--Current err is 52437.171 and the improvement is 7402.441
+
+The 2-th iteration of Accelerated ALM FGD
+----The ALM err is  51099.98607062458
+----The accelerated err is  51099.98607062458
+--Current err is 51099.986 and the improvement is 1337.185
+
+The 3-th iteration of Accelerated ALM FGD
+----The ALM err is  51099.93348728609
+----The accelerated err is  51841.741634576276
+--Current err is 51099.933 and the improvement is 0.053
+
+The 4-th iteration of Accelerated ALM FGD
+----The ALM err is  50657.217917406095
+----The accelerated err is  51388.2120817589
+--Current err is 50657.218 and the improvement is 442.716
+
+The 5-th iteration of Accelerated ALM FGD
+----The ALM err is  50850.98363753302
+----The accelerated err is  52044.86789589091
+--Current err is 50850.984 and the improvement is 193.766
+
+The 6-th iteration of Accelerated ALM FGD
+----The ALM err is  50514.62469345115
+----The accelerated err is  51385.649521854226
+--Current err is 50514.625 and the improvement is 336.359
+
+The 7-th iteration of Accelerated ALM FGD
+----The ALM err is  50756.437789130774
+----The accelerated err is  52028.992480633955
+--Current err is 50756.438 and the improvement is 241.813
+
+The 8-th iteration of Accelerated ALM FGD
+----The ALM err is  50451.84684277256
+----The accelerated err is  51350.60055994149
+--Current err is 50451.847 and the improvement is 304.591
+
+The 9-th iteration of Accelerated ALM FGD
+----The ALM err is  50711.298357097505
+----The accelerated err is  51999.149851931106
+--Current err is 50711.298 and the improvement is 259.452
+
+The 10-th iteration of Accelerated ALM FGD
+----The ALM err is  50419.31770469638
+----The accelerated err is  51325.066761232316
+--Current err is 50419.318 and the improvement is 291.981
+
+The 11-th iteration of Accelerated ALM FGD
+----The ALM err is  50686.53029386932
+----The accelerated err is  51978.24716125913
+--Current err is 50686.530 and the improvement is 267.213
+
+The 12-th iteration of Accelerated ALM FGD
+----The ALM err is  50400.415865094765
+----The accelerated err is  51308.6597281338
+--Current err is 50400.416 and the improvement is 286.114
+
+The 13-th iteration of Accelerated ALM FGD
+----The ALM err is  50671.545276281046
+----The accelerated err is  51964.70960557186
+--Current err is 50671.545 and the improvement is 271.129
+
+The 14-th iteration of Accelerated ALM FGD
+----The ALM err is  50388.53472965629
+----The accelerated err is  51297.99192678085
+--Current err is 50388.535 and the improvement is 283.011
+
+The 15-th iteration of Accelerated ALM FGD
+----The ALM err is  50661.88280149362
+----The accelerated err is  51955.80253125479
+--Current err is 50661.883 and the improvement is 273.348
+
+The 16-th iteration of Accelerated ALM FGD
+----The ALM err is  50380.692683693844
+----The accelerated err is  51290.860138682314
+--Current err is 50380.693 and the improvement is 281.190
+
+The 17-th iteration of Accelerated ALM FGD
+----The ALM err is  50655.40737219827
+----The accelerated err is  51949.79512339806
+--Current err is 50655.407 and the improvement is 274.715
+
+The 18-th iteration of Accelerated ALM FGD
+----The ALM err is  50375.360974656665
+----The accelerated err is  51285.98311398546
+--Current err is 50375.361 and the improvement is 280.046
+
+The 19-th iteration of Accelerated ALM FGD
+----The ALM err is  50650.96137588885
+----The accelerated err is  51945.66057348241
+--Current err is 50650.961 and the improvement is 275.600
+
+The 20-th iteration of Accelerated ALM FGD
+----The ALM err is  50371.66270817045
+----The accelerated err is  51282.588627458
+--Current err is 50371.663 and the improvement is 279.299
+
+The 21-th iteration of Accelerated ALM FGD
+----The ALM err is  50647.85393685691
+----The accelerated err is  51942.767167896316
+--Current err is 50647.854 and the improvement is 276.191
+
+The 22-th iteration of Accelerated ALM FGD
+----The ALM err is  50369.0555613871
+----The accelerated err is  51280.18940214952
+--Current err is 50369.056 and the improvement is 278.798
+
+The 23-th iteration of Accelerated ALM FGD
+----The ALM err is  50645.64820645412
+----The accelerated err is  51940.711422522916
+--Current err is 50645.648 and the improvement is 276.593
+
+The 24-th iteration of Accelerated ALM FGD
+----The ALM err is  50367.19000457086
+----The accelerated err is  51278.468700848214
+--Current err is 50367.190 and the improvement is 278.458
+
+The 25-th iteration of Accelerated ALM FGD
+----The ALM err is  50644.05939652766
+----The accelerated err is  51939.22939627583
+--Current err is 50644.059 and the improvement is 276.869
+
+The 26-th iteration of Accelerated ALM FGD
+----The ALM err is  50365.83572392249
+----The accelerated err is  51277.21693411577
+--Current err is 50365.836 and the improvement is 278.224
+
+The 27-th iteration of Accelerated ALM FGD
+----The ALM err is  50642.898542374925
+----The accelerated err is  51938.14570623236
+--Current err is 50642.899 and the improvement is 277.063
+
+The 28-th iteration of Accelerated ALM FGD
+----The ALM err is  50364.83872919524
+----The accelerated err is  51276.29357926386
+--Current err is 50364.839 and the improvement is 278.060
+
+The 29-th iteration of Accelerated ALM FGD
+----The ALM err is  50642.038576457155
+----The accelerated err is  51937.34230879926
+--Current err is 50642.039 and the improvement is 277.200
+
+The 30-th iteration of Accelerated ALM FGD
+----The ALM err is  50364.0947553194
+----The accelerated err is  51275.603269709405
+--Current err is 50364.095 and the improvement is 277.944
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/MINIST_ARWLR_AGD_ALM_v8.mat.
+********
+Starting the AGD-type ALM FGD ----- Accelerate Weights and Basis ********
+
+The initial err is  59839.611907354614
+
+The 1-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.707781090771753
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.3186334679387706
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.2116296615070667
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.1524909032069925
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.1255067921018782
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.1071735755933574
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0972376511034492
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0898636629258815
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0855333853817595
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0821143985814405
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0799784070919671
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.078194942774757
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.077017249379828
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0759880671879802
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0752785670396912
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0746396276708268
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0741865478650021
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0737715164242672
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0734720765154766
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0731950384507036
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072992851394546
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072804401545676
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0726656246539217
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072535360826191
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072438655757029
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0723472071266813
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722787953589654
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0722135963601949
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721644621741273
+----The ALM err is  50387.365966299134
+--Current err is 50387.366 and the improvement is 9452.246
+
+The 2-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.073811408776217
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0731624730168345
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0729638926112381
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0728484479255054
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0727829647096676
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0727306285644544
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0726951858216753
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0726636034617965
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072640786585982
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0726194894353995
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0726036412019446
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0725884859840393
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072577020310595
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0725658909336475
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072557379134348
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0725490297503713
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0725425924341332
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072536226421518
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0725312860301208
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072526367382608
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0725225285396447
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0725186842586107
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0725156685327117
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072512632807974
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072510240038242
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0725078200266294
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0725059040059892
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0725039577935935
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0725024103240341
+----The ALM err is  50373.08364680136
+----The accelerated-weight err is  50373.08364680136
+----The accelerated err of accelerating basis is  50373.08364680136
+--Current err is 50373.084 and the improvement is 14.282
+
+The 3-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0725087491273657
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0725054240798613
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072503509268741
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.072501786547254
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0725004760386336
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724991782671156
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724981541739427
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724971172891342
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724962895318642
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072495443526203
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724947638109763
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072494065214896
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072493501280568
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724929193495223
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072492447738417
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724919595234461
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072491562487958
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724911503754968
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724908141798173
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072490464412493
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724901782615295
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072489879955757
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072489635265723
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072489379722318
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724891696013643
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724889498055363
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724887686734774
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724885789242289
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724884222287254
+----The ALM err is  50372.79703083186
+----The accelerated-weight err is  50372.79544714868
+------Found a better point after accelerating weights! Improvment is  0.0015836831807973795
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.07248889470271
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724886811748533
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724885169457443
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724883489095625
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072488210853318
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724880667162615
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724879474550586
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724878223429368
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724877185351198
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724876093833968
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072487518638879
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0724874230744688
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724873434906423
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724872595753232
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724871895840717
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724871157029912
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724870539916802
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724869887854958
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724869342455283
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0724868765622875
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724868282516624
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724867771102264
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724867342247397
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724866887860076
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724866506364352
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724866101802455
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724865761739404
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724865400802945
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724865097061558
+----The accelerated err of accelerating basis is  50372.6255763528
+------Found a better point after accelerating basis! Improvment is  0.1698707958785235
+--Current err is 50372.626 and the improvement is 0.458
+
+The 4-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721842089282991
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721841387230542
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721841034500579
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721840738810358
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072184051942239
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072184030760029
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721840139978327
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721839972257443
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721839836437481
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721839698256657
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072183958481944
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072183946813759
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721839371354767
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721839270953886
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721839186955089
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721839099200288
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072183902523487
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.07218389474988
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721838881554655
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0721838811894266
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0721838752470665
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072183868942481
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721838635385397
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721838577840197
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721838528313299
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.072183847540906
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721838429717918
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721838380783295
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721838338396306
+----The ALM err is  50372.61630118729
+----The accelerated-weight err is  50372.61622557853
+------Found a better point after accelerating weights! Improvment is  7.560876110801473e-05
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721838685211686
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721838621843152
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721838572338143
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721838520642848
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0721838476207821
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072183842866085
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721838387377918
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.072183834298168
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072183830430429
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721838262616286
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721838226227351
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072183818694979
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721838152616903
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721838115519697
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721838083057416
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721838047952663
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721838017207048
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072183798393673
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721837954776943
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072183792320557
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072183789551848
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721837865528148
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072183783921467
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721837810701496
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721837785673805
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.072183775854531
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721837734724782
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721837708897857
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.072183768621357
+----The accelerated err of accelerating basis is  50372.60282283959
+------Found a better point after accelerating basis! Improvment is  0.013402738943113945
+--Current err is 50372.603 and the improvement is 0.023
+
+The 5-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721637511973818
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721637464443006
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721637435890683
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721637409138882
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072163738745585
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0721637365041452
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721637346102215
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721637326088074
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721637308939627
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721637290653665
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721637274868343
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0721637257950543
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072163724327426
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721637227492922
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072163721375422
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721637198946563
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721637186021735
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072163717206743
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721637159863295
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072163714667023
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0721637135114368
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721637122610026
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721637111644633
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721637099770438
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072163708934825
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0721637078055901
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.072163706813745
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.072163705738621
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721637047937864
+----The ALM err is  50372.60091123742
+----The accelerated-weight err is  50372.60089469064
+------Found a better point after accelerating weights! Improvment is  1.6546786355320364e-05
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721637134117596
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721637120345613
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721637109262079
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721637097526004
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0721637087295417
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072163707624364
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721637066544831
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721637056034852
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721637046797066
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721637036777845
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721637027965716
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072163701840482
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721637009992777
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721637000864355
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721636992830959
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072163698411251
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721636976438664
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0721636968109851
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721636960778107
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0721636952820195
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072163694581433
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721636938209853
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721636931514686
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721636924247275
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072163691784853
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.072163691090273
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721636904786902
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721636898148121
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721636892302426
+----The accelerated err of accelerating basis is  50372.59728191741
+------Found a better point after accelerating basis! Improvment is  0.003612773223721888
+--Current err is 50372.597 and the improvement is 0.006
+
+The 6-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721582983075097
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721582976328985
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721582971331023
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.072158296619238
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0721582961782479
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0721582957067173
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721582952956787
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721582948528887
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721582944652057
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721582940464118
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721582936790008
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072158293281528
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721582929324145
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721582925543978
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721582922221176
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721582918621089
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721582915454881
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0721582912023013
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721582909003575
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0721582905729778
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0721582902848605
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721582899724016
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721582896973565
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721582893990227
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721582891363692
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0721582888514416
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.07215828860056
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721582883283771
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721582880886948
+----The ALM err is  50372.59680708348
+----The accelerated-weight err is  50372.59680280834
+------Found a better point after accelerating weights! Improvment is  4.27514169132337e-06
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.072158290322932
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.072158289973864
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721582896922335
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.072158289393504
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072158289132692
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072158288850754
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721582886030139
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721582883344676
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721582880981715
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721582878418496
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721582876162021
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0721582873713733
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721582871557953
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721582869218669
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072158286715861
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721582864923092
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721582862954264
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0721582860817693
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721582858935912
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072158285689376
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0721582855095084
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721582853143103
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721582851423799
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721582849557934
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721582847914466
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0721582846130902
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721582844559887
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.072158284285494
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721582841353172
+----The accelerated err of accelerating basis is  50372.59585621851
+------Found a better point after accelerating basis! Improvment is  0.0009465898256166838
+--Current err is 50372.596 and the improvement is 0.001
+
+The 7-th iteration of Accelerated ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721568578779472
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0721568577390401
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721568576249991
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721568575037435
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072156857397876
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0721568572834874
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.072156857183061
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721568570742595
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0721568569785975
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0721568568748736
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072156856783617
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0721568566846365
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721568565975201
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721568565030128
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721568564198134
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721568563295454
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721568562500647
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0721568561638277
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721568560878867
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0721568560054848
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072156855932916
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721568558541708
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0721568557848178
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721568557095604
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721568556432763
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0721568555713474
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721568555079934
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721568554392436
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721568553786875
+----The ALM err is  50372.595736894276
+----The accelerated-weight err is  50372.5957358144
+------Found a better point after accelerating weights! Improvment is  1.0798758012242615e-06
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0721568559423462
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.072156855854412
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0721568557833296
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0721568557079064
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072156855642025
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0721568555707943
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0721568555081868
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0721568554403123
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072156855380578
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072156855315775
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0721568552587195
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0721568551968106
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0721568551422922
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0721568550831302
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0721568550310254
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0721568549744824
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0721568549246812
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0721568548706362
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0721568548230334
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072156854771374
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0721568547258709
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0721568546764904
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072156854632993
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0721568545857902
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0721568545442104
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0721568544990878
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0721568544593403
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0721568544162072
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.072156854378212
+----The accelerated err of accelerating basis is  50372.595493957284
+------Found a better point after accelerating basis! Improvment is  0.00024185711663449183
+--Current err is 50372.595 and the improvement is 0.000
+
+Break the loop at 6-th iteration, since little improvement!
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/MINIST_ARWLR_AGD_ALM_Beta_v8.mat.
+********
+Starting the AGD-type ALM FGD ----- Accelerate Weights and Basis ********
+
+The initial err is  59839.611907354614
+
+The 1-th iteration of Accelerated ALM FGD
+----The ALM err is  52437.17070790816
+--Current err is 52437.171 and the improvement is 7402.441
+
+The 2-th iteration of Accelerated ALM FGD
+----The ALM err is  51099.98607062458
+----The accelerated-weight err is  51099.98607062458
+----The accelerated err of accelerating basis is  51099.98607062458
+--Current err is 51099.986 and the improvement is 1337.185
+
+The 3-th iteration of Accelerated ALM FGD
+----The ALM err is  51099.93348728609
+----The accelerated-weight err is  51099.754037167644
+------Found a better point after accelerating weights! Improvment is  0.17945011844858527
+----The accelerated err of accelerating basis is  50606.129102346305
+------Found a better point after accelerating basis! Improvment is  493.6249348213387
+--Current err is 50606.129 and the improvement is 493.857
+
+The 4-th iteration of Accelerated ALM FGD
+----The ALM err is  50806.859281780526
+----The accelerated-weight err is  50806.83257229393
+------Found a better point after accelerating weights! Improvment is  0.026709486592153553
+----The accelerated err of accelerating basis is  50469.73327854686
+------Found a better point after accelerating basis! Improvment is  337.0992937470728
+--Current err is 50469.733 and the improvement is 136.396
+
+The 5-th iteration of Accelerated ALM FGD
+----The ALM err is  50711.00235004916
+----The accelerated-weight err is  50710.98722548452
+------Found a better point after accelerating weights! Improvment is  0.015124564641155303
+----The accelerated err of accelerating basis is  50414.92870020079
+------Found a better point after accelerating basis! Improvment is  296.05852528372634
+--Current err is 50414.929 and the improvement is 54.805
+
+The 6-th iteration of Accelerated ALM FGD
+----The ALM err is  50669.3052317018
+----The accelerated-weight err is  50669.292464905775
+------Found a better point after accelerating weights! Improvment is  0.012766796025971416
+----The accelerated err of accelerating basis is  50388.10953377921
+------Found a better point after accelerating basis! Improvment is  281.1829311265683
+--Current err is 50388.110 and the improvement is 26.819
+
+The 7-th iteration of Accelerated ALM FGD
+----The ALM err is  50647.77859924038
+----The accelerated-weight err is  50647.766561191005
+------Found a better point after accelerating weights! Improvment is  0.012038049375405535
+----The accelerated err of accelerating basis is  50373.123769448845
+------Found a better point after accelerating basis! Improvment is  274.6427917421606
+--Current err is 50373.124 and the improvement is 14.986
+
+The 8-th iteration of Accelerated ALM FGD
+----The ALM err is  50635.36472849972
+----The accelerated-weight err is  50635.352984314784
+------Found a better point after accelerating weights! Improvment is  0.01174418493610574
+----The accelerated err of accelerating basis is  50364.09403003276
+------Found a better point after accelerating basis! Improvment is  271.25895428202784
+--Current err is 50364.094 and the improvement is 9.030
+
+The 9-th iteration of Accelerated ALM FGD
+----The ALM err is  50627.765001075764
+----The accelerated-weight err is  50627.75344241467
+------Found a better point after accelerating weights! Improvment is  0.011558661091839895
+----The accelerated err of accelerating basis is  50358.43530590765
+------Found a better point after accelerating basis! Improvment is  269.3181365070195
+--Current err is 50358.435 and the improvement is 5.659
+
+The 10-th iteration of Accelerated ALM FGD
+----The ALM err is  50622.957937639774
+----The accelerated-weight err is  50622.94648994887
+------Found a better point after accelerating weights! Improvment is  0.011447690907516517
+----The accelerated err of accelerating basis is  50354.79908002562
+------Found a better point after accelerating basis! Improvment is  268.1474099232437
+--Current err is 50354.799 and the improvement is 3.636
+
+The 11-th iteration of Accelerated ALM FGD
+----The ALM err is  50619.844625532554
+----The accelerated-weight err is  50619.83324046491
+------Found a better point after accelerating weights! Improvment is  0.011385067642549984
+----The accelerated err of accelerating basis is  50352.41089536769
+------Found a better point after accelerating basis! Improvment is  267.4223450972204
+--Current err is 50352.411 and the improvement is 2.388
+
+The 12-th iteration of Accelerated ALM FGD
+----The ALM err is  50617.78364931666
+----The accelerated-weight err is  50617.772296006406
+------Found a better point after accelerating weights! Improvment is  0.011353310255799443
+----The accelerated err of accelerating basis is  50350.80821366927
+------Found a better point after accelerating basis! Improvment is  266.96408233713737
+--Current err is 50350.808 and the improvement is 1.603
+
+The 13-th iteration of Accelerated ALM FGD
+----The ALM err is  50616.38945767703
+----The accelerated-weight err is  50616.37811841399
+------Found a better point after accelerating weights! Improvment is  0.011339263044646941
+----The accelerated err of accelerating basis is  50349.7094856153
+------Found a better point after accelerating basis! Improvment is  266.66863279868994
+--Current err is 50349.709 and the improvement is 1.099
+
+The 14-th iteration of Accelerated ALM FGD
+----The ALM err is  50615.42614814775
+----The accelerated-weight err is  50615.41481322669
+------Found a better point after accelerating weights! Improvment is  0.011334921058733016
+----The accelerated err of accelerating basis is  50348.94050660267
+------Found a better point after accelerating basis! Improvment is  266.4743066240262
+--Current err is 50348.941 and the improvement is 0.769
+
+The 15-th iteration of Accelerated ALM FGD
+----The ALM err is  50614.74687035128
+----The accelerated-weight err is  50614.73553474012
+------Found a better point after accelerating weights! Improvment is  0.011335611161484849
+----The accelerated err of accelerating basis is  50348.39156869831
+------Found a better point after accelerating basis! Improvment is  266.343966041808
+--Current err is 50348.392 and the improvement is 0.549
+
+The 16-th iteration of Accelerated ALM FGD
+----The ALM err is  50614.25851110183
+----The accelerated-weight err is  50614.247172374686
+------Found a better point after accelerating weights! Improvment is  0.011338727141264826
+----The accelerated err of accelerating basis is  50347.99228861317
+------Found a better point after accelerating basis! Improvment is  266.2548837615177
+--Current err is 50347.992 and the improvement is 0.399
+
+The 17-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.900912889956
+----The accelerated-weight err is  50613.889570053194
+------Found a better point after accelerating weights! Improvment is  0.011342836762196384
+----The accelerated err of accelerating basis is  50347.69667188377
+------Found a better point after accelerating basis! Improvment is  266.1928981694218
+--Current err is 50347.697 and the improvement is 0.296
+
+The 18-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.63449320852
+----The accelerated-weight err is  50613.62314603815
+------Found a better point after accelerating weights! Improvment is  0.011347170366207138
+----The accelerated err of accelerating basis is  50347.47412400648
+------Found a better point after accelerating basis! Improvment is  266.14902203167003
+--Current err is 50347.474 and the improvement is 0.223
+
+The 19-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.43274997274
+----The accelerated-weight err is  50613.42139864371
+------Found a better point after accelerating weights! Improvment is  0.011351329027093016
+----The accelerated err of accelerating basis is  50347.30394809341
+------Found a better point after accelerating basis! Improvment is  266.1174505503004
+--Current err is 50347.304 and the improvement is 0.170
+
+The 20-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.277643445996
+----The accelerated-weight err is  50613.26628832411
+------Found a better point after accelerating weights! Improvment is  0.01135512188920984
+----The accelerated err of accelerating basis is  50347.171916355604
+------Found a better point after accelerating basis! Improvment is  266.09437196850195
+--Current err is 50347.172 and the improvement is 0.132
+
+The 21-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.15669934453
+----The accelerated-weight err is  50613.14534087009
+------Found a better point after accelerating weights! Improvment is  0.011358474439475685
+----The accelerated err of accelerating basis is  50347.06809649866
+------Found a better point after accelerating basis! Improvment is  266.0772443714304
+--Current err is 50347.068 and the improvement is 0.104
+
+The 22-th iteration of Accelerated ALM FGD
+----The ALM err is  50613.06116042332
+----The accelerated-weight err is  50613.04979904731
+------Found a better point after accelerating weights! Improvment is  0.011361376011336688
+----The accelerated err of accelerating basis is  50346.985451122004
+------Found a better point after accelerating basis! Improvment is  266.0643479253049
+--Current err is 50346.985 and the improvement is 0.083
+
+The 23-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.984788245856
+----The accelerated-weight err is  50612.97342439604
+------Found a better point after accelerating weights! Improvment is  0.011363849815097637
+----The accelerated err of accelerating basis is  50346.918921515666
+------Found a better point after accelerating basis! Improvment is  266.05450288037537
+--Current err is 50346.919 and the improvement is 0.067
+
+The 24-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.92307498865
+----The accelerated-weight err is  50612.91170905331
+------Found a better point after accelerating weights! Improvment is  0.011365935337380506
+----The accelerated err of accelerating basis is  50346.86481988745
+------Found a better point after accelerating basis! Improvment is  266.0468891658602
+--Current err is 50346.865 and the improvement is 0.054
+
+The 25-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.87271787067
+----The accelerated-weight err is  50612.86135019235
+------Found a better point after accelerating weights! Improvment is  0.011367678322130814
+----The accelerated err of accelerating basis is  50346.82042087385
+------Found a better point after accelerating basis! Improvment is  266.040929318493
+--Current err is 50346.820 and the improvement is 0.044
+
+The 26-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.83126419125
+----The accelerated-weight err is  50612.81989506613
+------Found a better point after accelerating weights! Improvment is  0.011369125117198564
+----The accelerated err of accelerating basis is  50346.78368355279
+------Found a better point after accelerating basis! Improvment is  266.03621151333937
+--Current err is 50346.784 and the improvement is 0.037
+
+The 27-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.796868648846
+----The accelerated-weight err is  50612.785498329285
+------Found a better point after accelerating weights! Improvment is  0.011370319560228381
+----The accelerated err of accelerating basis is  50346.753059982395
+------Found a better point after accelerating basis! Improvment is  266.03243834689056
+--Current err is 50346.753 and the improvement is 0.031
+
+The 28-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.76812544987
+----The accelerated-weight err is  50612.75675414837
+------Found a better point after accelerating weights! Improvment is  0.011371301494364161
+----The accelerated err of accelerating basis is  50346.7273617797
+------Found a better point after accelerating basis! Improvment is  266.0293923686768
+--Current err is 50346.727 and the improvement is 0.026
+
+The 29-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.74395080363
+----The accelerated-weight err is  50612.73257869741
+------Found a better point after accelerating weights! Improvment is  0.011372106222552247
+----The accelerated err of accelerating basis is  50346.70566606412
+------Found a better point after accelerating basis! Improvment is  266.02691263329325
+--Current err is 50346.706 and the improvement is 0.022
+
+The 30-th iteration of Accelerated ALM FGD
+----The ALM err is  50612.72349973293
+----The accelerated-weight err is  50612.71212696855
+------Found a better point after accelerating weights! Improvment is  0.011372764376574196
+----The accelerated err of accelerating basis is  50346.68724838682
+------Found a better point after accelerating basis! Improvment is  266.0248785817312
+--Current err is 50346.687 and the improvement is 0.018
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/MINIST_ARWLR_AGD_ALM_Beta_v8.mat.
+The initial err is  59839.611907354614
+
+The 1-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.707781090771753
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.3186334679387706
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.2116296615070667
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.1524909032069925
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.1255067921018782
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.1071735755933574
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0972376511034492
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0898636629258815
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0855333853817595
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0821143985814405
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0799784070919671
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.078194942774757
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.077017249379828
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0759880671879802
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0752785670396912
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0746396276708268
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0741865478650021
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0737715164242672
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0734720765154766
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0731950384507036
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072992851394546
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072804401545676
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0726656246539217
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072535360826191
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072438655757029
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0723472071266813
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0722787953589654
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0722135963601949
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0721644621741273
+Current err is 50635.654 and the improvement is 9203.958
+
+The 2-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.073811408776217
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0731624730168345
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0729638926112381
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0728484479255054
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0727829647096676
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0727306285644544
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0726951858216753
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0726636034617965
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072640786585982
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0726194894353995
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0726036412019446
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0725884859840393
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072577020310595
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0725658909336475
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072557379134348
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0725490297503713
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0725425924341332
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072536226421518
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0725312860301208
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072526367382608
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0725225285396447
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0725186842586107
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0725156685327117
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072512632807974
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072510240038242
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0725078200266294
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0725059040059892
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0725039577935935
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0725024103240341
+Current err is 50373.647 and the improvement is 262.007
+
+The 3-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0725087491273657
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0725054240798613
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072503509268741
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.072501786547254
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0725004760386336
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724991782671156
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724981541739427
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724971172891342
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724962895318642
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072495443526203
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724947638109763
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072494065214896
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072493501280568
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724929193495223
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.072492447738417
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724919595234461
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072491562487958
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724911503754968
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724908141798173
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072490464412493
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724901782615295
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072489879955757
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072489635265723
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072489379722318
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724891696013643
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724889498055363
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724887686734774
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724885789242289
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724884222287254
+Current err is 50372.807 and the improvement is 0.841
+
+The 4-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724887738619024
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724885734786829
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724884168182929
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724882556449515
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0724881229304537
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072487984167963
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.072487869250002
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724877486090332
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724876484520673
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724875430914182
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724874554580193
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072487363138732
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.072487286226995
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.072487205106791
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724871374232374
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072487065961101
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724870062514769
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724869431469453
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724868903496365
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072486834498657
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724867877101227
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724867381710328
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724866966189146
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724866525854502
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724866156071173
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724865763866314
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724865434117898
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.072486508407473
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724864789439157
+Current err is 50372.752 and the improvement is 0.055
+
+The 5-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724865682346434
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724865313128862
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072486501493811
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724864702225978
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0724864439321027
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724864160379715
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.072486392494454
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724863674434026
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072486346266381
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724863236988784
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072486304598331
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072486284219992
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724862669530217
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724862485119975
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724862328696088
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724862161474238
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072486201947902
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.072486186753884
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724861738384213
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072486160005585
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.072486148234951
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724861356167115
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724861248685686
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724861133359995
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724861035026556
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724860929421778
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724860839286805
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724860742400837
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724860659625943
+Current err is 50372.736 and the improvement is 0.015
+
+The 6-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724861030837225
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724860924327382
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724860837441506
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724860745229705
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0724860666565486
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724860582038793
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724860509636047
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724860431616428
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724860364692812
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072486029247351
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072486023046342
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.072486016347633
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724860105907765
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724860043663282
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724859990125786
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724859932192978
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724859882324176
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724859828320499
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724859781798193
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0724859731382526
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724859687919122
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724859640786422
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724859600124488
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724859556001338
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724859517909962
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.072485947655083
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724859440822454
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724859402006437
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724859368454185
+Current err is 50372.730 and the improvement is 0.007
+
+The 7-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724859564653528
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724859520289924
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724859483900682
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724859444928077
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072485941134206
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724859374902787
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724859343370783
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724859309074548
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.072485927936396
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724859247015495
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724859218974638
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0724859188424605
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724859161929599
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724859133049582
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724859107992084
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072485908066762
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724859056950424
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724859031077973
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724859008612884
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0724858984098111
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724858962804649
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.072485893956126
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724858919365703
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.072485889731452
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724858878149135
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724858857217316
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724858839019735
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724858819140113
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724858801852803
+Current err is 50372.726 and the improvement is 0.003
+
+The 8-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.072485891582719
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724858892617555
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.072485887353964
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724858853015962
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0724858835246567
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724858815877951
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724858799040053
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724858780646729
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724858764642164
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724858747146733
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724858731917495
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0724858715263825
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724858700763715
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724858684903835
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.07248586710922
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724858655982825
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724858642822648
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724858628423934
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.072485861588096
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0724858602155873
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.0724858590198172
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724858577112126
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.072485856570984
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724858553230419
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724858542355549
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724858530452333
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724858520078546
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724858508722899
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724858498825431
+Current err is 50372.724 and the improvement is 0.002
+
+The 9-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724858567053794
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.072485855367939
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724858542680349
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724858530828292
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.072485852055049
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.072485850932872
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724858499557581
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724858488867406
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724858479551287
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.072485846935317
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.0724858460463134
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.07248584507293
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724858442242617
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724858432949391
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724858424846042
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.072485841597194
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.072485840823346
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724858399758515
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.072485839236766
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.072485838427309
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.07248583772136
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724858369481678
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724858362738174
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724858355352138
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.0724858348910038
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724858341853947
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.072485833569941
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724858328958142
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724858323078021
+Current err is 50372.723 and the improvement is 0.001
+
+The 10-th iteration of normal ALM FGD
+Enter The 1-th iteration of inner loop
+Enter The 2-th iteration of inner loop
+The improvement of inner step is  1.0724858364257857
+Enter The 3-th iteration of inner loop
+The improvement of inner step is  1.0724858356291767
+Enter The 4-th iteration of inner loop
+The improvement of inner step is  1.0724858349740394
+Enter The 5-th iteration of inner loop
+The improvement of inner step is  1.0724858342677128
+Enter The 6-th iteration of inner loop
+The improvement of inner step is  1.0724858336549252
+Enter The 7-th iteration of inner loop
+The improvement of inner step is  1.0724858329854858
+Enter The 8-th iteration of inner loop
+The improvement of inner step is  1.0724858324023037
+Enter The 9-th iteration of inner loop
+The improvement of inner step is  1.0724858317639583
+Enter The 10-th iteration of inner loop
+The improvement of inner step is  1.0724858312073997
+Enter The 11-th iteration of inner loop
+The improvement of inner step is  1.0724858305978875
+Enter The 12-th iteration of inner loop
+The improvement of inner step is  1.072485830066315
+Enter The 13-th iteration of inner loop
+The improvement of inner step is  1.0724858294840653
+Enter The 14-th iteration of inner loop
+The improvement of inner step is  1.0724858289761996
+Enter The 15-th iteration of inner loop
+The improvement of inner step is  1.0724858284198773
+Enter The 16-th iteration of inner loop
+The improvement of inner step is  1.0724858279345895
+Enter The 17-th iteration of inner loop
+The improvement of inner step is  1.0724858274029796
+Enter The 18-th iteration of inner loop
+The improvement of inner step is  1.0724858269392243
+Enter The 19-th iteration of inner loop
+The improvement of inner step is  1.0724858264311925
+Enter The 20-th iteration of inner loop
+The improvement of inner step is  1.0724858259879908
+Enter The 21-th iteration of inner loop
+The improvement of inner step is  1.0724858255024674
+Enter The 22-th iteration of inner loop
+The improvement of inner step is  1.07248582507889
+Enter The 23-th iteration of inner loop
+The improvement of inner step is  1.0724858246148614
+Enter The 24-th iteration of inner loop
+The improvement of inner step is  1.0724858242100272
+Enter The 25-th iteration of inner loop
+The improvement of inner step is  1.0724858237665276
+Enter The 26-th iteration of inner loop
+The improvement of inner step is  1.072485823379597
+Enter The 27-th iteration of inner loop
+The improvement of inner step is  1.0724858229557088
+Enter The 28-th iteration of inner loop
+The improvement of inner step is  1.0724858225858835
+Enter The 29-th iteration of inner loop
+The improvement of inner step is  1.0724858221807319
+Enter The 30-th iteration of inner loop
+The improvement of inner step is  1.0724858218272486
+Current err is 50372.723 and the improvement is 0.001
+
+Break the loop at 9-th iteration, since little improvement!
+
+ Saving as mat file.
+data is saved in /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/MINIST_ARWLR_ALM_v8.mat.
+
+ Plot Output Figs.
+The output fig is saved as /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/ConvergenceComparison_AGD_ALM_v8.png.
+
+Finished!

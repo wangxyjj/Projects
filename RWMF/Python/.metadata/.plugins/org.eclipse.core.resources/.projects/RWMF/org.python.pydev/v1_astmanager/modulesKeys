@@ -1,0 +1,13 @@
+MODULES_MANAGER_V2
+RWLR_support|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLR_support.py
+RWLR_support2|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLR_support2.py
+RWLSTM_lib|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\RWLSTM_lib.py
+Reweight_accessories|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\Reweight_accessories.py
+residue|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\residue.py
+test_CompareGrad|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_CompareGrad.py
+test_RWLR|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLR.py
+test_RWLSTM_basic_v1|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLSTM_basic_v1.py
+test_RWLSTM_v2|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_RWLSTM_v2.py
+test_Reweight_v1|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_Reweight_v1.py
+test_Reweight_v2|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_Reweight_v2.py
+test_condi_numb|C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_condi_numb.py

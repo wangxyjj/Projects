@@ -1,0 +1,26 @@
+INSTUPtest_Reweight_v2
+C:\Users\wangx\Google Drive\Research2015\ReweightMF\Code\Python\RWMF\test_Reweight_v2.py
+INFOS:&&3|1|2|0&&3|3|2|0&&3|4|2|0&&3|5|2|0&&3|6|2|0&&3|7|2|0&&3|8|2|0&&3|9|2|0&&3|10|2|0&&3|11|2|0&&3|7|2|0&&3|12|2|0&&3|8|2|0&&3|9|2|0&&3|13|2|0&&3|14|2|0&&3|15|2|0&&3|16|2|0&&3|17|2|0&&3|18|2|0&&3|19|2|0&&3|20|2|0&&3|20|2|0&&3|21|2|0&&3|22|2|0&&3|23|2|0
+test_data_IO=3
+sigma=19
+ver=1
+svd_initial=5
+iter_max=17
+mu=18
+k=13
+init_portion=14
+damping=15
+dataset_name=6
+dir_path=10
+M=8
+idexes0=21
+fin_mat=7
+output=9
+delta_converged=16
+random_pick=4
+fin_name=11
+X0=20
+W0=23
+test_Reweight_v2=2
+Y0T=22
+raw_data=12

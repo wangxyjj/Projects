@@ -1,0 +1,152 @@
+/Users/XiangyuW/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Successfully load data from pickle /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/YaleFace1.pickle!
+Data loaded successfully from /Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/testdata/YaleFace1.pickle !
+
+***********Begins test no.  1
+The projected low rank is  64
+The initial randon shuffle is  [ 28  11  23  71  90  54 103  86  74  64  36  72  56 106  68 140  57  94
+ 104  61  33  22 137  83  60  97  67 101 109 115 136  88  24 114  45 124
+ 133   1  17 147  77  35 102  79   3  37 117  98  27  84  30  41 125 110
+   4  91 120 130  44  80   2  73  18   7  46 123 146 143 100  12  58  95
+   6 132 116  10  53 107  34 119  59  99 134  65  47  38 141  39  93  29
+  69  49 131 113 121 129  96  43 118  26 142   0  52 105  55 144  66  25
+ 122  13   5  89  92  14  75 139 135 126 128 111  50  82   9   8 112  87
+  40 127  85  48  42  63  81  20  32  19  51  78  70  31  21 145  15 108
+  16  62  76 138]
+********
+Starting the AGD-type ALM FGD---Accelerate Basis********
+
+The initial err is  28639.95683397886
+
+The 1-th iteration of Accelerated ALM FGD
+----The ALM err is  24865.212565685688
+----The accelerated err is  28639.95683397886
+--Current err is 24865.213 and the improvement is 3774.744
+
+The 2-th iteration of Accelerated ALM FGD
+----The ALM err is  22915.72777258966
+----The accelerated err is  22915.72777258966
+--Current err is 22915.728 and the improvement is 1949.485
+
+The 3-th iteration of Accelerated ALM FGD
+----The ALM err is  22843.614882187183
+----The accelerated err is  23283.740557808545
+--Current err is 22843.615 and the improvement is 72.113
+
+The 4-th iteration of Accelerated ALM FGD
+----The ALM err is  22534.87914492607
+----The accelerated err is  22929.884376922797
+--Current err is 22534.879 and the improvement is 308.736
+
+The 5-th iteration of Accelerated ALM FGD
+----The ALM err is  22727.25412180699
+----The accelerated err is  23459.945410293127
+--Current err is 22727.254 and the improvement is 192.375
+
+The 6-th iteration of Accelerated ALM FGD
+----The ALM err is  22476.377587649284
+----The accelerated err is  22941.197384194977
+--Current err is 22476.378 and the improvement is 250.877
+
+The 7-th iteration of Accelerated ALM FGD
+----The ALM err is  22692.08359732464
+----The accelerated err is  23472.646575423227
+--Current err is 22692.084 and the improvement is 215.706
+
+The 8-th iteration of Accelerated ALM FGD
+----The ALM err is  22449.140015779903
+----The accelerated err is  22925.92943690767
+--Current err is 22449.140 and the improvement is 242.944
+
+The 9-th iteration of Accelerated ALM FGD
+----The ALM err is  22669.644530387697
+----The accelerated err is  23458.79976554113
+--Current err is 22669.645 and the improvement is 220.505
+
+The 10-th iteration of Accelerated ALM FGD
+----The ALM err is  22428.714716411185
+----The accelerated err is  22908.008896208637
+--Current err is 22428.715 and the improvement is 240.930
+
+The 11-th iteration of Accelerated ALM FGD
+----The ALM err is  22650.96327238808
+----The accelerated err is  23442.1856684105
+--Current err is 22650.963 and the improvement is 222.249
+
+The 12-th iteration of Accelerated ALM FGD
+----The ALM err is  22410.949125977644
+----The accelerated err is  22891.10398633622
+--Current err is 22410.949 and the improvement is 240.014
+
+The 13-th iteration of Accelerated ALM FGD
+----The ALM err is  22634.41459938477
+----The accelerated err is  23426.620758430337
+--Current err is 22634.415 and the improvement is 223.465
+
+The 14-th iteration of Accelerated ALM FGD
+----The ALM err is  22395.3313931478
+----The accelerated err is  22876.087397105774
+--Current err is 22395.331 and the improvement is 239.083
+
+The 15-th iteration of Accelerated ALM FGD
+----The ALM err is  22620.24486514525
+----The accelerated err is  23413.33176761894
+--Current err is 22620.245 and the improvement is 224.913
+
+The 16-th iteration of Accelerated ALM FGD
+----The ALM err is  22382.390696751027
+----The accelerated err is  22863.735231923256
+--Current err is 22382.391 and the improvement is 237.854
+
+The 17-th iteration of Accelerated ALM FGD
+----The ALM err is  22609.03591129425
+----The accelerated err is  23403.012758512352
+--Current err is 22609.036 and the improvement is 226.645
+
+The 18-th iteration of Accelerated ALM FGD
+----The ALM err is  22372.538864044694
+----The accelerated err is  22854.44674377874
+--Current err is 22372.539 and the improvement is 236.497
+
+The 19-th iteration of Accelerated ALM FGD
+----The ALM err is  22600.89833727853
+----The accelerated err is  23395.689575408625
+--Current err is 22600.898 and the improvement is 228.359
+
+The 20-th iteration of Accelerated ALM FGD
+----The ALM err is  22365.608338952505
+----The accelerated err is  22847.99869982572
+--Current err is 22365.608 and the improvement is 235.290
+
+The 21-th iteration of Accelerated ALM FGD
+----The ALM err is  22595.395544717627
+----The accelerated err is  23390.851805985167
+--Current err is 22595.396 and the improvement is 229.787
+
+The 22-th iteration of Accelerated ALM FGD
+----The ALM err is  22361.01677624166
+----The accelerated err is  22843.782042199113
+--Current err is 22361.017 and the improvement is 234.379
+
+The 23-th iteration of Accelerated ALM FGD
+----The ALM err is  22591.858095677755
+----The accelerated err is  23387.814984644505
+--Current err is 22591.858 and the improvement is 230.841
+
+The 24-th iteration of Accelerated ALM FGD
+----The ALM err is  22358.09408880575
+----The accelerated err is  22841.132324191887
+--Current err is 22358.094 and the improvement is 233.764
+
+The 25-th iteration of Accelerated ALM FGD
+----The ALM err is  22589.657135161022
+----The accelerated err is  23385.973217691888
+--Current err is 22589.657 and the improvement is 231.563
+
+The 26-th iteration of Accelerated ALM FGD
+----The ALM err is  22356.277607836364
+----The accelerated err is  22839.507426488293
+--Current err is 22356.278 and the improvement is 233.380
+
+The 27-th iteration of Accelerated ALM FGD

@@ -1,0 +1,26 @@
+warning: Debugger speedups using cython not found. Run '"/Users/XiangyuW/anaconda3/bin/python3.6" "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/setup_cython.py" build_ext --inplace' to build.
+pydev debugger: starting (pid: 1644)
+/Users/XiangyuW/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Err in loading pickle files and the infor is:  invalid literal for int() with base 10: 'AB 5.0 MAT-file, Platform: MACI64, Created on: Wed Feb 22 18:11:32 2017                                         '
+
+
+We now try loding data from mat /Users/XiangyuW/Google Drive/Research2015/SNMF_clustering/SNMFUKmeans/Code/facedata/face_19x19.mat!
+
+
+Successfully load data from mat /Users/XiangyuW/Google Drive/Research2015/SNMF_clustering/SNMFUKmeans/Code/facedata/face_19x19.mat!
+Data loaded successfully from /Users/XiangyuW/Google Drive/Research2015/SNMF_clustering/SNMFUKmeans/Code/facedata/face_19x19.mat !
+Traceback (most recent call last):
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1621, in <module>
+    main()
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1615, in main
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/pydevd.py", line 1022, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/Users/XiangyuW/.p2/pool/plugins/org.python.pydev.core_6.3.2.201803171248/pysrc/_pydev_imps/_pydev_execfile.py", line 25, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/test_RWLR.py", line 36, in <module>
+    raw_data_train,raw_label_train,raw_data_test,raw_label_test = test_data_IO.use_dataset(dataset_name,fin_mat,test_portion = 0.1)
+  File "/Users/XiangyuW/Google Drive/Research2015/ReweightMF/Code/Python/RWLSTM_lib.py", line 116, in use_dataset
+    label = np.zeros((m,max(data[1])))
+TypeError: only integer scalar arrays can be converted to a scalar index
